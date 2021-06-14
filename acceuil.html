@@ -10,26 +10,25 @@
 </head>
 
 <body>
-  
   <div class="container">
     <div class="row">
         <div class="col-md-4 offset-md-4">
             <div class="login-form bg-light mt-4 p-4">
                 <form action="" method="" class="row g-3">
                     <h4 class="text-center">Quote Manager</h4>
+                    <div class="form-floating col-12">
+                        <input type="email" class="form-control" id="login-address" placeholder="name@example.com">
+                        <label for="login-address">Email address</label>
+                      </div>
+                      <div class="form-floating col-12">
+                        <input type="password" class="form-control" id="login-password" placeholder="Password">
+                        <label for="login-password">Password</label>
+                      </div>
                     <div class="col-12">
-                        <label>Username</label>
-                        <input type="text" name="username" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="col-12">
-                        <label>Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-                    <div class="col-12">
-                        <!-- <div class="form-check">
+                        <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="rememberMe">
                             <label class="form-check-label" for="rememberMe"> Remember me</label>
-                        </div> -->
+                        </div>
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-dark float-end">Login</button>
@@ -54,17 +53,17 @@
           </div>
           <div class="modal-body">
               <form>
-                  <div class="mb-3">
-                      <label class="form-label">Email Address</label>
-                      <input type="email" class="form-control" id="email" name="Email Address" placeholder="Email Address" />
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
                   </div>
-                  <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
-                </div>
-                  <div class="mb-3">
-                      <label class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+                  <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="New Password">
+                    <label for="floatingPassword">New Password</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword2" placeholder="Confirm Password">
+                    <label for="floatingPassword2">Confirm Password</label>
                   </div>
                   <!-- <div class="mb-3 form-check">
                       <input type="checkbox" class="form-check-input" id="rememberMe" />
