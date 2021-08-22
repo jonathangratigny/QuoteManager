@@ -63,8 +63,8 @@
           </select>
         </div>
         <div class="container text-center">
-          <button type="button" class="btn btn-warning">Save as draft</button>
-          <button type="button" class="btn btn-primary">Next</button>
+          <!-- <button type="button" class="btn btn-warning">Save as draft</button> -->
+          <a href="./step2.php"><button type="button" class="btn btn-primary">Next</button></a>
         </div>
 
     </form>

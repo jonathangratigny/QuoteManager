@@ -1,13 +1,10 @@
-# QuoteManager
+QuoteManager is an 'out of gauge' transport quotation management tool.
 
-Ce projet présenté pour la validation du titre professionnel.
-QuoteManager est un outil de gestion de cotation de transport maritime du type 'out of gauge'.
-
-L'objectif est de pouvoir : 
-  - préparer les demandes, 
-  - les telecharger au format email, 
-  - les envoyer par la suite depuis son client mail local 
-  - garder un historique des demandes traitées.
+The goal is to be able to:
+   - prepare requests,
+   - download them in email format,
+   - send them later from his local mail client
+   - keep a history of requests processed.
   
-Le projet comporte en premier lieu une creation de compte puis nous sommes guidés à travers les trois étapes clés pour créer la demande.
-Depuis le dashboard, il est possible de consulter l'historique, le status et de modifier une demande en cas d'évolution du projet dans sa réalisation.
+The project first involves creating an account and then we are guided through the three key steps to create the demand.
+From the dashboard, it is possible to consult the history, the status and to modify a request in the event of progress of the project in its realization.

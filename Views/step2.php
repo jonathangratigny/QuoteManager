@@ -40,7 +40,46 @@
                     <button type="button" name="valid" class="btn btn-warning">add</button>
                 </div>
             </div>
-            <div class="container-fluid">
+
+            <table>
+                <thead>Container</thead>
+                <tr>
+                    <th>Crate Name</th>
+                    <th>Length</th>
+                    <th>Width</th>
+                    <th>Height</th>
+                    <th>Weight</th>
+                    <th>Volume</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                </tr>
+                
+
+            </table>
+
+            <!-- <div class="container-fluid">
                 <div class="row">
                     <div class="col col-md-2 ">
                         <label for="crate">Crate#</label>
@@ -59,8 +98,8 @@
                     </div>
 
                 </div>
-            </div>
-            <div class="container-fluid">
+            </div> -->
+            <!-- <div class="container-fluid">
                 <div class="row">
                     <div class="col col-md-2">
                         <input type="text" name="" id="crate">
@@ -81,9 +120,9 @@
                         <button type="button" class="btn btn-primary">+</button>
                     </div>
                 </div>
-        </form>
+        </form> -->
         <div class="container-fluid text-center">
-            <button type="button" class="btn btn-GREEN">Save as draft</button>
+            <!-- <button type="button" class="btn btn-success">Save as draft</button> -->
             <button type="button" class="btn btn-secondary">Back</button>
             <button type="button" class="btn btn-primary">Next</button>
         </div>
