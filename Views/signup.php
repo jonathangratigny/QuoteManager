@@ -1,16 +1,7 @@
 <?php
 require_once '../controllers/signup-controller.php'
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/style.css">
-  <title>Document</title>
-</head>
 
 <body>
 
@@ -22,15 +13,19 @@ require_once '../controllers/signup-controller.php'
       <div class="modal-body">
         <form action="" method="post">
           <div class="form-floating mb-3">
-            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input name="username" type="email" class="form-control" id="floatingInput" placeholder="Username" value="">
+            <label for="floatingInput">Username</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="">
             <label for="floatingInput">Email address</label>
           </div>
           <div class="form-floating mb-3">
-            <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="New Password">
+            <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="New Password" value="">
             <label for="floatingPassword">New Password</label>
           </div>
           <div class="form-floating mb-3">
-            <input name="password" type="password" class="form-control" id="floatingPassword2" placeholder="Confirm Password">
+            <input name="password" type="password" class="form-control" id="floatingPassword2" placeholder="Confirm Password" value="">
             <label for="floatingPassword2">Confirm Password</label>
           </div>
           <!-- <div class="mb-3 form-check">
@@ -38,7 +33,7 @@ require_once '../controllers/signup-controller.php'
                       <label class="form-check-label" for="rememberMe">Remember me</label>
                   </div> -->
           <div class="modal-footer d-block">
-            <button type="submit" class="btn btn-dark float-end">Submit</button>
+            <button type="submit" name="saveNewAccount" class="btn btn-dark float-end">Submit</button>
           </div>
         </form>
       </div>
