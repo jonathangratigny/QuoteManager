@@ -1,6 +1,0 @@
-INSERT into container_default_value (ct_type, ct_length, ct_width, ct_height, ct_payload) values('40HC',1200,234,258,26580),('20GP',590,234,228,28250),('20FR',565,220,258,31250),('40FR',1165,220,258,39980);
-INSERT into container_default_value (ct_type, ct_length, ct_width, ct_height, ct_payload) values ('40HC',1200,234,258,26580), ('20GP',590,234,228,28250), ('20FR',565,220,258,31250), ('40FR',1165,220,258,39980);
-insert into user (u_email,u_firstname,u_password) values ('Sandra@geodis.fr','Sandra','$2y$10$OWtT/4t3PdfP7QcWVoGYkuQBxsIly8bVSM6UaaU.13veYQonqo/NW'), ('Claire@geodis.fr','Claire','$2y$10$0xiaxSy1sJ9JRUOT/z791.u8exx/J0MgcBYZeAAHaRTOPXFVAiUsi'), ('François@geodis.fr','François','$2y$10$74SVVWm80ojS4XFADYAMRuZewWqGizoKr3lLrxM/oCWECX5aKQCp6'), ('Marjorie@geodis.fr','Marjorie','$2y$10$QTdAd2bquAEZvRJPsqF8lOHnpPtGoLAJseoe4s3NKzLuLDSvHMRSS');
-insert into h1_project (h1_ref,h1_final_customer_name,h1_gff_ref,h1_country_dest,h1_POL,h1_POD,u_id,sl_id) values ('H1.001443','COCA','SLEHS1200221','CANADA','LE HAVRE','TORONTO',rand()*4,rand()*4), ('H1.001543','NATURAL','SLEHS1208821','FIJI','LE HAVRE','NADI',rand()*4,rand()*4);
-INSERT INTO h1_crate (h1cr_ref,h1cr_length,h1cr_width,h1cr_height,h1cr_gross_weight,h1cr_volume) values ('SID01', 560,420,360,14000, 560*420*360/1000000);
-INSERT INTO `quoteManager`.`IS_PACKED_IN` (`h1cr_id`, `h1_id`) VALUES (1,2);
