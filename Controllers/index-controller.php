@@ -20,8 +20,8 @@ if (!empty($_POST)) {
     // die();
 
 
-    // if(empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-    //     $errors = "Votre email n'est pas valide.";
+    if(empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors = "Votre email n'est pas valide.";
     // } ajouter check erreur du mail
 
     if (empty($_POST['password'])) {
