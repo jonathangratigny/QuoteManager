@@ -1,9 +1,12 @@
 <?php
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require './Models/functions.php';
 require './Controllers/index-controller.php';
-require './Controllers/header-controller.php';
+include './Controllers/header-controller.php';
 ?>
+
 <body>
     <div class="container">
         <div class="row">
@@ -11,23 +14,22 @@ require './Controllers/header-controller.php';
                 <div class="login-form bg-light mt-4 p-4">
                     <form action="" method="post" class="row g-3">
                         <h4 class="text-center">Quote Manager</h4>
-                        <div class="col-12">
-                            <label>Username</label>
-                            <input type="text" name="username" class="form-control" placeholder="Username">
+                        <div class="col-12 form-floating">
+                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Ex : test@example.com">
+                            <label for="floatingInput">Email</label>
                         </div>
-                        <div class="col-12">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Password">
+                        <div class="col-12 form-floating">
+                            <input type="password" name="password" class="form-control" placeholder="Password" id="floatingInput">
+                            <label for="floatingInput">Password</label>
                         </div>
-                        <div class="col-12">
-                            <!-- <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe"> Remember me</label>
-                        </div> -->
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" name="login" class="btn btn-dark float-end">Login</button>
-                        </div>
+                        <div class="col-12 form-floating">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe"> Remember me</label>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" name="login" class="btn btn-dark float-end">Login</button>
+                            </div>
                     </form>
                     <hr class="mt-4">
                     <div class="col-12">

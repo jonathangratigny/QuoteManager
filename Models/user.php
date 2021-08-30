@@ -1,10 +1,26 @@
 <?php
 
-Class User extends Database {
+class User extends Database
+{
     private $username;
     private $email;
     private $password;
 
+/**
+ * function that check if email already exists
+ *
+ * @param string $email
+ * @return fetch
+ */
+    public function checkDoubleEmail(string $email)
+    {
+        $dbh =  $this->connectDatabase();
+        $req = $dbh->prepare('SELECT `u_id` FROM `user` WHERE `u_email` = :email');
+        $req->bindValue(':email', $email, PDO::PARAM_STR);
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
 
     /**
      * function that check if username already exists
@@ -12,10 +28,10 @@ Class User extends Database {
      * @param string $username
      * @return fetch
      */
-    public function checkDoubleUsername($username)
+    public function checkDoubleUsername(string $username)
     {
         $dbh =  $this->connectDatabase();
-        $req = $dbh->prepare('SELECT id FROM `user` WHERE username = :username');
+        $req = $dbh->prepare('SELECT `u_id` FROM `user` WHERE `u_username` = :username');
         $req->bindValue(':username', $username, PDO::PARAM_STR);
         $req->execute();
         $fetch = $req->fetch(PDO::FETCH_ASSOC);
@@ -30,27 +46,26 @@ Class User extends Database {
      */
     public function hashPassword($password)
     {
-    $hashPassword = password_hash($password,PASSWORD_BCRYPT);
-    return $hashPassword;
-
+        $hashPassword = password_hash($password, PASSWORD_BCRYPT);
+        return $hashPassword;
     }
 
-    public function InsertUserInDbh($username, $email, $password)
+    public function InsertUserInDbh($email, $username, $password)
     {
         //ENCODE PASSWORD HERE
         $dbh =  $this->connectDatabase();
-        $req = $dbh->prepare('insert into `user` (email, username, password) values (:email, :username, :password)
+        $req = $dbh->prepare('INSERT INTO `user` (`u_username`, `u_email`, `u_password`) VALUES (:username, :email, :u_password)
         ');
         $req->bindValue(':username', $username, PDO::PARAM_STR);
         $req->bindValue(':email', $email, PDO::PARAM_STR);
-        $req->bindValue(':password', $password, PDO::PARAM_STR);
+        $req->bindValue(':u_password', $password, PDO::PARAM_STR);
         $req->execute();
     }
 
 
     /**
      * Get the value of username
-     */ 
+     */
     public function getusername()
     {
         return $this->username;
@@ -60,7 +75,7 @@ Class User extends Database {
      * Set the value of username
      *
      * @return  self
-     */ 
+     */
     public function setusername($username)
     {
         $this->username = $username;
@@ -70,7 +85,7 @@ Class User extends Database {
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -80,7 +95,7 @@ Class User extends Database {
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -90,7 +105,7 @@ Class User extends Database {
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -100,7 +115,7 @@ Class User extends Database {
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;

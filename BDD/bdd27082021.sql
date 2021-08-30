@@ -12,12 +12,12 @@ USE Quote_Manager;
 CREATE TABLE user(
         u_id        Int  Auto_increment  NOT NULL ,
         u_email     Varchar (100) NOT NULL ,
-        u_firstname Varchar (50) NOT NULL COMMENT "user is connecting with email and pw only, firstname is for ux only"  ,
+        u_username Varchar (50) NOT NULL COMMENT "user is connecting with email and pw only, firstname is for ux only"  ,
         u_password  Varchar (20) NOT NULL
 	,CONSTRAINT user_PK PRIMARY KEY (u_id)
 )ENGINE=InnoDB;
 
-INSERT INTO user (u_email, u_firstname, u_password) values ('Maiar@test.fr', 'Maiar', ''), ('Valar@test.fr', 'Valar', ''), ('Olorin@test.fr', 'Olorin', ''), ('Morgoth@test.fr', 'Morgoth', '');
+INSERT INTO user (u_email, u_username, u_password) values ('Maiar@test.fr', 'Maiar', ''), ('Valar@test.fr', 'Valar', ''), ('Olorin@test.fr', 'Olorin', ''), ('Morgoth@test.fr', 'Morgoth', '');
 
 #------------------------------------------------------------
 # Table: shipping_line

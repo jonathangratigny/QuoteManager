@@ -2,8 +2,8 @@
 
 class Database
 {
-    private $dbname = 'quoteManager';
-    private $user = 'quote_Manager';
+    private $dbname = 'Quote_Manager';
+    private $user = 'quote_manager';
     private $password = '06KNRzGp4%^p%5K4';
 
     protected function connectDatabase()

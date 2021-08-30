@@ -1,10 +1,20 @@
 <?php
-require_once '../controllers/signup-controller.php'
+require_once '../controllers/signup-controller.php';
+require '../Controllers/header-controller.php';
 ?>
 
 
 <body>
-
+  <?php if (!empty($errors)) : ?>
+    <div class="alert alert-danger">
+      <p>Form contain errors, please correct them before submit :</p>
+      <?php foreach ($errors as $error) : ?>
+        <ul>
+          <li><?= $error; ?></li>
+        </ul>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,19 +23,19 @@ require_once '../controllers/signup-controller.php'
       <div class="modal-body">
         <form action="" method="post">
           <div class="form-floating mb-3">
-            <input name="username" type="email" class="form-control" id="floatingInput" placeholder="Username" value="">
+            <input name="username" type="text" class="form-control " id="floatingInput" placeholder="Username" value="">
             <label for="floatingInput">Username</label>
           </div>
           <div class="form-floating mb-3">
-            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="">
-            <label for="floatingInput">Email address</label>
+            <input name="email" type="email" class="form-control " id="floatingInput" placeholder="name@example.com" value="">
+            <label for="floatingInput">Email</label>
           </div>
           <div class="form-floating mb-3">
             <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="New Password" value="">
             <label for="floatingPassword">New Password</label>
           </div>
           <div class="form-floating mb-3">
-            <input name="password" type="password" class="form-control" id="floatingPassword2" placeholder="Confirm Password" value="">
+            <input name="confirm_password" type="password" class="form-control " id="floatingPassword2" placeholder="Confirm Password" value="">
             <label for="floatingPassword2">Confirm Password</label>
           </div>
           <!-- <div class="mb-3 form-check">
