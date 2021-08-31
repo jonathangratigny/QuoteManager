@@ -1,6 +1,6 @@
 <?php
 require_once '../controllers/signup-controller.php';
-require '../Controllers/header-controller.php';
+include './Controllers/header-controller.php';
 ?>
 
 

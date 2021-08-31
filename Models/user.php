@@ -6,12 +6,62 @@ class User extends Database
     private $email;
     private $password;
 
-/**
- * function that check if email already exists
- *
- * @param string $email
- * @return fetch
- */
+
+    /**
+     * return hash pwd of user
+     *
+     * @param string $username
+     * @return string
+     */
+    public function checkPassword(string $username)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT 
+        u_password
+        FROM
+        user
+        WHERE
+        u_username = :username
+        OR
+        u_email = :username");
+        $req->bindValue(':username', $username, PDO::PARAM_STR);
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
+
+
+
+    /**
+     * return username or email
+     *
+     * @param string $username
+     * @return void
+     */
+    public function logWithEmailUsername(string $username)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT 
+        u_username, u_email, u_id
+        FROM
+        user
+        WHERE
+        u_username = :username 
+        OR
+        u_email = :username");
+        $req->bindValue(':username', $username, PDO::PARAM_STR);
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
+
+
+    /**
+     * function that check if email already exists
+     *
+     * @param string $email
+     * @return fetch
+     */
     public function checkDoubleEmail(string $email)
     {
         $dbh =  $this->connectDatabase();
