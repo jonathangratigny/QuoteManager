@@ -1,6 +1,5 @@
 <?php
-
-require './Models/functions.php';
+session_start();
 include './Controllers/header-controller.php';
 ?>
 

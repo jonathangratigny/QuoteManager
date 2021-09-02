@@ -4,6 +4,10 @@ require '../Models/functions.php';
 require '../Models/database.php';
 require '../Models/user.php';
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $errors = array();
 $userObj = new User();
 
@@ -18,6 +22,7 @@ if (isset($_POST['login'])) {
             //compare input pwd with hash related to username and login the user
             if (password_verify($_POST['log-password'], $checkPassword['u_password'])) { 
                 $logWithEmailUsername = $userObj->logWithEmailUsername($_POST['log-username'], $_POST['log-password']);
+                session_start();
                 $_SESSION = array();
                 $_SESSION['u_id'] = $logWithEmailUsername['u_id'];
                 $_SESSION['u_username'] = $logWithEmailUsername['u_username'];

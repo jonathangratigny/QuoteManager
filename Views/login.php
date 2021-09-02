@@ -21,7 +21,7 @@ include '../Controllers/header-controller.php';
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="rememberMe">
                             <label class="form-check-label" for="rememberMe"> Remember me</label>
-                            <a href="forget-password.php">Reset my password...</a>
+                            <a href="forget-password.php">Forgot Password?</a>
                         </div>
                         <div class="col-12">
                             <button type="submit" name="login" class="btn btn-dark float-end">Login</button>
@@ -29,8 +29,8 @@ include '../Controllers/header-controller.php';
                 </form>
                 <hr class="mt-4">
                 <div class="col-12">
-                    <p class="text-center mb-0">Have not account yet?
-                        <a href="signup.php">Signup</a>
+                    <p class="text-center mb-0">Need an account?
+                        <a href="signup.php">Sign up now!</a>
                     </p>
                 </div>
             </div>

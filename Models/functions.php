@@ -9,10 +9,12 @@ function loggedIn()
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    if (!isset($_SESSION['u_id'])) {
+    if (empty($_SESSION['u_id'])) {
         $_SESSION['flash']['danger'] = "access restricted, please login.";
-        header('Location: login.php');
-        exit();
+        // header('Location: index.php');
+        // exit();
+    } else {
+        // $_SESSION['flash'] = array();
     }
 }
 

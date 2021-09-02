@@ -32,7 +32,7 @@ include '../Controllers/header-controller.php';
           </div>
           <div class="form-floating mb-3">
             <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="New Password" value="">
-            <label for="floatingPassword">New Password</label>
+            <label for="floatingPassword">Choose Password</label>
           </div>
           <div class="form-floating mb-3">
             <input name="confirm_password" type="password" class="form-control " id="floatingPassword2" placeholder="Confirm Password" value="">

@@ -8,6 +8,38 @@ class User extends Database
     private $id;
     private $reset_token;
 
+    public function updatePasswordByReset(string $password)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("UPDATE 
+        user 
+        SET u_password = :u_password, 
+        reset_at = NULL, 
+        reset_token = NULL");
+        $req->bindValue(':u_password', $password, PDO::PARAM_STR);
+        $req->execute();
+    }
+
+    function checkTokenId(string $id, string $reset_token)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT *
+    FROM user
+    WHERE u_id = :u_id
+    AND
+    reset_token IS NOT NULL
+    AND
+    reset_token = :reset_token
+    AND 
+    reset_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)");
+        $req->bindValue(':reset_token', $reset_token, PDO::PARAM_STR);
+        $req->bindValue(':u_id', $id, PDO::PARAM_STR);
+        $req->execute();
+        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
+
+
     public function resetPassword($reset_token, $id)
     {
         $dbh = $this->connectDatabase();

@@ -1,7 +1,3 @@
-<?php
-loggedIn();
-debug($_SESSION);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +17,10 @@ debug($_SESSION);
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endforeach; ?>
-        <?php unset($_SESSION['flash']) ?>
+        <?php 
+        if (isset($_SESSION['flash']['danger'])) {
+            $error = true;
+        }
+        unset($_SESSION['flash']) ?>
     <?php endif; ?>
 </div>
