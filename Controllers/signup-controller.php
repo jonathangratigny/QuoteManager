@@ -4,21 +4,20 @@ require '../Models/functions.php';
 require '../Models/database.php';
 require '../Models/user.php';
 
+$errors = array();
+$userObj = new User();
 
-if (!empty($_POST)) {
-    $errors = array();
+if (isset($_POST['saveNewAccount'])) {
 
     if (empty($_POST['username']) || !preg_match('/^[a-zA-Z]+$/', $_POST['username'])) {
         $errors['username'] = "The entry is not valid.";
     } else {
-        $userObj = new User();
         $checkDoubleUsername = $userObj->checkDoubleUsername($_POST['username']);
-
+        
         if ($checkDoubleUsername) {
             $errors['username'] = 'Username already exists';
         }
     }
-    
 
 
     if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
@@ -39,9 +38,8 @@ if (!empty($_POST)) {
     if (empty($errors)) {
         $hashUserPassword = $userObj->hashPassword($_POST['password']);
         $newUser = $userObj->InsertUserInDbh($_POST['email'], $_POST['username'], $hashUserPassword);
-        header( "refresh:5;url=../index.php" );
-        echo 'Account created with success. You\'ll be redirected in about 5 secs. If not, click <a href="../index.php">here</a>.';
-        die();
+        $_SESSION['flash']['success'] = 'Account created successfully.';
+        header("Location: login.php");
+        exit();
     }
-    // debug($errors);
 };

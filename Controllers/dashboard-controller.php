@@ -8,4 +8,4 @@ require '../Models/functions.php';
 
 session_start();
 
-$_SESSION['auth'] = $user;
+var_dump($_SESSION);
