@@ -8,7 +8,14 @@ class User extends Database
     private $id;
     private $reset_token;
 
-    public function updatePasswordByReset(string $password, string $id)
+    /**
+     * update password by reset process
+     *
+     * @param hash $password
+     * @param string $id
+     * @return void
+     */
+    public function updatePasswordByReset($password, string $id)
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("UPDATE 
@@ -22,18 +29,26 @@ class User extends Database
         $req->execute();
     }
 
+
+    /**
+     * check if token generated exists, match the dbh one and will exists 30min
+     * 
+     * @param string $id
+     * @param string $reset_token
+     * @return void
+     */
     function checkTokenId(string $id, string $reset_token)
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("SELECT *
-    FROM user
-    WHERE u_id = :u_id
-    AND
-    reset_token IS NOT NULL
-    AND
-    reset_token = :reset_token
-    AND 
-    reset_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)");
+        FROM user
+        WHERE u_id = :u_id
+        AND
+        reset_token IS NOT NULL
+        AND
+        reset_token = :reset_token
+        AND 
+        reset_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)");
         $req->bindValue(':reset_token', $reset_token, PDO::PARAM_STR);
         $req->bindValue(':u_id', $id, PDO::PARAM_STR);
         $req->execute();
@@ -41,25 +56,34 @@ class User extends Database
         return $fetch;
     }
 
-
+    /**
+     * reset user password in dbh
+     *
+     * @param [type] $reset_token
+     * @param [type] $id
+     * @return void
+     */
     public function resetPassword($reset_token, $id)
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("UPDATE  
-    user
-    SET
-    reset_token = :reset_token,
-    reset_at = NOW()
-    WHERE
-    u_id = :id");
+        user
+        SET
+        reset_token = :reset_token,
+        reset_at = NOW()
+        WHERE
+        u_id = :id");
         $req->bindValue(':reset_token', $reset_token, PDO::PARAM_STR);
         $req->bindValue(':id', $id, PDO::PARAM_STR);
         $req->execute();
-        // $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
-        // return $fetch;
     }
 
-
+    /**
+     * check if email exists in dbh with user id
+     *
+     * @param string $id
+     * @return void
+     */
     public function checkEmailWithId(string $id)
     {
         $dbh = $this->connectDatabase();
@@ -75,7 +99,13 @@ class User extends Database
         return $fetch;
     }
 
-
+    /**
+     * update user pwd with user id
+     *
+     * @param string $password
+     * @param string $id
+     * @return void
+     */
     public function updatePassword(string $password, string $id)
     {
         $dbh = $this->connectDatabase();
