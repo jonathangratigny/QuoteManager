@@ -19,10 +19,9 @@ if (isset($_GET['id']) && isset($_GET['token'])) {
 
                 //then we hash and send user to dashboard
                 $hash_password = $userObj->hashPassword($_POST['update_password']);
-                $updatePasswordByReset = $userObj->updatePasswordByReset($_POST['update_password']);
+                $updatePasswordByReset = $userObj->updatePasswordByReset($hash_password, $_GET['id']);
                 session_start();
-                $_SESSION['flash']['success'] = 'password updated successfully!';
-                header('Location: dashboard.php');
+                $_SESSION['flash']['success'] = 'password updated successfully! You can login now!';
             }
         }
     } else {

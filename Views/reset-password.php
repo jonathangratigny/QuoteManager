@@ -17,6 +17,9 @@ if (!isset($error)) : ?>
             </div>
             <button type="submit" name="submit_update_password" class="btn btn-primary mt-3">Reset My Password</button>
         </form>
+        <a href="login.php">
+            <button type="button" class="btn btn-warning mt-3">Return To Login</button>
+        </a>
     </div>
 <?php endif; ?>
 <?php

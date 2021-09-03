@@ -8,15 +8,17 @@ class User extends Database
     private $id;
     private $reset_token;
 
-    public function updatePasswordByReset(string $password)
+    public function updatePasswordByReset(string $password, string $id)
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("UPDATE 
         user 
         SET u_password = :u_password, 
         reset_at = NULL, 
-        reset_token = NULL");
+        reset_token = NULL
+        WHERE u_id = :u_id");
         $req->bindValue(':u_password', $password, PDO::PARAM_STR);
+        $req->bindValue(':u_id', $id, PDO::PARAM_STR);
         $req->execute();
     }
 
@@ -184,7 +186,9 @@ class User extends Database
     {
         //ENCODE PASSWORD HERE
         $dbh =  $this->connectDatabase();
-        $req = $dbh->prepare('INSERT INTO `user` (`u_username`, `u_email`, `u_password`) VALUES (:username, :email, :u_password)
+        $req = $dbh->prepare('INSERT INTO 
+        `user` (`u_username`, `u_email`, `u_password`) 
+        VALUES (:username, :email, :u_password)
         ');
         $req->bindValue(':username', $username, PDO::PARAM_STR);
         $req->bindValue(':email', $email, PDO::PARAM_STR);

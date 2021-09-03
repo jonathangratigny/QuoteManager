@@ -14,13 +14,15 @@ $userObj = new User();
 if (isset($_POST['login'])) {
 
     if (!empty($_POST['log-username'])) {
+        echo '1';
         //check hash pwd of user
-        $checkPassword = $userObj->checkPassword($_POST['log-username']); 
-
+        $checkPassword = $userObj->checkPassword($_POST['log-username']);
+        var_dump($checkPassword['u_password']);
         if ($checkPassword == true && !empty($_POST['log-password'])) {
-
+            echo '2';
             //compare input pwd with hash related to username and login the user
-            if (password_verify($_POST['log-password'], $checkPassword['u_password'])) { 
+            if (password_verify($_POST['log-password'], $checkPassword['u_password'])) {
+                echo '3';
                 $logWithEmailUsername = $userObj->logWithEmailUsername($_POST['log-username'], $_POST['log-password']);
                 session_start();
                 $_SESSION = array();
