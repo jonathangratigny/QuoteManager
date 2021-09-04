@@ -156,5 +156,5 @@ require '../Controllers/header-controller.php';
     </div>
 
 <?php
-include './Controllers/footer-controller.php';
+include '../Controllers/footer-controller.php';
 ?>
