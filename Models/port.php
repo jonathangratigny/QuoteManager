@@ -7,6 +7,17 @@ class Port extends Database
     private $port_name;
     private $port_country;
 
+    public function showUniqueCountry()
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT distinct 
+        port_country from port 
+        order by port_country asc");
+        $req->execute();
+        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $fetch;
+
+    }
 
     /**
      * fetch port table

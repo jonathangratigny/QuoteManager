@@ -10,12 +10,12 @@ include '../Controllers/header-controller.php';
                 <form action="" method="post" class="row g-3">
                     <h4 class="text-center">Quote Manager</h4>
                     <div class="col-12 form-floating">
-                        <input type="text" name="log-username" class="form-control" id="floatingInput" placeholder="Email or Username">
-                        <label for="floatingInput">Email or Username</label>
+                        <input type="text" name="log-username" class="form-control" id="floatingEmail" placeholder="Email or Username">
+                        <label for="floatingEmail">Email or Username</label>
                     </div>
                     <div class="col-12 form-floating">
-                        <input type="password" name="log-password" class="form-control" placeholder="Password" id="floatingInput">
-                        <label for="floatingInput">Password</label>
+                        <input type="password" name="log-password" class="form-control" placeholder="Password" id="floatingPassword">
+                        <label for="floatingPassword">Password</label>
                     </div>
                     <div class="col-12 form-floating">
                         <div class="form-check">

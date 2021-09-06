@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../Controllers/step1-controller.php';
 require '../Controllers/header-controller.php';
 ?>
@@ -15,21 +15,29 @@ require '../Controllers/header-controller.php';
   </nav>
 
   <div class="progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-black" role="progressbar"
-      aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:33%">33%</div>
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-black" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:33%">33%</div>
   </div>
 
   <div class="container">
+    <?php if (!empty($errorS1)) : ?>
+      <div class="alert alert-danger">
+        <p>Form contain errors, please correct them before submit :</p>
+        <?php foreach ($errorS1 as $error) : ?>
+          <ul>
+            <li><?= $error; ?></li>
+          </ul>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
     <form action="" method="post">
-      <div class="container-fluid d-flex flex-column col-6">
-
+      <div class="container-fluid d-flex flex-column col-lg-6 col-sm-12">
         <div class="form-floating mb-3 mt-3">
-          <input type="text" class="form-control" placeholder="My reference" id="project_owner_ref" name="project_owner_ref">
+          <input type="text" class="form-control" placeholder="My reference" id="project_owner_ref" name="project_owner_ref" maxlength="15">
           <label for="project_owner_ref">My Reference</label>
         </div>
 
         <div class="form-floating mb-3 mt-3">
-          <input type="text" class="form-control" id="project_ref" placeholder="Project reference" name="project_ref">
+          <input type="text" class="form-control" id="project_ref" placeholder="Project reference" name="project_ref" maxlength="10">
           <label for="project_ref">Project Reference</label>
         </div>
         <div class="form-floating mb-3 mt-3">
@@ -37,42 +45,37 @@ require '../Controllers/header-controller.php';
           <label for="project_final_customer_name">Final Customer Name</label>
         </div>
 
-        <div class="d-flex mb-3">
-          <label for="project_POL">Port Of Loading :</label>
-          <select name="project_POL" id="project_POL">
-            <option value="none">LE HAVRE</option>
+        <label for="project_POL">Port Of Loading :</label>
+        <div class="d-flex mb-3 mt-1">
+          <select style="min-width: 200px; text-align: center;" name="project_POL" id="project_POL">
+            <option>LE HAVRE</option>
           </select>
         </div>
 
-        <div class="d-flex mb-3">
-          <label for="project_country_dest">Destination Country : </label>
-          <select name="project_country_dest" id="project_country_dest">
+        <label for="project_country_dest">Destination Country :</label>
+        <div class="d-flex mt-1 mb-3">
+          <select style="min-width: 200px; text-align: center;" name="project_country_dest" id="project_country_dest">
             <option selected value="none">Select A Country</option>
-            
+            <?php foreach ($showUniqueCountry as $key => $port) : ?>
+              <option><?= $port['port_country'] ?></option>
+            <?php endforeach; ?>
           </select>
         </div>
 
-        <div class="d-flex">
+        <div class="d-flex mb-3 ">
           <label for="project_POD">Port Of Discharge : </label>
           <select name="project_POD" id="project_POD">
-            <option value="none">Select A Port</option>
-
           </select>
         </div>
         <div class="container text-center">
           <!-- <button type="button" class="btn btn-warning">Save as draft</button> -->
-          <a href="./step2.php"><button type="button" class="btn btn-primary">Next</button></a>
+          <!-- <a href="./step2.php"> -->
+          <button type="submit" name='step1' class="btn btn-primary">Next</button>
+          <!-- </a> -->
         </div>
-
+      </div>
     </form>
   </div>
-  
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
-  </script>
-</body>
-
-</html>
+  <script src="../assets/js/script.js"></script>
+  <?php include '../Controllers/footer-controller.php'; ?>
