@@ -2,7 +2,7 @@ const project_country_dest = document.getElementById('project_country_dest');
 const select = document.getElementById('project_POD');
 
 project_country_dest.addEventListener('change', function () {
-    // select.innerHTML = ''
+    select.innerHTML = ''
     fetch('../Controllers/ajax-controller.php?country=' + this.value)
         .then(response => response.json())
         .then(json => {

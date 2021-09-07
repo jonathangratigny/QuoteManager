@@ -1,6 +1,13 @@
 <?php
 require '../Controllers/step1-controller.php';
 require '../Controllers/header-controller.php';
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+if(empty($_SESSION['u_id'])) {
+  header('Location: ../index.php');
+}
+var_dump($_SESSION);
 ?>
 
 <body>
@@ -32,39 +39,41 @@ require '../Controllers/header-controller.php';
     <form action="" method="post">
       <div class="container-fluid d-flex flex-column col-lg-6 col-sm-12">
         <div class="form-floating mb-3 mt-3">
-          <input type="text" class="form-control" placeholder="My reference" id="project_owner_ref" name="project_owner_ref" maxlength="15">
+          <input type="text" class="form-control" placeholder="My reference" id="project_owner_ref" name="project_owner_ref" maxlength="15" value="<?= $_SESSION['project_owner_ref'] ?? null ?>">
           <label for="project_owner_ref">My Reference</label>
         </div>
 
         <div class="form-floating mb-3 mt-3">
-          <input type="text" class="form-control" id="project_ref" placeholder="Project reference" name="project_ref" maxlength="10">
+          <input type="text" class="form-control" id="project_ref" placeholder="Project reference" name="project_ref" maxlength="10" value="<?= $_SESSION['project_ref'] ?? null ?>">
           <label for="project_ref">Project Reference</label>
         </div>
+
         <div class="form-floating mb-3 mt-3">
-          <input type="text" name="project_final_customer_name" class="form-control" id="project_final_customer_name" placeholder="Project reference">
+          <input type="text" name="project_final_customer_name" class="form-control" id="project_final_customer_name" placeholder="Project reference" value="<?= $_SESSION['project_final_customer_name'] ?? null ?>">
           <label for="project_final_customer_name">Final Customer Name</label>
         </div>
 
         <label for="project_POL">Port Of Loading :</label>
         <div class="d-flex mb-3 mt-1">
-          <select style="min-width: 200px; text-align: center;" name="project_POL" id="project_POL">
+          <select style="min-width: 327px; text-align: center;" name="project_POL" id="project_POL">
             <option>LE HAVRE</option>
           </select>
         </div>
 
         <label for="project_country_dest">Destination Country :</label>
         <div class="d-flex mt-1 mb-3">
-          <select style="min-width: 200px; text-align: center;" name="project_country_dest" id="project_country_dest">
-            <option selected value="none">Select A Country</option>
+          <select style="min-width: 327px; text-align: center;" name="project_country_dest" id="project_country_dest">
+            <option selected><?= $_SESSION['project_country_dest'] ?? 'Select A Country' ?></option>
             <?php foreach ($showUniqueCountry as $key => $port) : ?>
               <option><?= $port['port_country'] ?></option>
             <?php endforeach; ?>
           </select>
         </div>
 
+        <label for="project_POD">Port Of Discharge : </label>
         <div class="d-flex mb-3 ">
-          <label for="project_POD">Port Of Discharge : </label>
-          <select name="project_POD" id="project_POD">
+          <select name="project_POD" id="project_POD" style="min-width: 327px; text-align: center;">
+            <option value="none"><?= $_SESSION['project_POD'] ?? 'Select A Port' ?></option>
           </select>
         </div>
         <div class="container text-center">
