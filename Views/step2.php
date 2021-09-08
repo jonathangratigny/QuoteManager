@@ -20,55 +20,29 @@ require '../Controllers/header-controller.php';
 <div class="container-fluid">
     <div class="container-fluid text-center">
         <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelectCT">Containers</label>
-            <select class="form-select" id="inputGroupSelectCT">
-                <option selected>Select a container</option>
-                <option value="40FR" name="40FR">40FR</option>
-                <option value="20FR" name="20FR">20FR</option>
-                <option value="40HC" name="40HC">40HC</option>
-                <option value="20GP" name="20GP">20GP</option>
-            </select>
-            <button type="button" name="valid" class="btn btn-warning">add</button>
+            <div class="btn-group" role="group" aria-label="">
+                <button type="button" class="btn btn-primary" id="20FRbtn">20FR</button>
+                <button type="button" class="btn btn-primary" id="40FRbtn">40FR</button>
+                <button type="button" class="btn btn-primary" id="20GPbtn">20GP</button>
+                <button type="button" class="btn btn-primary" id="40HCbtn">40HC</button>
+
+            </div>
         </div>
     </div>
 </div>
-<form action="" method="post" class="table-responsive">
-    <table class="table">
-        <thead>Container</thead>
-        <tr>
-            <th scope="col">Crate Name</th>
-            <th scope="col">Length</th>
-            <th scope="col">Width</th>
-            <th scope="col">Height</th>
-            <th scope="col">Weight</th>
-            <th scope="col">Volume</th>
-        </tr>
-        <tr>
-            <td><input class="w-auto" type="text" name="crate_ref" id=""></td>
-            <td><input class="w-auto" type="text" name="crate_length" id=""></td>
-            <td><input class="w-auto" type="text" name="crate_width" id=""></td>
-            <td><input class="w-auto" type="text" name="crate_height" id=""></td>
-            <td><input class="w-auto" type="text" name="crate_gross_weight" id=""></td>
-            <td><input class="w-auto" type="text" name="crate_volume" id=""></td>
-        </tr>
-        
+<form action="" method="post" class="table-responsive" id="tableContainer">
 
-
-    </table>
-
+    <button type="submit" class="btn btn-primary">Next</button>
 
 </form>
 <div class="container-fluid text-center">
     <!-- <button type="button" class="btn btn-success">Save as draft</button> -->
     <button type="button" class="btn btn-secondary">Back</button>
-    <button type="button" class="btn btn-primary">Next</button>
 </div>
 <div>
     <label for=""></label>
 </div>
-
-
-
+<script src="../assets/js/step2.js"></script>
 <?php
-include '../Controllers/footer-controller.php'
+include '../Controllers/footer-controller.php';
 ?>

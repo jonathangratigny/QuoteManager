@@ -8,6 +8,7 @@ require '../Models/project.php';
 $portObj = new Port();
 $showUniqueCountry = $portObj->showUniqueCountry();
 $errorS1 = array();
+var_dump($_POST);
 
 
 if (isset($_POST['step1'])) {

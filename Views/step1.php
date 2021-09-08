@@ -73,7 +73,7 @@ var_dump($_SESSION);
         <label for="project_POD">Port Of Discharge : </label>
         <div class="d-flex mb-3 ">
           <select name="project_POD" id="project_POD" style="min-width: 327px; text-align: center;">
-            <option value="none"><?= $_SESSION['project_POD'] ?? 'Select A Port' ?></option>
+            <option><?= $_SESSION['project_POD'] ?? 'Select A Port' ?></option>
           </select>
         </div>
         <div class="container text-center">
