@@ -42,6 +42,11 @@ require '../Controllers/header-controller.php';
 <div>
     <label for=""></label>
 </div>
+<script >
+    //get the value of container from controller
+    let defaultContainerValue = <?= $arrayContainerData ?>;
+    console.log(defaultContainerValue);
+</script>
 <script src="../assets/js/step2.js"></script>
 <?php
 include '../Controllers/footer-controller.php';
