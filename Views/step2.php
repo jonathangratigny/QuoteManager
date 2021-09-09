@@ -21,10 +21,10 @@ require '../Controllers/header-controller.php';
     <div class="container-fluid text-center">
         <div class="input-group mb-3">
             <div class="btn-group" role="group" aria-label="">
-                <button type="button" class="btn btn-primary" id="20FRbtn">20FR</button>
-                <button type="button" class="btn btn-primary" id="40FRbtn">40FR</button>
-                <button type="button" class="btn btn-primary" id="20GPbtn">20GP</button>
-                <button type="button" class="btn btn-primary" id="40HCbtn">40HC</button>
+                <button type="button" class="btn btn-primary" data-btn ="0" id="40HCbtn">40HC</button>
+                <button type="button" class="btn btn-primary" data-btn ="1" id="20GPbtn">20GP</button>
+                <button type="button" class="btn btn-primary" data-btn="2" id="20FRbtn">20FR</button>
+                <button type="button" class="btn btn-primary" data-btn ="3" id="40FRbtn">40FR</button>
 
             </div>
         </div>
