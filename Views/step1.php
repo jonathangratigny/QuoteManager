@@ -1,13 +1,6 @@
 <?php
 require '../Controllers/step1-controller.php';
 require '../Controllers/header-controller.php';
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-}
-if(empty($_SESSION['u_id'])) {
-  header('Location: ../index.php');
-}
-var_dump($_SESSION);
 ?>
 
 <body>
@@ -17,7 +10,7 @@ var_dump($_SESSION);
         STEP 1 ON 3
       </span>
       <label for="customRange2" class="form-label">Example range</label>
-      <button type="button" class="btn btn-warning text-dark btn-sm">Dashboard</button>
+      <a href="./dashboard.php"><button type="button" class="btn btn-warning text-dark btn-sm">Dashboard</button></a>
     </div>
   </nav>
 
@@ -36,6 +29,7 @@ var_dump($_SESSION);
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
+    
     <form action="" method="post">
       <div class="container-fluid d-flex flex-column col-lg-6 col-sm-12">
         <div class="form-floating mb-3 mt-3">
@@ -53,12 +47,23 @@ var_dump($_SESSION);
           <label for="project_final_customer_name">Final Customer Name</label>
         </div>
 
+        <label for="project_shipping_line">Shipping Line :</label>
+        <div class="d-flex mt-1 mb-3">
+          <select style="min-width: 327px; text-align: center;" name="project_shipping_line" id="project_shipping_line">
+            <option selected><?= $_SESSION['project_shipping_line'] ?? 'Select A Shipping Line' ?></option>
+            <?php foreach ($getShippingLine as $key => $name) : ?>
+              <option><?= $name['sl_name'] ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+
         <label for="project_POL">Port Of Loading :</label>
         <div class="d-flex mb-3 mt-1">
           <select style="min-width: 327px; text-align: center;" name="project_POL" id="project_POL">
             <option>LE HAVRE</option>
           </select>
         </div>
+
 
         <label for="project_country_dest">Destination Country :</label>
         <div class="d-flex mt-1 mb-3">
@@ -77,10 +82,7 @@ var_dump($_SESSION);
           </select>
         </div>
         <div class="container text-center">
-          <!-- <button type="button" class="btn btn-warning">Save as draft</button> -->
-          <!-- <a href="./step2.php"> -->
           <button type="submit" name='step1' class="btn btn-primary">Next</button>
-          <!-- </a> -->
         </div>
       </div>
     </form>

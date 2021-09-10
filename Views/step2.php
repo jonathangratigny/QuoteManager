@@ -1,6 +1,8 @@
 <?php
 require '../Controllers/step2-controller.php';
 require '../Controllers/header-controller.php';
+var_dump($_POST);
+// var_dump($_SESSION);
 ?>
 
 <nav class="navbar navbar-dark bg-dark">
@@ -29,9 +31,18 @@ require '../Controllers/header-controller.php';
         </div>
     </div>
 </div>
-<form action="" method="post" class="table-responsive" id="tableContainer">
+<form action="" method="POST">
+
+    <div class="table-responsive" id="tableContainer">
+
+    </div>
+    <div id="buttonsCase" class="container-fluid text-center">
+
+    </div>
 
 </form>
+
+
 <script>
     //get the value of container from controller
     let defaultContainerValue = <?= $arrayContainerData ?>;
