@@ -2,16 +2,32 @@ const tableContainer = document.getElementById('tableContainer');
 const addContainerBtn = document.querySelectorAll("[data-btn]");
 let index = 0;
 
+
+//click on button to print a tab to fill
+//limit is 4 rows per containers
 addContainerBtn.forEach(button => {
     button.addEventListener('click', function () {
-        console.log(this.dataset.btn)
         index++;
+
+        //creating the table
         let newTable = document.createElement("table");
         newTable.setAttribute("class", "table table-bordered table-sm");
         newTable.setAttribute("id", defaultContainerValue[button.dataset.btn]['container_df_type'] + index);
         tableContainer.append(newTable);
+
+        //creating the trash button
+        let newButton = document.createElement("button");
+        newButton.setAttribute("class", "btn btn-danger");
+        newButton.setAttribute("data-trash", defaultContainerValue[button.dataset.btn]['container_df_type'] + index);
+        newButton.setAttribute("type", "button");
+        newButton.innerText = "Delete Container";
+        newButton.value = `delete${index}`
+        tableContainer.append(newButton);
+
+        //filling the table
         newTable.innerHTML = `
-        <caption>Container ${defaultContainerValue[button.dataset.btn]['container_df_type']} #${index}</caption>
+        <caption>Container ${defaultContainerValue[button.dataset.btn]['container_df_type']}</caption>
+
         <thead>
             <tr>
                 <th scope="col">Crate Ref</th>
@@ -67,6 +83,43 @@ addContainerBtn.forEach(button => {
             </tr>
         </tfoot>`
 
+        //creating div to contain buttons
+        let divButtons = document.createElement("div");
+        divButtons.setAttribute("class", "container-fluid text-center");
+        divButtons.setAttribute("id", "submit_step_2");
+        tableContainer.append(divButtons);
+        const submit_step_2 = document.getElementById("submit_step_2");
+
+        //creating back button
+        let backButton = document.createElement("button");
+        backButton.setAttribute("class", "btn btn-secondary");
+        backButton.setAttribute("type", "button");
+        backButton.innerText = "Back";
+        submit_step_2.append(backButton);
+
+        //creating next button
+        let nextButton = document.createElement("button");
+        nextButton.setAttribute("class", "btn btn-primary");
+        nextButton.setAttribute("type", "submit");
+        nextButton.innerText = "Next";
+        nextButton.value = "step2"
+        submit_step_2.append(nextButton);
+
+
+        //delete a container
+        let buttontrash = document.querySelectorAll('button[data-trash]')
+        buttontrash.forEach(button => {
+            button.addEventListener('click', function () {
+                if (button.dataset.trash == newTable.id) {
+                    var result = confirm("Are you sure to delete?");
+                    if (result) {
+                        tableContainer.removeChild(newTable);
+                        tableContainer.removeChild(button);
+                    }
+                }
+            });
+        });
+
         //count for total crates
         countRef = 0;
         const totalRef = document.querySelectorAll("[data-crate = 'ref']");
@@ -91,6 +144,7 @@ addContainerBtn.forEach(button => {
             })
         });
 
+        
         //count for total length
         countLength = 0;
         const dataLength = document.querySelectorAll("[data-crate = 'length']");
@@ -124,6 +178,11 @@ addContainerBtn.forEach(button => {
             })
         });
 
+        //bring ID of table to target the difference 
+        //between FR and GP/HC container
+        //FR has no width and height limits
+        const checkID = newTable.id;
+
         //count for max width
         const dataWidth = document.querySelectorAll("[data-crate = 'width']");
         const countMaxWidth = document.getElementById(`crate_width_V${index}`);
@@ -138,17 +197,18 @@ addContainerBtn.forEach(button => {
 
                 //case if one crate is > max width
                 dataWidth.forEach(bigValue => {
-                    if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_width'])) {
-                        alert(`please update this line, ${bigValue.value}cm is over width in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
-                        bigValue.focus;
-                        bigValue.setActive;
-                        bigValue.select();
-                        countMaxWidth.value = '';
+                    if (!checkID.includes('FR')) {
+                        if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_width'])) {
+                            alert(`please update this line, ${bigValue.value}cm is over width in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
+                            bigValue.focus;
+                            bigValue.setActive;
+                            bigValue.select();
+                            countMaxWidth.value = '';
+                        }
                     }
-                });
-            });
-        });
-
+                })
+            })
+        })
         //count for max height
         const dataHeight = document.querySelectorAll("[data-crate = 'height']");
         const countMaxHeight = document.getElementById(`crate_height_V${index}`);
@@ -163,13 +223,14 @@ addContainerBtn.forEach(button => {
 
                 //case if one crate is > max height
                 dataHeight.forEach(bigValue => {
-                    if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_height'])) {
-                        alert(`please update this line, ${bigValue.value}cm over height in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
-                        bigValue.focus;
-                        bigValue.setActive;
-                        bigValue.select();
-                        countMaxWidth.value = '';
-
+                    if (!checkID.includes('FR')) {
+                        if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_height'])) {
+                            alert(`please update this line, ${bigValue.value}cm over height in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
+                            bigValue.focus;
+                            bigValue.setActive;
+                            bigValue.select();
+                            countMaxWidth.value = '';
+                        }
                     }
                 })
             })
