@@ -1,322 +1,403 @@
-const tableContainer = document.getElementById('tableContainer');
-const addContainerBtn = document.querySelectorAll("[data-btn]");
-let index = 0;
+function createRow(index) {
+    return `
+        <tr class="tableRow">
+            <td><input class="border-0 form-control" type="text" data-ref="ref" name="crate[${index}][ref]" maxlength="10" placeholder="ref..."></td>
+            <td><input class="border-0 form-control" type="number" data-crate="length" name="crate[${index}][length]" max="1150"></td>
+            <td><input class="border-0 form-control" type="number" data-crate="width" name="crate[${index}][width]" max="300"></td>
+            <td><input class="border-0 form-control" type="number" data-crate="height" name="crate[${index}][height]" max="500"></td>
+            <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate[${index}][gross_weight]" max="30000"></td>
+            <td><input class="border-0 form-control" type="number" data-crate="volume" name="crate[${index}][volume]" readonly></td>
+        </tr>
+    `
+}
+
+function addRowToTable() {
+    // 1. get number of ongoing .tableRow in the table => document.querySelectorAll('form .tableRow').length
+    const ongoingTableRow = document.querySelectorAll("form .tableRow").length;
+    console.log(ongoingTableRow); // works
+    const row = createRow(ongoingTableRow)
+    console.log(row); 
+    document.querySelector('#tableContainer').insertAdjacentHTML('beforeend', row)
+
+    // // 2. clone table row (from hidden row) => const clone = document.querySelector('.hiddenRow .tableRow').cloneNode(true) // true because the argument by default is false, and means => deep clone
+    // // const element = document.querySelector(".hiddenRow .tableRow");
+    // const element = document.querySelector(".hiddenRow");
+    // console.log(element);
+    // const clone = element.cloneNode(true);
+    // console.log(clone); 
+    // //ne recupere pas tableRow mais que hidden row => me donne #text sur la console
+
+    // // 3. Loop on children of the clones hidden row => (https://developer.mozilla.org/fr/docs/Web/API/Node/childNodes) to get childNode of cloneNode
+    // if (clone.hasChildNodes()) {
+    //     let children = clone.childNodes;
+    //     for (let i = 0; i < children.length; i++) {
+    //         element = children[i];
+            
+    //         for (let j = 1; j < children.length; j += 2) {
+    //             const element = children[j];
+    //             // 4. replace [index] in each input (attribute name) by [{nbRow}] => childElement.setAttribute('name', childElement.setAttribute('name').replace('[index]', `[${nbRow}]`))
+    //             element.setAttribute('name', element.name.replace('[index]', `[${ongoingTableRow}]`))
+                
+    //         }
+            
+    //         // // 5. append to tbody
+    //         console.log(element);
+    //         cloneHere = document.getElementById('cloneHere');
+    //         clone.removeAttribute('style');
+    //         cloneHere.appendChild(clone);
+    //     }
+    // }
+
+    // 6. add row eventListeners (bubbling row)
+}
+const removeRowFromTable = () => {
+    // remove last tr from table
+
+}
+const addRowListeners = (row) => {
+    document.querySelector(row).addEventListener('change', (event) => {
+        // event.currentTarget => input
+        // get input data-crate
+        // switch(data-crate)
+        // case: ""
+    })
+}
 
 
-//click on button to print a tab to fill
-//limit is 4 rows per containers
-addContainerBtn.forEach(button => {
-    button.addEventListener('click', function () {
-        index++;
+
+// const tableContainer = document.getElementById('tableContainer');
+// const addContainerBtn = document.querySelectorAll("[data-btn]");
+// let index = 0;
+
+
+// function addcontainer() {
+//     const clone = document.getElementById('tableHead');
+//     clone.innerHTML = `
+//     <tr>
+//         <th scope="col">Crate Ref</th>
+//         <th scope="col">Length in cm</th>
+//         <th scope="col">Width in cm</th>
+//         <th scope="col">Height in cm</th>
+//         <th scope="col">Weight in kg</th>
+//         <th scope="col">Volume in m3</th>
+//     </tr>`;
+    
+// }
+
+// //click on button to print a tab to fill
+// //limit is 4 rows per containers
+// addContainerBtn.forEach(button => {
+//     button.addEventListener('click', function () {
+//         index++;
 
         //creating the table
-        let newTable = document.createElement("table");
-        newTable.setAttribute("class", "table table-bordered table-sm");
-        newTable.setAttribute("id", defaultContainerValue[button.dataset.btn]['container_df_type'] + index);
-        tableContainer.append(newTable);
+        // let newTable = document.createElement("table");
+        // newTable.setAttribute("class", "table table-bordered table-sm");
+        // newTable.setAttribute("id", defaultContainerValue[button.dataset.btn]['container_df_type'] + index);
+        // tableContainer.append(newTable);
 
-        //creating the trash button
-        let newButton = document.createElement("button");
-        newButton.setAttribute("class", "btn btn-danger order-1");
-        newButton.setAttribute("data-trash", defaultContainerValue[button.dataset.btn]['container_df_type'] + index);
-        newButton.setAttribute("type", "button");
-        newButton.innerText = "Delete Container";
-        newButton.value = `delete${index}`
-        tableContainer.append(newButton);
+//         //creating the trash button
+//         let newButton = document.createElement("button");
+//         newButton.setAttribute("class", "btn btn-danger order-1");
+//         newButton.setAttribute("data-trash", defaultContainerValue[button.dataset.btn]['container_df_type'] + index);
+//         newButton.setAttribute("type", "button");
+//         newButton.innerText = "Delete Container";
+//         newButton.value = `delete${index}`
+//         tableContainer.append(newButton);
 
-        //filling the table
-        newTable.innerHTML = `
-        <caption><input type="hidden" name="container_type${index}" value="${defaultContainerValue[button.dataset.btn]['container_df_type']}">Container ${defaultContainerValue[button.dataset.btn]['container_df_type']}</caption>
+//         //filling the table
+//         newTable.innerHTML = `
+//         <caption><input type="hidden" name="container_type${index}" value="${defaultContainerValue[button.dataset.btn]['container_df_type']}">Container ${defaultContainerValue[button.dataset.btn]['container_df_type']}</caption>
 
-        <thead>
-            <tr>
-                <th scope="col">Crate Ref</th>
-                <th scope="col">Length in cm</th>
-                <th scope="col">Width in cm</th>
-                <th scope="col">Height in cm</th>
-                <th scope="col">Weight in kg</th>
-                <th scope="col">Volume in m3</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R1_V${index}" id="crate_ref_R1_V${index}"  maxlength="10" placeholder="ref..."></td>
-                <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R1_V${index}" id="crate_length_R1_V${index}" onkeypress="if (this.value.length > 3) return false;" ></td>
-                <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R1_V${index}" id="crate_width_R1_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R1_V${index}" id="crate_height_R1_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_R1_V${index}" id="crate_gross_weight_R1_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="volume" name="crate_volume_R1_V${index}" id="crate_volume_R1_V${index}" readonly></td>
-            </tr>
-            <tr>
-                <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R2_V${index}" id="crate_ref_R2_V${index}" maxlength="10"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R2_V${index}" id="crate_length_R2_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R2_V${index}" id="crate_width_R2_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R2_V${index}" id="crate_height_R2_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_R2_V${index}" id="crate_gross_weight_R2_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="volume" name="crate_volume_R2_V${index}" id="crate_volume_R2_V${index}" readonly></td>
-            </tr>
-            <tr>
-                <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R3_V${index}" id="crate_ref_R3_V${index}" maxlength="10"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R3_V${index}" id="crate_length_R3_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R3_V${index}" id="crate_width_R3_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R3_V${index}" id="crate_height_R3_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_R3_V${index}" id="crate_gross_weight_R3_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="volume" name="crate_volume_R3_V${index}" id="crate_volume_R3_V${index}" readonly></td>
-            </tr>
-            <tr>
-                <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R4_V${index}" id="crate_ref_R4_V${index}" maxlength="10"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R4_V${index}" id="crate_length_R4_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R4_V${index}" id="crate_width_R4_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R4_V${index}" id="crate_height_R4_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_R4_V${index}" id="crate_gross_weight_R4_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="volume" name="crate_volume_R4_V${index}" id="crate_volume_R4_V${index}" readonly></td>
-            </tr>
-        </tbody>
-        <tfoot class="table-light">
-            <tr>
-                <td><input class="border-0 form-control" type="text" name="total_crate_V${index}" id="crate_ref_V${index}"readonly></td>
-                <td><input class="border-0 form-control" type="number" name="total_length_V${index}" id="crate_length_V${index}" readonly placeholder="Max Length ${defaultContainerValue[button.dataset.btn]['container_df_length']}cm "></td>
-                <td><input class="border-0 form-control" type="number" name="max_width_V${index}" id="crate_width_V${index}"readonly placeholder="Max Width ${defaultContainerValue[button.dataset.btn]['container_df_width']}cm "></td>
-                <td><input class="border-0 form-control" type="number" name="max_height_V${index}" id="crate_height_V${index}"readonly placeholder="Max Height ${defaultContainerValue[button.dataset.btn]['container_df_height']}cm "></td>
-                <td><input class="border-0 form-control" type="number" name="total_gross_weight_V${index}" id="crate_weight_V${index}"readonly></td>
-                <td><input class="border-0 form-control" type="number" name="total_volume_V${index}" id="crate_volume_V${index}"readonly></td>
-            </tr>
-        </tfoot>`
+//         <thead>
+//             <tr>
+//                 <th scope="col">Crate Ref</th>
+//                 <th scope="col">Length in cm</th>
+//                 <th scope="col">Width in cm</th>
+//                 <th scope="col">Height in cm</th>
+//                 <th scope="col">Weight in kg</th>
+//                 <th scope="col">Volume in m3</th>
+//             </tr>
+//         </thead>
+//         <tbody>
+//             <tr>
+//                 <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R1_V${index}" id="crate_ref_R1_V${index}"  maxlength="10" placeholder="ref..."></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R1_V${index}" id="crate_length_R1_V${index}" onkeypress="if (this.value.length > 3) return false;" ></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R1_V${index}" id="crate_width_R1_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R1_V${index}" id="crate_height_R1_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_R1_V${index}" id="crate_gross_weight_R1_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="volume" name="crate_volume_R1_V${index}" id="crate_volume_R1_V${index}" readonly></td>
+//             </tr>
+//             <tr>
+//                 <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R2_V${index}" id="crate_ref_R2_V${index}" maxlength="10"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R2_V${index}" id="crate_length_R2_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R2_V${index}" id="crate_width_R2_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R2_V${index}" id="crate_height_R2_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_R2_V${index}" id="crate_gross_weight_R2_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="volume" name="crate_volume_R2_V${index}" id="crate_volume_R2_V${index}" readonly></td>
+//             </tr>
+//             <tr>
+//                 <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R3_V${index}" id="crate_ref_R3_V${index}" maxlength="10"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R3_V${index}" id="crate_length_R3_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R3_V${index}" id="crate_width_R3_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R3_V${index}" id="crate_height_R3_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_R3_V${index}" id="crate_gross_weight_R3_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="volume" name="crate_volume_R3_V${index}" id="crate_volume_R3_V${index}" readonly></td>
+//             </tr>
+//             <tr>
+//                 <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R4_V${index}" id="crate_ref_R4_V${index}" maxlength="10"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R4_V${index}" id="crate_length_R4_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R4_V${index}" id="crate_width_R4_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R4_V${index}" id="crate_height_R4_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_R4_V${index}" id="crate_gross_weight_R4_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
+//                 <td><input class="border-0 form-control" type="number" data-crate="volume" name="crate_volume_R4_V${index}" id="crate_volume_R4_V${index}" readonly></td>
+//             </tr>
+//         </tbody>
+//         <tfoot class="table-light">
+//             <tr>
+//                 <td><input class="border-0 form-control" type="text" name="total_crate_V${index}" id="crate_ref_V${index}"readonly></td>
+//                 <td><input class="border-0 form-control" type="number" name="total_length_V${index}" id="crate_length_V${index}" readonly placeholder="Max Length ${defaultContainerValue[button.dataset.btn]['container_df_length']}cm "></td>
+//                 <td><input class="border-0 form-control" type="number" name="max_width_V${index}" id="crate_width_V${index}"readonly placeholder="Max Width ${defaultContainerValue[button.dataset.btn]['container_df_width']}cm "></td>
+//                 <td><input class="border-0 form-control" type="number" name="max_height_V${index}" id="crate_height_V${index}"readonly placeholder="Max Height ${defaultContainerValue[button.dataset.btn]['container_df_height']}cm "></td>
+//                 <td><input class="border-0 form-control" type="number" name="total_gross_weight_V${index}" id="crate_weight_V${index}"readonly></td>
+//                 <td><input class="border-0 form-control" type="number" name="total_volume_V${index}" id="crate_volume_V${index}"readonly></td>
+//             </tr>
+//         </tfoot>`
 
-        //blocking the entry of e + - in input
-        let inputBox = document.querySelectorAll("[data-crate]");
-        let invalidChars = [
-            "-",
-            "+",
-            "e",
-        ];
-        inputBox.forEach(element => {
-            element.addEventListener("input", function () {
-                this.value = this.value.replace(/[e\+\-]/gi, "");
-                element.addEventListener("keydown", function (e) {
-                    if (invalidChars.includes(e.key)) {
-                        e.preventDefault();
-                    }
-                });
-            });
-        });
-
-
+//         //blocking the entry of e + - in input
+//         let inputBox = document.querySelectorAll("[data-crate]");
+//         let invalidChars = [
+//             "-",
+//             "+",
+//             "e",
+//         ];
+//         inputBox.forEach(element => {
+//             element.addEventListener("input", function () {
+//                 this.value = this.value.replace(/[e\+\-]/gi, "");
+//                 element.addEventListener("keydown", function (e) {
+//                     if (invalidChars.includes(e.key)) {
+//                         e.preventDefault();
+//                     }
+//                 });
+//             });
+//         });
 
 
-        //delete a container
-        let buttontrash = document.querySelectorAll('button[data-trash]')
-        buttontrash.forEach(button => {
-            button.addEventListener('click', function () {
-                if (button.dataset.trash == newTable.id) {
-                    var result = confirm("Are you sure to delete?");
-                    if (result) {
-                        tableContainer.removeChild(newTable);
-                        tableContainer.removeChild(button);
-                    }
-                }
-            });
-        });
-
-        //count for total crates
-        countRef = 0;
-        const totalRef = document.querySelectorAll("[data-ref]");
-        let crates = document.getElementById(`crate_ref_V${index}`);
-        totalRef.forEach(crate_ref => {
-            crate_ref.addEventListener('change', function () {
-
-                if (crate_ref.value != '') {
-                    countRef++;
-                }
-                if (crate_ref.value == '') {
-                    countRef--;
-                }
-
-                if (countRef > 1) {
-                    crates.value = countRef + " Crates";
-                } else if (countRef == 0) {
-                    crates.value = '';
-                } else {
-                    crates.value = countRef + " Crate";
-                }
-            })
-        });
 
 
-        //count for total length
-        countLength = 0;
-        const dataLength = document.querySelectorAll("[data-crate = 'length']");
-        const length = document.getElementById(`crate_length_V${index}`);
-        dataLength.forEach(crate_length => {
-            crate_length.addEventListener('change', function () {
-                first = document.getElementById(`crate_length_R1_V${index}`).value;
-                second = document.getElementById(`crate_length_R2_V${index}`).value;
-                third = document.getElementById(`crate_length_R3_V${index}`).value;
-                fourth = document.getElementById(`crate_length_R4_V${index}`).value;
-                countLength = +first + +second + +third + +fourth;
-                length.value = countLength;
+//         //delete a container
+//         let buttontrash = document.querySelectorAll('button[data-trash]')
+//         buttontrash.forEach(button => {
+//             button.addEventListener('click', function () {
+//                 if (button.dataset.trash == newTable.id) {
+//                     var result = confirm("Are you sure to delete?");
+//                     if (result) {
+//                         tableContainer.removeChild(newTable);
+//                         tableContainer.removeChild(button);
+//                     }
+//                 }
+//             });
+//         });
 
-                //case if one crate is >max length
-                dataLength.forEach(bigValue => {
-                    if (bigValue.value >= parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])) {
-                        alert(`please update this field, ${bigValue.value}cm is over length for ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
-                        bigValue.focus;
-                        bigValue.setActive;
-                        bigValue.select();
-                        length.value = '';
-                    }
-                })
+//         //count for total crates
+//         countRef = 0;
+//         const totalRef = document.querySelectorAll("[data-ref]");
+//         let crates = document.getElementById(`crate_ref_V${index}`);
+//         totalRef.forEach(crate_ref => {
+//             crate_ref.addEventListener('change', function () {
 
-                if (length.value >= parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])) {
-                    alert(`Overlength in ${defaultContainerValue[button.dataset.btn]['container_df_type']} (${parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])}cm max), please check the lengths.`)
-                    length.value = '';
-                } else if (length.value == 0) {
-                    length.value = '';
-                }
-            })
-        });
+//                 if (crate_ref.value != '') {
+//                     countRef++;
+//                 }
+//                 if (crate_ref.value == '') {
+//                     countRef--;
+//                 }
 
-        //bring ID of table to target the difference 
-        //between FR and GP/HC container
-        //FR has no width and height limits
-        const checkID = newTable.id;
+//                 if (countRef > 1) {
+//                     crates.value = countRef + " Crates";
+//                 } else if (countRef == 0) {
+//                     crates.value = '';
+//                 } else {
+//                     crates.value = countRef + " Crate";
+//                 }
+//             })
+//         });
 
-        //count for max width
-        const dataWidth = document.querySelectorAll("[data-crate = 'width']");
-        const countMaxWidth = document.getElementById(`crate_width_V${index}`);
-        dataWidth.forEach(crate_width => {
-            crate_width.addEventListener('change', function () {
-                first = document.getElementById(`crate_width_R1_V${index}`).value;
-                second = document.getElementById(`crate_width_R2_V${index}`).value;
-                third = document.getElementById(`crate_width_R3_V${index}`).value;
-                fourth = document.getElementById(`crate_width_R4_V${index}`).value;
-                maxWidth = Math.max(first, second, third, fourth);
-                countMaxWidth.value = maxWidth;
 
-                //case if one crate is > max width
-                dataWidth.forEach(bigValue => {
-                    if (!checkID.includes('FR')) {
-                        if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_width'])) {
-                            alert(`please update this line, ${bigValue.value}cm is over width in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
-                            bigValue.focus;
-                            bigValue.setActive;
-                            bigValue.select();
-                            countMaxWidth.value = '';
-                        }
-                    }
-                })
-            })
-        })
-        //count for max height
-        const dataHeight = document.querySelectorAll("[data-crate = 'height']");
-        const countMaxHeight = document.getElementById(`crate_height_V${index}`);
-        dataHeight.forEach(crate_height => {
-            crate_height.addEventListener('change', function () {
-                first = document.getElementById(`crate_height_R1_V${index}`).value;
-                second = document.getElementById(`crate_height_R2_V${index}`).value;
-                third = document.getElementById(`crate_height_R3_V${index}`).value;
-                fourth = document.getElementById(`crate_height_R4_V${index}`).value;
-                maxHeight = Math.max(first, second, third, fourth);
-                countMaxHeight.value = maxHeight;
+//         //count for total length
+//         countLength = 0;
+//         const dataLength = document.querySelectorAll("[data-crate = 'length']");
+//         const length = document.getElementById(`crate_length_V${index}`);
+//         dataLength.forEach(crate_length => {
+//             crate_length.addEventListener('change', function () {
+//                 first = document.getElementById(`crate_length_R1_V${index}`).value;
+//                 second = document.getElementById(`crate_length_R2_V${index}`).value;
+//                 third = document.getElementById(`crate_length_R3_V${index}`).value;
+//                 fourth = document.getElementById(`crate_length_R4_V${index}`).value;
+//                 countLength = +first + +second + +third + +fourth;
+//                 length.value = countLength;
 
-                //case if one crate is > max height
-                dataHeight.forEach(bigValue => {
-                    if (!checkID.includes('FR')) {
-                        if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_height'])) {
-                            alert(`please update this line, ${bigValue.value}cm over height in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
-                            bigValue.focus;
-                            bigValue.setActive;
-                            bigValue.select();
-                            countMaxHeight.value = '';
-                        }
-                    }
-                })
-            })
-        });
+//                 //case if one crate is >max length
+//                 dataLength.forEach(bigValue => {
+//                     if (bigValue.value >= parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])) {
+//                         alert(`please update this field, ${bigValue.value}cm is over length for ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
+//                         bigValue.focus;
+//                         bigValue.setActive;
+//                         bigValue.select();
+//                         length.value = '';
+//                     }
+//                 })
 
-        //count for total weight
-        countWeight = 0;
-        const dataWeight = document.querySelectorAll("[data-crate = 'weight']");
-        const countdataWeight = document.getElementById(`crate_weight_V${index}`);
-        dataWeight.forEach(crate_weight => {
-            crate_weight.addEventListener('change', function () {
-                first = document.getElementById(`crate_gross_weight_R1_V${index}`).value;
-                second = document.getElementById(`crate_gross_weight_R2_V${index}`).value;
-                third = document.getElementById(`crate_gross_weight_R3_V${index}`).value;
-                fourth = document.getElementById(`crate_gross_weight_R4_V${index}`).value;
+//                 if (length.value >= parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])) {
+//                     alert(`Overlength in ${defaultContainerValue[button.dataset.btn]['container_df_type']} (${parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])}cm max), please check the lengths.`)
+//                     length.value = '';
+//                 } else if (length.value == 0) {
+//                     length.value = '';
+//                 }
+//             })
+//         });
 
-                countWeight = +first + +second + +third + +fourth;
-                countdataWeight.value = countWeight;
+//         //bring ID of table to target the difference 
+//         //between FR and GP/HC container
+//         //FR has no width and height limits
+//         const checkID = newTable.id;
 
-                if (countdataWeight.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_payload'])) {
-                    alert(`${countdataWeight.value}kg is over payload in ${defaultContainerValue[button.dataset.btn]['container_df_type']}!`);
-                    countdataWeight.value = '';
-                }
-            })
-        })
+//         //count for max width
+//         const dataWidth = document.querySelectorAll("[data-crate = 'width']");
+//         const countMaxWidth = document.getElementById(`crate_width_V${index}`);
+//         dataWidth.forEach(crate_width => {
+//             crate_width.addEventListener('change', function () {
+//                 first = document.getElementById(`crate_width_R1_V${index}`).value;
+//                 second = document.getElementById(`crate_width_R2_V${index}`).value;
+//                 third = document.getElementById(`crate_width_R3_V${index}`).value;
+//                 fourth = document.getElementById(`crate_width_R4_V${index}`).value;
+//                 maxWidth = Math.max(first, second, third, fourth);
+//                 countMaxWidth.value = maxWidth;
 
-        //count for volume
-        countVolumeR1 = 0;
-        countVolumeR2 = 0;
-        countVolumeR3 = 0;
-        countVolumeR4 = 0;
+//                 //case if one crate is > max width
+//                 dataWidth.forEach(bigValue => {
+//                     if (!checkID.includes('FR')) {
+//                         if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_width'])) {
+//                             alert(`please update this line, ${bigValue.value}cm is over width in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
+//                             bigValue.focus;
+//                             bigValue.setActive;
+//                             bigValue.select();
+//                             countMaxWidth.value = '';
+//                         }
+//                     }
+//                 })
+//             })
+//         })
+//         //count for max height
+//         const dataHeight = document.querySelectorAll("[data-crate = 'height']");
+//         const countMaxHeight = document.getElementById(`crate_height_V${index}`);
+//         dataHeight.forEach(crate_height => {
+//             crate_height.addEventListener('change', function () {
+//                 first = document.getElementById(`crate_height_R1_V${index}`).value;
+//                 second = document.getElementById(`crate_height_R2_V${index}`).value;
+//                 third = document.getElementById(`crate_height_R3_V${index}`).value;
+//                 fourth = document.getElementById(`crate_height_R4_V${index}`).value;
+//                 maxHeight = Math.max(first, second, third, fourth);
+//                 countMaxHeight.value = maxHeight;
 
-        const dataVolume = document.querySelectorAll('[data-crate]');
-        console.log(dataVolume);
-        const volumeR1 = document.getElementById(`crate_volume_R1_V${index}`);
-        const volumeR2 = document.getElementById(`crate_volume_R2_V${index}`);
-        const volumeR3 = document.getElementById(`crate_volume_R3_V${index}`);
-        const volumeR4 = document.getElementById(`crate_volume_R4_V${index}`);
-        const countdataVolume = document.getElementById(`crate_volume_V${index}`);
+//                 //case if one crate is > max height
+//                 dataHeight.forEach(bigValue => {
+//                     if (!checkID.includes('FR')) {
+//                         if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_height'])) {
+//                             alert(`please update this line, ${bigValue.value}cm over height in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
+//                             bigValue.focus;
+//                             bigValue.setActive;
+//                             bigValue.select();
+//                             countMaxHeight.value = '';
+//                         }
+//                     }
+//                 })
+//             })
+//         });
 
-        dataVolume.forEach(volume_crate => {
-            volume_crate.addEventListener('change', function () {
-                lengthR1 = document.getElementById(`crate_length_R1_V${index}`).value;
-                widthR1 = document.getElementById(`crate_width_R1_V${index}`).value;
-                heightR1 = document.getElementById(`crate_height_R1_V${index}`).value;
-                if (heightR1 != '') {
-                    countVolumeR1 = (+lengthR1 * +widthR1 * +heightR1) / 1000000;
-                    roundCountVolumeR1 = countVolumeR1 * 100;
-                    roundCountVolumeR1 = Math.round(roundCountVolumeR1);
-                    volumeR1.value = roundCountVolumeR1 / 100;
-                }
+//         //count for total weight
+//         countWeight = 0;
+//         const dataWeight = document.querySelectorAll("[data-crate = 'weight']");
+//         const countdataWeight = document.getElementById(`crate_weight_V${index}`);
+//         dataWeight.forEach(crate_weight => {
+//             crate_weight.addEventListener('change', function () {
+//                 first = document.getElementById(`crate_gross_weight_R1_V${index}`).value;
+//                 second = document.getElementById(`crate_gross_weight_R2_V${index}`).value;
+//                 third = document.getElementById(`crate_gross_weight_R3_V${index}`).value;
+//                 fourth = document.getElementById(`crate_gross_weight_R4_V${index}`).value;
 
-                lengthR2 = document.getElementById(`crate_length_R2_V${index}`).value;
-                widthR2 = document.getElementById(`crate_width_R2_V${index}`).value;
-                heightR2 = document.getElementById(`crate_height_R2_V${index}`).value;
-                if (heightR2 != '') {
-                    countVolumeR2 = (+lengthR2 * +widthR2 * +heightR2) / 1000000;
-                    roundCountVolumeR2 = countVolumeR2 * 100;
-                    roundCountVolumeR2 = Math.round(roundCountVolumeR2);
-                    volumeR2.value = roundCountVolumeR2 / 100;
-                }
+//                 countWeight = +first + +second + +third + +fourth;
+//                 countdataWeight.value = countWeight;
 
-                lengthR3 = document.getElementById(`crate_length_R3_V${index}`).value;
-                widthR3 = document.getElementById(`crate_width_R3_V${index}`).value;
-                heightR3 = document.getElementById(`crate_height_R3_V${index}`).value;
-                if (heightR3 != '') {
-                    countVolumeR3 = (+lengthR3 * +widthR3 * +heightR3) / 1000000;
-                    roundCountVolumeR3 = countVolumeR3 * 100;
-                    roundCountVolumeR3 = Math.round(roundCountVolumeR3);
-                    volumeR3.value = roundCountVolumeR3 / 100;
-                }
+//                 if (countdataWeight.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_payload'])) {
+//                     alert(`${countdataWeight.value}kg is over payload in ${defaultContainerValue[button.dataset.btn]['container_df_type']}!`);
+//                     countdataWeight.value = '';
+//                 }
+//             })
+//         })
 
-                lengthR4 = document.getElementById(`crate_length_R4_V${index}`).value;
-                widthR4 = document.getElementById(`crate_width_R4_V${index}`).value;
-                heightR4 = document.getElementById(`crate_height_R4_V${index}`).value;
-                if (heightR4 != '') {
-                    countVolumeR4 = (+lengthR4 * +widthR4 * +heightR4) / 1000000;
-                    roundCountVolumeR4 = countVolumeR4 * 100;
-                    roundCountVolumeR4 = Math.round(roundCountVolumeR4);
-                    volumeR4.value = roundCountVolumeR4 / 100;
-                }
-                countdataVolume.value = (countVolumeR1 + countVolumeR2 + countVolumeR3 + countVolumeR4) * 100;
-                countdataVolume.value = Math.round(countdataVolume.value);
-                countdataVolume.value = countdataVolume.value / 100;
-            })
-        })
-    });
-})
+//         //count for volume
+//         countVolumeR1 = 0;
+//         countVolumeR2 = 0;
+//         countVolumeR3 = 0;
+//         countVolumeR4 = 0;
+
+//         const dataVolume = document.querySelectorAll('[data-crate]');
+//         console.log(dataVolume);
+//         const volumeR1 = document.getElementById(`crate_volume_R1_V${index}`);
+//         const volumeR2 = document.getElementById(`crate_volume_R2_V${index}`);
+//         const volumeR3 = document.getElementById(`crate_volume_R3_V${index}`);
+//         const volumeR4 = document.getElementById(`crate_volume_R4_V${index}`);
+//         const countdataVolume = document.getElementById(`crate_volume_V${index}`);
+
+//         dataVolume.forEach(volume_crate => {
+//             volume_crate.addEventListener('change', function () {
+//                 lengthR1 = document.getElementById(`crate_length_R1_V${index}`).value;
+//                 widthR1 = document.getElementById(`crate_width_R1_V${index}`).value;
+//                 heightR1 = document.getElementById(`crate_height_R1_V${index}`).value;
+//                 if (heightR1 != '') {
+//                     countVolumeR1 = (+lengthR1 * +widthR1 * +heightR1) / 1000000;
+//                     roundCountVolumeR1 = countVolumeR1 * 100;
+//                     roundCountVolumeR1 = Math.round(roundCountVolumeR1);
+//                     volumeR1.value = roundCountVolumeR1 / 100;
+//                 }
+
+//                 lengthR2 = document.getElementById(`crate_length_R2_V${index}`).value;
+//                 widthR2 = document.getElementById(`crate_width_R2_V${index}`).value;
+//                 heightR2 = document.getElementById(`crate_height_R2_V${index}`).value;
+//                 if (heightR2 != '') {
+//                     countVolumeR2 = (+lengthR2 * +widthR2 * +heightR2) / 1000000;
+//                     roundCountVolumeR2 = countVolumeR2 * 100;
+//                     roundCountVolumeR2 = Math.round(roundCountVolumeR2);
+//                     volumeR2.value = roundCountVolumeR2 / 100;
+//                 }
+
+//                 lengthR3 = document.getElementById(`crate_length_R3_V${index}`).value;
+//                 widthR3 = document.getElementById(`crate_width_R3_V${index}`).value;
+//                 heightR3 = document.getElementById(`crate_height_R3_V${index}`).value;
+//                 if (heightR3 != '') {
+//                     countVolumeR3 = (+lengthR3 * +widthR3 * +heightR3) / 1000000;
+//                     roundCountVolumeR3 = countVolumeR3 * 100;
+//                     roundCountVolumeR3 = Math.round(roundCountVolumeR3);
+//                     volumeR3.value = roundCountVolumeR3 / 100;
+//                 }
+
+//                 lengthR4 = document.getElementById(`crate_length_R4_V${index}`).value;
+//                 widthR4 = document.getElementById(`crate_width_R4_V${index}`).value;
+//                 heightR4 = document.getElementById(`crate_height_R4_V${index}`).value;
+//                 if (heightR4 != '') {
+//                     countVolumeR4 = (+lengthR4 * +widthR4 * +heightR4) / 1000000;
+//                     roundCountVolumeR4 = countVolumeR4 * 100;
+//                     roundCountVolumeR4 = Math.round(roundCountVolumeR4);
+//                     volumeR4.value = roundCountVolumeR4 / 100;
+//                 }
+//                 countdataVolume.value = (countVolumeR1 + countVolumeR2 + countVolumeR3 + countVolumeR4) * 100;
+//                 countdataVolume.value = Math.round(countdataVolume.value);
+//                 countdataVolume.value = countdataVolume.value / 100;
+//             })
+//         })
+//     });
+// })
 
 //creating back button
 let backButton = document.createElement("button");

@@ -17,7 +17,7 @@ $ok = array();
 $containerObj = new ContainerDefault;
 $getContainerData = $containerObj->getContainerData();
 $arrayContainerData = json_encode($getContainerData);
-
+var_dump($_POST);
 if (isset($_POST)) {
     //kick in error array the empty values from form
     //most of the times, it is the fiels remaining is container
@@ -41,6 +41,6 @@ if (isset($_POST)) {
     //     }
     // }
 
-    var_dump($errorS2);
-    var_dump($ok);
+    // var_dump($errorS2);
+    // var_dump($ok);
 }
