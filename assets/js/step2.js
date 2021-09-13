@@ -26,7 +26,7 @@ addContainerBtn.forEach(button => {
 
         //filling the table
         newTable.innerHTML = `
-        <caption>Container ${defaultContainerValue[button.dataset.btn]['container_df_type']}</caption>
+        <caption><input type="hidden" name="container_type${index}" value="${defaultContainerValue[button.dataset.btn]['container_df_type']}">Container ${defaultContainerValue[button.dataset.btn]['container_df_type']}</caption>
 
         <thead>
             <tr>
