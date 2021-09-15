@@ -1,7 +1,6 @@
 <?php
 require '../Controllers/step2-controller.php';
 require '../Controllers/header-controller.php';
-var_dump($_POST);
 // var_dump($_SESSION);
 ?>
 
