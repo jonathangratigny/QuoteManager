@@ -1,6 +1,8 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
+    // $_SESSION= array();
+    var_dump($_SESSION);
 }
 
 require '../Models/database.php';
@@ -9,9 +11,10 @@ require '../Models/user.php';
 require '../Models/port.php';
 require '../Models/project.php';
 
+$errorS1 = array();
+
 $portObj = new Port();
 $showUniqueCountry = $portObj->showUniqueCountry();
-$errorS1 = array();
 
 $shippingLineObj = new ShippingLine();
 $getShippingLine = $shippingLineObj->getShippingLine();
@@ -60,6 +63,9 @@ if (isset($_POST['step1'])) {
         if ($_POST['project_POD'] != 'none') {
             $_SESSION['project_POD'] = '';
             $_SESSION['project_POD'] = $_POST['project_POD'];
+            $showIDFromPOD = $portObj->showIDFromPOD($_POST['project_POD']);
+            $_SESSION['POD_ID'] = '';
+            $_SESSION['POD_ID'] = $showIDFromPOD['port_id'];
         } else {
             $errorS1['project_POD'] = 'Please Select A Port Of Discharge.';
         }
@@ -67,5 +73,4 @@ if (isset($_POST['step1'])) {
     if (empty($errorS1)) {
         header('Location: step2.php');
     }
-    
 }

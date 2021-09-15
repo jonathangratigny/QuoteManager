@@ -9,19 +9,31 @@ class Project extends User
     private $project_country_dest;
     private $project_POL;
     private $project_POD;
+    private $u_id;
+    private $port_id;
 
 
-    public function showCountryFromPOD($port_name)
+    public function pushProject($project_ref, $project_final_customer_name, $project_owner_ref, $project_country_dest, $project_POL, $project_POD)
     {
         $dbh = $this->connectDatabase();
-        $req = $dbh->prepare("SELECT *
-    FROM port
-    WHERE port_name = :port_name;");
-        $req->execute();
-        $req->bindValue(':port_name', $port_name, PDO::PARAM_STR);
-        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
-        return $fetch;
+        $req = $dbh->prepare(
+            "INSERT INTO project 
+        (project_ref, 
+        project_final_customer_name, 
+        project_owner_ref, 
+        project_country_dest, 
+        project_POL, 
+        project_POD, 
+        u_id, 
+        sl_id, 
+        port_id) 
+        values ('H1.001443', 'COCA', '20210827-01', 'CANADA', 'LE HAVRE', 'TORONTO', 1, 1, 201);
+        "
+
+        );
     }
+
+
 
     /**
      * show POD infos
@@ -175,6 +187,46 @@ class Project extends User
     public function setProject_POD($project_POD)
     {
         $this->project_POD = $project_POD;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of u_id
+     */ 
+    public function getU_id()
+    {
+        return $this->u_id;
+    }
+
+    /**
+     * Set the value of u_id
+     *
+     * @return  self
+     */ 
+    public function setU_id($u_id)
+    {
+        $this->u_id = $u_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of port_id
+     */ 
+    public function getPort_id()
+    {
+        return $this->port_id;
+    }
+
+    /**
+     * Set the value of port_id
+     *
+     * @return  self
+     */ 
+    public function setPort_id($port_id)
+    {
+        $this->port_id = $port_id;
 
         return $this;
     }

@@ -23,17 +23,17 @@ class Port extends Database
      * fetch port table
      *
      * @param string $port_name
-     * @return void
+     * @return fetch
      */
-    public function showCountryFromPOD(string $port_name)
+    public function showIDFromPOD(string $port_name)
     {
         $dbh = $this->connectDatabase();
-        $req = $dbh->prepare("SELECT *
+        $req = $dbh->prepare("SELECT port_id
     FROM port
     WHERE port_name = :port_name;");
-        $req->execute();
         $req->bindValue(':port_name', $port_name, PDO::PARAM_STR);
-        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
         return $fetch;
     }
 

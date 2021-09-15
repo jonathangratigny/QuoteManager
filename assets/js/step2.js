@@ -330,5 +330,4 @@ let nextButton = document.createElement("button");
 nextButton.setAttribute("class", "btn btn-primary mx-1");
 nextButton.setAttribute("type", "submit");
 nextButton.innerText = "Next";
-nextButton.value = "step2"
 buttonsCase.append(nextButton);

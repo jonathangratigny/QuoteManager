@@ -1,9 +1,13 @@
 <?php
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
-    // $_SESSION = array();
-    // var_dump($_SESSION);
+
+    // header('Location: index.php');
 }
+var_dump($_SESSION);
+// unset($_SESSION['crate_data']);
+
 
 require '../Models/database.php';
 require '../Models/user.php';
@@ -13,7 +17,6 @@ require '../Models/container-default-value.php';
 
 $errorS2 = array();
 $dataFilled = array();
-$containerQty = array();
 $totalRow = 0;
 
 // var_dump($_POST);
@@ -36,13 +39,10 @@ if (isset($_POST)) {
         if (strlen($value) > 0) {
             $dataFilled[$key] = $value;
         }
-
         if (strpos($key, 'crate_ref_R', 0) !== false && strlen($value) != 0) {
             $totalRow++;
         }
     }
-
-    var_dump($dataFilled);
 
     $dimsArray = []; // Array nous permettant de stacker nos cotes 
     $start = 1; // va nous permettre de recup les valeurs avec un pas de 5
@@ -61,12 +61,14 @@ if (isset($_POST)) {
             $start++;
         }
     }
-    var_dump($dimsArray);
 
-
-    //pushing data data
+    //pushing data to $_SESSION
     if (!empty($dimsArray)) {
-        foreach ($dataFilled as $data => $value) {
-        }
-    }
-}
+        $_SESSION['crate_data'] = $dimsArray;
+        
+        header("Location: ./step3.php");
+        die;
+    } 
+};
+ob_end_flush();
+?>

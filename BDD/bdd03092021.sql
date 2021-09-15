@@ -1764,6 +1764,7 @@ CREATE TABLE project_container(
 	,CONSTRAINT project_container_project0_FK FOREIGN KEY (project_id) REFERENCES project(project_id)
 )ENGINE=InnoDB;
 
+insert into project_container (container_df_id,project_id) values (2,7);
 
 #------------------------------------------------------------
 # Table: IS STUFF IN
@@ -1778,3 +1779,5 @@ CREATE TABLE IS_STUFF_IN(
 	,CONSTRAINT IS_STUFF_IN_project_crate0_FK FOREIGN KEY (project_crate_id) REFERENCES project_crate(project_crate_id)
 )ENGINE=InnoDB;
 
+insert into IS_STUFF_IN(project_container_id, project_crate_id) values (1, 1)
+insert into IS_STUFF_IN(project_container_id, project_crate_id) values (1, 2)

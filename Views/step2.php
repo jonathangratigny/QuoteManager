@@ -3,7 +3,6 @@ require '../Controllers/step2-controller.php';
 require '../Controllers/header-controller.php';
 // var_dump($_SESSION);
 ?>
-
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <span class="navbar-text">
@@ -13,11 +12,9 @@ require '../Controllers/header-controller.php';
         <button type="button" class="btn btn-warning text-dark btn-sm">Dashboard</button>
     </div>
 </nav>
-
 <div class="progress">
     <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-black" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:67%">67%</div>
 </div>
-
 <div class="container-fluid">
     <div class="container-fluid text-center">
         <div class="input-group mb-3">
@@ -31,22 +28,15 @@ require '../Controllers/header-controller.php';
     </div>
 </div>
 <form action="" method="POST">
-
     <div class="table-responsive" id="tableContainer">
-
     </div>
     <div id="buttonsCase" class="container-fluid text-center">
-
     </div>
-
 </form>
-
-
 <script>
     //get the value of container from controller
     let defaultContainerValue = <?= $arrayContainerData ?>;
 </script>
 <script src="../assets/js/step2.js"></script>
 <?php
-include '../Controllers/footer-controller.php';
-?>
+include '../Controllers/footer-controller.php'; ?>
