@@ -19,7 +19,6 @@ $errorS2 = array();
 $dataFilled = array();
 $totalRow = 0;
 
-// var_dump($_POST);
 
 //get the container default value from dbh
 $containerObj = new ContainerDefault;
@@ -65,7 +64,6 @@ if (isset($_POST)) {
     //pushing data to $_SESSION
     if (!empty($dimsArray)) {
         $_SESSION['crate_data'] = $dimsArray;
-        
         header("Location: ./step3.php");
         die;
     } 

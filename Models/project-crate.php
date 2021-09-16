@@ -9,7 +9,7 @@ Class Crate extends Database {
     private $crate_volume;
  
 
-    public function pushCrate($crate_ref, $crate_length, $crate_width, $crate_height, $crate_gross_weight) {
+    public function pushCrate($crate_ref, $crate_length, $crate_width, $crate_height, $crate_gross_weight, $v) {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("INSERT INTO
         PROJECT_crate 
@@ -33,6 +33,9 @@ Class Crate extends Database {
     $req->bindValue(':project_crate_height', $crate_height, PDO::PARAM_INT);
     $req->bindValue(':project_crate_gross_weight', $crate_gross_weight, PDO::PARAM_INT);
     $req->execute();
+
+    return $dbh->lastInsertId() . '-' . $v;
+
     }
     
 

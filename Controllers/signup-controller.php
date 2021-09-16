@@ -3,14 +3,14 @@
 require '../Models/functions.php';
 require '../Models/database.php';
 require '../Models/user.php';
-
+var_dump($_POST);
 $errors = array();
 $userObj = new User();
 
 if (isset($_POST['saveNewAccount'])) {
 
     if (empty($_POST['username']) || !preg_match('/^[a-zA-Z]+$/', $_POST['username'])) {
-        $errors['username'] = "The entry is not valid.";
+        $errors['username'] = "The entry is not valid, no digit allowed.";
     } else {
         $checkDoubleUsername = $userObj->checkDoubleUsername($_POST['username']);
         
@@ -32,14 +32,13 @@ if (isset($_POST['saveNewAccount'])) {
     }
 
     if (empty($_POST['password']) || $_POST['password'] != $_POST['confirm_password']) {
-        $errors['password'] = "Password not valid.";
+        $errors['password'] = "Password not valid or not matching.";
     }
 
     if (empty($errors)) {
         $hashUserPassword = $userObj->hashPassword($_POST['password']);
         $newUser = $userObj->InsertUserInDbh($_POST['email'], $_POST['username'], $hashUserPassword);
-        $_SESSION['flash']['success'] = 'Account created successfully.';
-        header("Location: login.php");
-        exit();
+        $_SESSION['flash']['success'] = 'Account created successfully! Please log you in :-)';
+        $_POST = '';
     }
 };
