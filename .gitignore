@@ -1,1 +1,4 @@
 INSERTS.sql
+assets/vendor/*
+assets/css/bootstrap*
+assets/js/bootstrap*

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83b6abf6d841cdb5b1ce056b8fcfe973",
+    "content-hash": "3df6b2d20f405114188940384c28d1bc",
     "packages": [
         {
             "name": "doctrine/lexer",
@@ -635,6 +635,56 @@
                 }
             ],
             "time": "2021-05-27T09:17:38+00:00"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "v5.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "0d81d3cbc14dfcdca8a868e3f25189a4f1ab273c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/0d81d3cbc14dfcdca8a868e3f25189a4f1ab273c",
+                "reference": "0d81d3cbc14dfcdca8a868e3f25189a4f1ab273c",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                },
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "https://getbootstrap.com/",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "web"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/bootstrap/issues",
+                "source": "https://github.com/twbs/bootstrap/tree/v5.1.1"
+            },
+            "time": "2021-09-07T15:37:44+00:00"
         }
     ],
     "packages-dev": [],

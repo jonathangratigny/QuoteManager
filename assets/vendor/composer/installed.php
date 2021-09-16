@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '0ca2ddecf31488da65bad9441794ed666dd6d45e',
+        'reference' => '6bf7e84c3b6b6f2bff909a2cb695b0c741fbfd0b',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '0ca2ddecf31488da65bad9441794ed666dd6d45e',
+            'reference' => '6bf7e84c3b6b6f2bff909a2cb695b0c741fbfd0b',
             'dev_requirement' => false,
         ),
         'doctrine/lexer' => array(
@@ -90,6 +90,21 @@
             'aliases' => array(),
             'reference' => '9a142215a36a3888e30d0a9eeea9766764e96976',
             'dev_requirement' => false,
+        ),
+        'twbs/bootstrap' => array(
+            'pretty_version' => 'v5.1.1',
+            'version' => '5.1.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../twbs/bootstrap',
+            'aliases' => array(),
+            'reference' => '0d81d3cbc14dfcdca8a868e3f25189a4f1ab273c',
+            'dev_requirement' => false,
+        ),
+        'twitter/bootstrap' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v5.1.1',
+            ),
         ),
     ),
 );
