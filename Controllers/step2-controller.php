@@ -5,9 +5,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
     // header('Location: index.php');
 }
-var_dump($_SESSION);
-// unset($_SESSION['crate_data']);
-
 
 require '../Models/database.php';
 require '../Models/user.php';

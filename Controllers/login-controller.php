@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
         echo '1';
         //check hash pwd of user
         $checkPassword = $userObj->checkPassword($_POST['log-username']);
-        var_dump($checkPassword['u_password']);
+
         if ($checkPassword == true && !empty($_POST['log-password'])) {
             echo '2';
             //compare input pwd with hash related to username and login the user

@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
     // $_SESSION= array();
-    var_dump($_SESSION);
+    // var_dump($_SESSION);
 }
 
 require '../Models/database.php';

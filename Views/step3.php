@@ -1,7 +1,7 @@
 <?php
 require '../Controllers/header-controller.php';
 require '../Controllers/step3-controller.php';
-// var_dump($_SESSION);
+var_dump($_SESSION);
 ?>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">

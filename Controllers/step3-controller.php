@@ -3,7 +3,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
     // header('Location: index.php');
 }
-// var_dump($_SESSION);
 require '../Models/database.php';
 require '../Models/user.php';
 require '../Models/port.php';

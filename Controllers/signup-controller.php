@@ -3,7 +3,6 @@
 require '../Models/functions.php';
 require '../Models/database.php';
 require '../Models/user.php';
-var_dump($_POST);
 $errors = array();
 $userObj = new User();
 
