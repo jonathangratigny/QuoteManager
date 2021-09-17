@@ -68,7 +68,7 @@ if (isset($_POST['step1'])) {
             $_SESSION['project_POD'] = $_POST['project_POD'];
             $showIDFromPOD = $portObj->showIDFromPOD($_POST['project_POD']);
             $_SESSION['POD_ID'] = '';
-            $_SESSION['POD_ID'] = $showIDFromPOD['port_id'];
+            $_SESSION['POD_ID'] = $showIDFromPOD['port_id'] ?? null;
         } else {
             $errorS1['project_POD'] = 'Please Select A Port Of Discharge.';
         }

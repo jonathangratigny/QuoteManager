@@ -52,7 +52,7 @@ require '../Controllers/header-controller.php';
           <select style="min-width: 327px; text-align: center;" name="project_shipping_line" id="project_shipping_line">
             <option selected><?= $_SESSION['project_shipping_line'] ?? 'Select A Shipping Line' ?></option>
             <?php foreach ($getShippingLine as $key => $name) : ?>
-              <option><?= $name['sl_name'] ?></option>
+              <option><?= $name['sl_name'] ?? null ?></option>
             <?php endforeach; ?>
           </select>
         </div>

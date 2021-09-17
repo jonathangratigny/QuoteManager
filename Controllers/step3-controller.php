@@ -12,6 +12,7 @@ require '../Models/container-default-value.php';
 
 $crateObj = new Crate();
 $projectObj = new Project();
+$containerObj = new ContainerDefault;
 $containerInQuote = array();
 $containerID = array();
 $crateInContainer = array();
@@ -19,6 +20,9 @@ $containerValueWithWhichCrate = array();
 $containerIndex = 0;
 $crateByContainer = array();
 $index = 1;
+
+//get the container default value from dbh
+$getContainerData = $containerObj->getContainerData();
 
 if (isset($_POST['validate'])) {
     if (!empty($_SESSION['crate_data'])) {
@@ -48,7 +52,6 @@ if (isset($_POST['validate'])) {
     //get the quantity of containers in quotation
     foreach ($_SESSION['crate_data'] as $value) {
 
-        // $value[7] = explode('V', $value[7]); // kick the 'V'
         if ($value[7][1] == $index) {
             $containerInQuote[] = 'V' . $value[7][1];
             $index++;
@@ -90,6 +93,7 @@ if (isset($_POST['validate'])) {
         //then once first loop is done, let's go for the next one...
         $crateByContainer[] = $bufferArray;
     }
+    var_dump($crateByContainer);
     foreach ($crateByContainer as $value) {
         $isStuffIn = $projectObj->isStuffIn($value[0], $value[1]);
     }

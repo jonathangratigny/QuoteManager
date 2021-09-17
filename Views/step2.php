@@ -9,7 +9,7 @@ require '../Controllers/header-controller.php';
             STEP 2 ON 3
         </span>
         <label for="customRange2" class="form-label">Example range</label>
-        <button type="button" class="btn btn-warning text-dark btn-sm">Dashboard</button>
+        <a href="./dashboard.php"><button type="button" class="btn btn-warning text-dark btn-sm">Dashboard</button></a>
     </div>
 </nav>
 <div class="progress">
@@ -29,7 +29,7 @@ require '../Controllers/header-controller.php';
 </div>
 <form action="" method="POST">
     <div class="table-responsive" id="tableContainer">
-    </div>
+</div>
     <div id="buttonsCase" class="container-fluid text-center">
     </div>
 </form>

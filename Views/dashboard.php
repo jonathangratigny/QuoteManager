@@ -6,17 +6,17 @@ require '../Controllers/header-controller.php';
 <body class="bg-light">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <span class="navbar-text">
-                Welcome to Dashboard, <?= $_SESSION['u_username'] ?? null ?>
-            </span>
-        </div>
-        <div class="btn-group d-flex" role="group" aria-label="">
-            <a href="step1.php">
-                <button type="button" class="btn btn-warning text-dark btn-sm">New Quote</button>
-            </a>
-            <a href="../Views/disconnect.php">
-                <button type="button" class="btn btn-warning text-dark btn-sm">Disconnect</button>
-            </a>
+            <span class="navbar-text"> Welcome to Dashboard, <?= $_SESSION['u_username'] ?? null ?></span>
+            <div class="d-flex">
+                <div class="row">
+                    <div class="col-auto">
+                        <a href="step1.php"><span type="button" class="btn btn-warning text-dark btn-sm">New Quote</span></a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="../Views/disconnect.php"><button type="button" class="btn btn-warning text-dark btn-sm">Disconnect</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -33,24 +33,6 @@ require '../Controllers/header-controller.php';
 
                 </div>
                 <span class="badge bg-success rounded-pill">sent on 01/01/2021</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">H1.00XXXX Le Havre - Houston</div>
-                    <div>CMA CGM </div>
-                    <div>sending date : 01/01/2021</div>
-                    <button type="button" class="btn btn-secondary btn-sm">View more</button>
-                </div>
-                <span class="badge bg-success rounded-pill">sent on 01/01/2021</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">H1.00XXXX Le Havre - Houston</div>
-                    <div>CMA CGM </div>
-                    <div>sending date : 01/01/2021</div>
-                    <button type="button" class="btn btn-secondary btn-sm">View more</button>
-                </div>
-                <span class="badge bg-danger rounded-pill">draft on 01/01/2021</span>
             </li>
         </ol>
 
@@ -110,18 +92,6 @@ require '../Controllers/header-controller.php';
                 <div>quotation@cma-cgm.com</div>
                 <div>+33 23456789</div>
             </li>
-            <li class="list-group-item list-bordered">HAPAG LLOYD
-                <div>quotation@hapag-lloyd.com</div>
-                <div>+33 23456789</div>
-            </li>
-            <li class="list-group-item">MSC
-                <div>quotation@msc.com</div>
-                <div>+33 23456789</div>
-            </li>
-            <li class="list-group-item">ONE
-                <div>quotation@ocean-network.com</div>
-                <div>+33 23456789</div>
-            </li>
         </div>
     </div>
 
@@ -155,6 +125,6 @@ require '../Controllers/header-controller.php';
         </div>
     </div>
 
-<?php
-include '../Controllers/footer-controller.php';
-?>
+    <?php
+    include '../Controllers/footer-controller.php';
+    ?>

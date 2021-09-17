@@ -1,7 +1,6 @@
 <?php
 require '../Controllers/header-controller.php';
 require '../Controllers/step3-controller.php';
-var_dump($_SESSION);
 ?>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
@@ -9,7 +8,7 @@ var_dump($_SESSION);
             STEP 3 ON 3
         </span>
         <label for="customRange2" class="form-label">Example range</label>
-        <button type="button" class="btn btn-warning text-dark btn-sm" onclick="window.location">Dashboard</button>
+        <a href="./dashboard.php"><button type="button" class="btn btn-warning text-dark btn-sm">Dashboard</button></a>
     </div>
 </nav>
 <div class="progress">
@@ -47,14 +46,36 @@ var_dump($_SESSION);
             <input type="text" class="form-control" placeholder="Port Of Loading" value="<?= $_SESSION['project_POD'] . ', ' . $_SESSION['project_country_dest'] ?? null ?>" disabled>
             <label for="project_POD">Port Of Discharge</label>
         </div>
-        <div class="">
-            <span class="">crate_data</span>
-            <?php foreach ($_SESSION['crate_data'] as $value) : ?>
-                <input type="text" class="form-control" value="Container id : <?= $value[5] . " Crate ref : " . $value[1]  . ' x ' . $value[2] . ' x ' . $value[3] . ' cm ' . $value[4] . 'kg' ?>">
-            <?php endforeach; ?>
-        </div>
-        <div class="container text-center">
-            <button type="submit" name='step1' class="btn btn-primary">Next</button>
+
+        <div class="table-responsive" id="tableContainer">
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">Container Type</th>
+                        <th scope="col">Crate Ref</th>
+                        <th scope="col">Length in cm</th>
+                        <th scope="col">Width in cm</th>
+                        <th scope="col">Height in cm</th>
+                        <th scope="col">Weight in kg</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($_SESSION['crate_data'] as $value) {
+                        $value[7][1];
+                        $getContaineerNameWithID = $containerObj->getContaineerNameWithID(intval($value[5])); ?>
+                        <tr class="text-center">
+                            <td><?= $getContaineerNameWithID[0] . ' #' . $value[7][1] ?></td>
+                            <td><?= $value[0] ?></td>
+                            <td><?= $value[1] ?></td>
+                            <td><?= $value[2] ?></td>
+                            <td><?= $value[3] ?></td>
+                            <td><?= $value[4] ?></td>
+                        </tr>
+                    <?php }; ?>
+            </table>
+            <div class="container text-center">
+                <button type="submit" name='' class="btn btn-primary">Next</button>
+            </div>
         </div>
     </div>
 </form>

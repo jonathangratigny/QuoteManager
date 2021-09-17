@@ -121,13 +121,21 @@ addContainerBtn.forEach(button => {
         //count for total crates
         countRef = 0;
         let totalRef = document.querySelectorAll("[data-ref]");
+        console.log(totalRef);
         let crates = document.getElementById(`crate_ref_V${index}`);
         totalRef.forEach(crate_ref => {
             crate_ref.addEventListener('change', function () {
-
-                if (crate_ref.value != '') {
+                
+                if (this.value != '') {
+                    console.log(this.value);
                     countRef++;
                 }
+
+                // if (crate_ref.value != '') {
+                //     countRef++;
+                //     console.log('ok');
+                // }
+
                 if (crate_ref.value == '') {
                     countRef--;
                 }
