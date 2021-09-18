@@ -4,6 +4,21 @@ class ShippingLine extends Database
 {
     private $sl_name;
 
+
+
+
+    public function getShippingLineWithID($sl_id)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT sl_name
+    FROM shipping_line
+    WHERE sl_id = :sl_id;");
+        $req->bindValue(':sl_id', $sl_id, PDO::PARAM_INT);
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_OBJ);
+        return $fetch;
+    }
+
     public function getShippingLineID($sl_name)
     {
         $dbh = $this->connectDatabase();

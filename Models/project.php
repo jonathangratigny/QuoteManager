@@ -46,6 +46,15 @@ class Project extends User
 
         return $dbh->lastInsertId();
     }
+    public function showProjectData()
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT * 
+        from project");
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_OBJ);
+        return $fetch;
+    }
 
 
     public function getLastProjectID()
@@ -72,7 +81,8 @@ class Project extends User
         project_POD, 
         u_id, 
         sl_id, 
-        port_id) 
+        port_id,
+        project_created_at) 
         values (:project_ref,
          :project_final_customer_name, 
          :project_owner_ref,
@@ -81,7 +91,8 @@ class Project extends User
          :project_POD, 
          :u_id, 
          :sl_id, 
-         :port_id);
+         :port_id,
+         NOW());
         "
         );
         $req->bindValue(':project_ref', $project_ref, PDO::PARAM_STR);

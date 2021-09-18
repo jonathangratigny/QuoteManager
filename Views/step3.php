@@ -74,7 +74,7 @@ require '../Controllers/step3-controller.php';
                     <?php }; ?>
             </table>
             <div class="container text-center">
-                <button type="submit" name='' class="btn btn-primary">Next</button>
+                <button type="submit" name='validate' class="btn btn-primary">Next</button>
             </div>
         </div>
     </div>

@@ -47,54 +47,57 @@ if (isset($_POST['validate'])) {
         } else {
             $_SESSION['flash']['danger'] = 'An Error Occurs, please try again.';
         }
-    }
 
-    //get the quantity of containers in quotation
-    foreach ($_SESSION['crate_data'] as $value) {
+        //get the quantity of containers in quotation
+        foreach ($_SESSION['crate_data'] as $value) {
 
-        if ($value[7][1] == $index) {
-            $containerInQuote[] = 'V' . $value[7][1];
-            $index++;
+            if ($value[7][1] == $index) {
+                $containerInQuote[] = 'V' . $value[7][1];
+                $index++;
+            }
+            //get container ID of containers in quotation
+            $containerID[] = $value[5];
         }
-        //get container ID of containers in quotation
-        $containerID[] = $value[5];
-    }
 
-    //insert project container : which df container for this request
-    $project_container_ID = array();
-    $getLastProjectID = $projectObj->getLastProjectID();
-    foreach ($containerID as $value) {
-        $pushProject_container = $projectObj->pushProject_container(intval($value), intval($getLastProjectID['project_id']));
-        array_push($project_container_ID, $pushProject_container);
-    }
+        //insert project container : which df container for this request
+        $project_container_ID = array();
+        $getLastProjectID = $projectObj->getLastProjectID();
+        foreach ($containerID as $value) {
+            $pushProject_container = $projectObj->pushProject_container(intval($value), intval($getLastProjectID['project_id']));
+            array_push($project_container_ID, $pushProject_container);
+        }
 
-    //IS_STUFF_IN process
-    //we have to define in which container is pack which crate
-    foreach ($containerInQuote as $value) { //the 'V' value 
-        $containerValueWithWhichCrate[$value] = $project_container_ID[$containerIndex]; //V1 = project container ID
-        $containerIndex++;
-    }
+        //IS_STUFF_IN process
+        //we have to define in which container is pack which crate
+        foreach ($containerInQuote as $value) { //the 'V' value 
+            $containerValueWithWhichCrate[$value] = $project_container_ID[$containerIndex]; //V1 = project container ID
+            $containerIndex++;
+        }
 
 
-    //we look in 01-V1 array
-    foreach ($crateInContainer as $value) {
-        $getValueV = explode('-', $value); //take the V value
-        $bufferArray = []; //create an array of array where first array [0], [1], [2]...  will be the data for IS_STUFF_IN table filling (and purge it in next loop):
-        // array[0]
-        //[0] = project_container_id
-        //[1] = project_crate_id
+        //we look in 01-V1 array
+        foreach ($crateInContainer as $value) {
+            $getValueV = explode('-', $value); //take the V value
+            $bufferArray = []; //create an array of array where first array [0], [1], [2]...  will be the data for IS_STUFF_IN table filling (and purge it in next loop):
+            // array[0]
+            //[0] = project_container_id
+            //[1] = project_crate_id
 
-        array_push(
-            $bufferArray,
-            $containerValueWithWhichCrate[$getValueV[1]], //[0] = project_container_id
-            $getValueV[0]
-        ); //[1] = project_crate_id
+            array_push(
+                $bufferArray,
+                $containerValueWithWhichCrate[$getValueV[1]], //[0] = project_container_id
+                $getValueV[0]
+            ); //[1] = project_crate_id
 
-        //then once first loop is done, let's go for the next one...
-        $crateByContainer[] = $bufferArray;
-    }
-    var_dump($crateByContainer);
-    foreach ($crateByContainer as $value) {
-        $isStuffIn = $projectObj->isStuffIn($value[0], $value[1]);
+            //then once first loop is done, let's go for the next one...
+            $crateByContainer[] = $bufferArray;
+        }
+        foreach ($crateByContainer as $value) {
+            $isStuffIn = $projectObj->isStuffIn($value[0], $value[1]);
+        }
+        $_SESSION['flash']['success'] = 'Project saved successfully !';
+        header('Location: ./dashboard.php');
+    } else {
+        $_SESSION['flash']['danger'] = "There is no crate to manage, we can't go ahead anymore";
     }
 }

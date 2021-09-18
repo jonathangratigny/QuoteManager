@@ -1,5 +1,5 @@
 <script src="../assets/js/bootstrap.js">
-    </script>
+</script>
 </body>
 
 </html>

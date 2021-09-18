@@ -25,9 +25,9 @@ require '../Controllers/header-controller.php';
         <ol class="list-group list-group-numbered">
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                    <div class="fw-bold">H1.00XXXX Le Havre - Houston</div>
-                    <div>CMA CGM </div>
-                    <div>sending date : 01/01/2021</div>
+                    <div class="fw-bold"><?= $showProjectData->project_ref . ' ' . $showProjectData->project_POL . ' - ' . $showProjectData->project_POD ?></div>
+                    <div><?= $getShippingLineWithID->sl_name ?></div>
+                    <div>Creating Date : <?= $date_project ?></div>
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#quote1">View more</button>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#quote1">Delete</button>
 
