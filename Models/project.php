@@ -14,7 +14,81 @@ class Project extends User
     private $container_df_id;
 
 
-    
+    public function deleteProject($project_id)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("DELETE FROM project 
+        WHERE
+        project_id = :project_id");
+        $req->bindValue(':project_id', $project_id, PDO::PARAM_INT);
+        $req->execute();
+        return $_SESSION['flash']['success'] = 'Project deleted with success.';
+    }
+
+    public function containersDetails($project_id)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT 
+        project.project_ref,
+        container_default_value.container_df_type AS CT_type,
+        IS_STUFF_IN.project_container_id AS CT_id,
+        is_stuff_in.project_crate_id AS crate_id,
+        project_crate.project_crate_length AS crate_length,
+        project_crate.project_crate_width AS crate_width,
+        project_crate.project_crate_height AS crate_height,
+        project_crate.project_crate_gross_weight AS crate_weight,
+        project_crate.project_crate_volume AS crate_volume,
+        container_default_value.container_df_width AS CT_df_width,
+        container_default_value.container_df_height AS CT_df_height
+    FROM
+        Quote_Manager.IS_STUFF_IN
+            INNER JOIN
+        project_container ON IS_STUFF_IN.project_container_id = project_container.project_container_id
+            INNER JOIN
+        project ON project_container.project_id = project.project_id
+            INNER JOIN
+        container_default_value ON project_container.container_df_id = container_default_value.container_df_id
+            INNER JOIN
+        project_crate ON IS_STUFF_IN.project_crate_id = project_crate.project_crate_id
+        where project.project_id = :project_id;");
+        $req->bindValue('project_id', $project_id, PDO::PARAM_INT);
+        $req->execute();
+        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
+
+
+
+    public function containersInThisProject($project_id)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT 
+    project_ref, 
+    count(container_df_type)
+    FROM
+    project
+    INNER JOIN
+    project_container ON project_container.project_id = project.project_id
+    INNER JOIN
+    container_default_value ON project_container.container_df_id = container_default_value.container_df_id
+    where project.project_id = :project_id;");
+        $req->bindValue(':project_id', $project_id, PDO::PARAM_INT);
+        $req->execute();
+        $fetch = $req->fetchAll(PDO::FETCH_OBJ);
+        return $fetch;
+    }
+
+    public function showProjectDataWithID($project_id)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT * 
+        from project
+        WHERE project_id = :project_id");
+        $req->bindValue(':project_id', $project_id, PDO::PARAM_INT);
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_OBJ);
+        return $fetch;
+    }
 
 
     public function dateDifferenceProjectAndNow()
@@ -24,11 +98,11 @@ class Project extends User
         AS creating_interval 
         FROM project;");
         $req->execute();
-        $fetch = $req->fetch(PDO::FETCH_OBJ);
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
         return $fetch;
     }
 
-    
+
     public function isStuffIn($project_container_id, $project_crate_id)
     {
         $dbh = $this->connectDatabase();
@@ -42,7 +116,6 @@ class Project extends User
         $req->bindValue(':project_container_id', $project_container_id, PDO::PARAM_INT);
         $req->bindValue(':project_crate_id', $project_crate_id, PDO::PARAM_INT);
         $req->execute();
-
     }
 
 
@@ -62,13 +135,15 @@ class Project extends User
 
         return $dbh->lastInsertId();
     }
+
+
     public function showProjectData()
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("SELECT * 
         from project");
         $req->execute();
-        $fetch = $req->fetch(PDO::FETCH_OBJ);
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
         return $fetch;
     }
 
@@ -121,7 +196,6 @@ class Project extends User
         $req->bindValue(':sl_id', $sl_id, PDO::PARAM_INT);
         $req->bindValue(':port_id', $port_id, PDO::PARAM_INT);
         $req->execute();
-
     }
 
 

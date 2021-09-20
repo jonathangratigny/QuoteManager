@@ -16,10 +16,15 @@ $projectObj = new Project();
 $shippingLineObj = new ShippingLine();
 
 $showProjectData = $projectObj->showProjectData();
-$getShippingLineWithID = $shippingLineObj->getShippingLineWithID($showProjectData->sl_id);
-$projectOwnerWithID = $projectObj->projectOwnerWithID($showProjectData->u_id);
-$date_project = $showProjectData->project_created_at;
-// $date_project = date("F j, Y, g:i a");
+
+$getShippingLineWithID = $shippingLineObj->getShippingLineWithID($showProjectData['sl_id'] ?? null);
+$projectOwnerWithID = $projectObj->projectOwnerWithID($showProjectData['u_id'] ?? null);
 $dateDifferenceProjectAndNow = $projectObj->dateDifferenceProjectAndNow();
-$getShippingLine = $shippingLineObj->getShippingLine();
-$getShippingLineOnproject = $shippingLineObj->getShippingLineOnproject();
+
+
+$getShippingLine = $shippingLineObj->getShippingLine() ?? null;
+$getShippingLineOnproject = $shippingLineObj->getShippingLineOnproject() ?? null;
+
+if (isset($_POST['delete_project'])) {
+    $deleteProject = $projectObj->deleteProject($_POST['delete_project']);
+}

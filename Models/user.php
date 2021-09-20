@@ -24,7 +24,7 @@ class User extends Database
         on project.u_id = user.u_id");
         $req->bindValue(':u_id', $u_id, PDO::PARAM_INT);
         $req->execute();
-        $fetch = $req->fetch(PDO::FETCH_OBJ);
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
         return $fetch;
     }
 

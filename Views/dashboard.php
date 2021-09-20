@@ -24,15 +24,17 @@ require '../Controllers/header-controller.php';
     <div class="container my-3">
         <ol class="list-group list-group-numbered">
             <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold"><?= $showProjectData->project_ref . ' ' . $showProjectData->project_POL . ' - ' . $showProjectData->project_POD ?></div>
-                    <div><?= $getShippingLineOnproject['sl_name'] ?></div>
-                    <div>Creating Date : <?= $date_project ?></div>
+                <div class="ms-2 me-auto mb-3">
+                    <div class="fw-bold">Project Ref : <?= $showProjectData['project_ref'] ?? null ?></div>
+                    <div>Port Of Loading : <?= $showProjectData['project_POL'] ?? null ?></div>
+                    <div>Port Of Discharge : <?= $showProjectData['project_POD'] ?? null ?></div>
+                    <div>Carrier : <?= $getShippingLineOnproject['sl_name'] ?? null ?></div>
+                    <div>Creating Date : <?= $showProjectData['project_created_at'] ?></div>
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#quote1">View more</button>
-                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#quote1">Delete</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#quote1">Delete Project</button>
 
                 </div>
-                <span class="badge bg-success rounded-pill">Created By <?= $projectOwnerWithID->u_username ?></span>
+                <span class="badge bg-success rounded-pill">Created By <?= $projectOwnerWithID['u_username']  . ', ' . $dateDifferenceProjectAndNow['creating_interval'] ?> days ago</span>
             </li>
         </ol>
 
@@ -45,9 +47,9 @@ require '../Controllers/header-controller.php';
                             <div class="row">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                                <h5 class="modal-title text-center" id="exampleModalLabel"><?= $showProjectData->project_ref . ' ' . $showProjectData->project_POL . ' - ' . $showProjectData->project_POD ?>
+                                <h5 class="modal-title text-center" id="exampleModalLabel"><?= $showProjectData['project_ref'] ?? null . ' ' . $showProjectData['project_POL'] ?? null . ' - ' . $showProjectData['project_POD'] ?? null ?>
                                 </h5>
-                                <span class="modal-body text-center" id="exampleModalLabel">Carrier : <?= $getShippingLineOnproject['sl_name'] ?> </span>
+                                <span class="modal-body text-center" id="exampleModalLabel">Carrier : <?= $getShippingLineOnproject['sl_name'] ?? null ?> </span>
                             </div>
                         </div>
                     </div>
@@ -59,15 +61,18 @@ require '../Controllers/header-controller.php';
                                 <div> Height : 420cm => OH : 120 cm </div>
                                 <div> Gross weight : 18000 KG</div>
                             </li>
-                           
-                            <small class="text-muted d-flex justify-content-end">created <?= $dateDifferenceProjectAndNow->creating_interval ?> days ago</small>
+                            <small class="text-muted d-flex justify-content-end">created <?= $dateDifferenceProjectAndNow['creating_interval'] ?> days ago</small>
                         </ul>
                     </div>
                     <div class="modal-footer d-flex bd-highlight mb-3">
-
-                        <button type="button" class="btn btn-danger me-auto p-2 bd-highlight">Delete</button>
+                        <form action="" method="post" class="me-auto">
+                            <button type="submit" name="delete_project" value="63" class="btn btn-danger p-2 bd-highlight">Delete Project</button>
+                        </form>
                         <button type="button" class="btn btn-secondary p-2 bd-highlight" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary p-2 bd-highlight">Update</button>
+                        <form action="./project-view.php" method="post">
+                            <input type="hidden" value="<?= $showProjectData['project_id'] ?>" name="view_project">
+                            <button type="submit" class="btn btn-primary p-2 bd-highlight">Update</button>
+                        </form>
 
                     </div>
 
