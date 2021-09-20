@@ -9,6 +9,27 @@ class User extends Database
     private $reset_token;
 
     /**
+     * return user data with id
+     *
+     * @param int $u_id
+     * @return fetch
+     */
+    public function projectOwnerWithID($u_id)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT 
+        u_username, u_email 
+        FROM project
+        inner join user 
+        on project.u_id = user.u_id");
+        $req->bindValue(':u_id', $u_id, PDO::PARAM_INT);
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_OBJ);
+        return $fetch;
+    }
+
+
+    /**
      * update password by reset process
      *
      * @param hash $password

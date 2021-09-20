@@ -52,7 +52,7 @@ require '../Controllers/header-controller.php';
           <select style="min-width: 327px; text-align: center;" name="project_shipping_line" id="project_shipping_line">
             <option selected><?= $_SESSION['project_shipping_line'] ?? 'Select A Shipping Line' ?></option>
             <?php foreach ($getShippingLine as $key => $name) : ?>
-              <option><?= $name['sl_name'] ?? null ?></option>
+              <option><?= $name['sl_name'] ?? 'Select A Shipping Line' ?></option>
             <?php endforeach; ?>
           </select>
         </div>
@@ -70,7 +70,7 @@ require '../Controllers/header-controller.php';
           <select style="min-width: 327px; text-align: center;" name="project_country_dest" id="project_country_dest">
             <option selected><?= $_SESSION['project_country_dest'] ?? 'Select A Country' ?></option>
             <?php foreach ($showUniqueCountry as $key => $port) : ?>
-              <option><?= $port['port_country'] ?></option>
+              <option><?= $port['port_country'] ?? 'Select A Country' ?></option>
             <?php endforeach; ?>
           </select>
         </div>

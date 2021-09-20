@@ -46,7 +46,7 @@ if (isset($_POST['step1'])) {
         $_SESSION['project_shipping_line'] = '';
         $_SESSION['project_shipping_line'] = $_POST['project_shipping_line'];
         $_SESSION['sl_id'] = '';
-        $getShippingLineID = $shippingLineObj->getShippingLineID($_POST['project_shipping_line']);
+        $getShippingLineID = $shippingLineObj->getShippingLineID(($_POST['project_shipping_line']));
         $_SESSION['sl_id'] = $getShippingLineID['sl_id'];
     } else {
         $errorS1['project_shipping_line'] = 'Please Select A Shipping Line.';

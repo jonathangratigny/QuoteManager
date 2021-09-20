@@ -13,6 +13,22 @@ class Project extends User
     private $port_id;
     private $container_df_id;
 
+
+    
+
+
+    public function dateDifferenceProjectAndNow()
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT datediff(CURDATE(),project_created_at) 
+        AS creating_interval 
+        FROM project;");
+        $req->execute();
+        $fetch = $req->fetch(PDO::FETCH_OBJ);
+        return $fetch;
+    }
+
+    
     public function isStuffIn($project_container_id, $project_crate_id)
     {
         $dbh = $this->connectDatabase();
