@@ -33,6 +33,7 @@ class Project extends User
         container_default_value.container_df_type AS CT_type,
         IS_STUFF_IN.project_container_id AS CT_id,
         is_stuff_in.project_crate_id AS crate_id,
+        project_crate.project_crate_ref AS crate_ref,
         project_crate.project_crate_length AS crate_length,
         project_crate.project_crate_width AS crate_width,
         project_crate.project_crate_height AS crate_height,

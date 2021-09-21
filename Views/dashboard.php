@@ -29,12 +29,12 @@ require '../Controllers/header-controller.php';
                     <div>Port Of Loading : <?= $showProjectData['project_POL'] ?? null ?></div>
                     <div>Port Of Discharge : <?= $showProjectData['project_POD'] ?? null ?></div>
                     <div>Carrier : <?= $getShippingLineOnproject['sl_name'] ?? null ?></div>
-                    <div>Creating Date : <?= $showProjectData['project_created_at'] ?></div>
+                    <div>Creating Date : <?= $showProjectData['project_created_at'] ?? null ?></div>
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#quote1">View more</button>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#quote1">Delete Project</button>
 
                 </div>
-                <span class="badge bg-success rounded-pill">Created By <?= $projectOwnerWithID['u_username']  . ', ' . $dateDifferenceProjectAndNow['creating_interval'] ?> days ago</span>
+                <span class="badge bg-success rounded-pill">Created By <?= $projectOwnerWithID['u_username'] ?? null ?> , <?= $dateDifferenceProjectAndNow['creating_interval'] ?? null ?> days ago</span>
             </li>
         </ol>
 
@@ -66,16 +66,14 @@ require '../Controllers/header-controller.php';
                     </div>
                     <div class="modal-footer d-flex bd-highlight mb-3">
                         <form action="" method="post" class="me-auto">
-                            <button type="submit" name="delete_project" value="63" class="btn btn-danger p-2 bd-highlight">Delete Project</button>
+                            <button type="submit" name="delete_project" value="<?= $showProjectData['project_id'] ?>" class="btn btn-danger p-2 bd-highlight">Delete Project</button>
                         </form>
                         <button type="button" class="btn btn-secondary p-2 bd-highlight" data-bs-dismiss="modal">Close</button>
                         <form action="./project-view.php" method="post">
                             <input type="hidden" value="<?= $showProjectData['project_id'] ?>" name="view_project">
                             <button type="submit" class="btn btn-primary p-2 bd-highlight">Update</button>
                         </form>
-
                     </div>
-
                 </div>
             </div>
         </div>

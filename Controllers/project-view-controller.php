@@ -1,5 +1,4 @@
 <?php
-var_dump($_POST);
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -26,9 +25,7 @@ $showProjectDataWithID = $projectObj->showProjectDataWithID($_POST['view_project
 
 
 $containersDetails = $projectObj->containersDetails($_POST['view_project'] ?? null);
-// var_dump($containersDetails);
 
-foreach ($containersDetails as $value) {
+//variable to separate crates per container in view 
+$cratePerContainer = $containersDetails[0]['CT_id'] ?? null;
 
-    var_dump($value);
-}

@@ -3,6 +3,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 require '../Models/functions.php';
 require '../Models/database.php';
 require '../Models/user.php';
@@ -28,3 +29,5 @@ $getShippingLineOnproject = $shippingLineObj->getShippingLineOnproject() ?? null
 if (isset($_POST['delete_project'])) {
     $deleteProject = $projectObj->deleteProject($_POST['delete_project']);
 }
+$showProjectData = $projectObj->showProjectData();
+var_dump($showProjectData);

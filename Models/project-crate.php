@@ -10,6 +10,17 @@ class Crate extends Database
     private $crate_volume;
     private $crate_id;
 
+    public function readCrate($crate_id)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT * 
+        FROM project_crate
+        WHERE project_crate_id = :project_crate_id;");
+        $req->bindValue('project_crate_id', $crate_id, );
+        $req->execute();
+        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $fetch;
+    }
 
     public function deleteCrate($crate_id)
     {
@@ -22,27 +33,29 @@ class Crate extends Database
     }
 
 
-    public function updateCrate($crate_id, $crate_ref, $crate_length, $crate_width, $crate_height, $crate_gross_weight)
+    public function updateCrate($crate_ref, $crate_length, $crate_width, $crate_height, $crate_gross_weight, $crate_id)
     {
         $dbh = $this->connectDatabase();
-        $req = $dbh->prepare("UPDATE project_crate 
+        $req = $dbh->prepare("UPDATE Quote_Manager.project_crate 
 SET 
     project_crate_ref = :crate_ref,
     project_crate_length = :crate_length,
     project_crate_width = :crate_width,
     project_crate_height = :crate_height,
     project_crate_gross_weight = :crate_gross_weight,
-    project_crate_volune = :crate_length * :crate_width * :crate_height /1000000
+    project_crate_volume = project_crate_length * project_crate_width * project_crate_height /1000000
 WHERE
     project_crate_id = :crate_id");
 
-        $req->bindValue('crate_ref', $crate_ref, PDO::PARAM_INT);
-        $req->bindValue('crate_length', $crate_length, PDO::PARAM_INT);
-        $req->bindValue('crate_width', $crate_width, PDO::PARAM_INT);
-        $req->bindValue('crate_height', $crate_height, PDO::PARAM_INT);
-        $req->bindValue('crate_gross_weight', $crate_gross_weight, PDO::PARAM_INT);
-        $req->bindValue('crate_id', $crate_id, PDO::PARAM_INT);
+        $req->bindValue(':crate_ref', $crate_ref, PDO::PARAM_STR);
+        $req->bindValue(':crate_length', $crate_length, PDO::PARAM_INT);
+        $req->bindValue(':crate_width', $crate_width, PDO::PARAM_INT);
+        $req->bindValue(':crate_height', $crate_height, PDO::PARAM_INT);
+        $req->bindValue(':crate_gross_weight', $crate_gross_weight, PDO::PARAM_INT);
+        $req->bindValue(':crate_id', $crate_id, PDO::PARAM_INT);
         $req->execute();
+        return $_SESSION['flash']['success'] = 'crate updated successfully ! 
+        You will now be returned to dashboard in 5 seconds.';
     }
 
 
