@@ -2,7 +2,13 @@
 
 class ContainerDefault extends Database
 {
-
+    /**
+     * get the default width and height from container with it's type
+     * 40FR, 20FR, 20GP and 40HC
+     *
+     * @param str $container_df_type
+     * @return void
+     */
     public function getContainerDimensions($container_df_type)
     {
         $dbh = $this->connectDatabase();
@@ -16,6 +22,12 @@ class ContainerDefault extends Database
         return $fetch;
     }
 
+    /**
+     * get the container_id and type with a project_ref 
+     * 
+     * @param str $project_ref
+     * @return object
+     */
     public function getContainerById($project_ref)
     {
 
@@ -30,6 +42,33 @@ class ContainerDefault extends Database
         return $fetch;
     }
 
+    /**
+     * get the total gross weight of crates stuff into a container
+     *
+     * @param str $project_container_id
+     * @return void
+     */
+    public function totalGrossWeight($project_container_id)
+    {
+        $dbh = $this->connectDatabase();
+        $req = $dbh->prepare("SELECT sum(project_crate_gross_weight) as total_gross_weight
+        from project_crate 
+natural join is_stuff_in
+natural join project_container
+where project_container_id = :project_container_id;");
+        $req->bindValue(":project_container_id", $project_container_id, PDO::PARAM_STR);
+        $req->execute();
+        $fetch = $req->fetch();
+        return $fetch;
+    }
+
+
+    /**
+     * get the higher crate height into a container
+     *
+     * @param str $project_container_id
+     * @return void
+     */
     public function maxHeightContainer($project_container_id)
     {
         $dbh = $this->connectDatabase();
@@ -44,6 +83,12 @@ where project_container_id = :project_container_id;");
         return $fetch;
     }
 
+    /**
+     * get the higher width into a container
+     *
+     * @param str $project_container_id
+     * @return void
+     */
     public function maxWidthContainer($project_container_id)
     {
         $dbh = $this->connectDatabase();
@@ -58,7 +103,12 @@ where project_container_id = :project_container_id;");
         return $fetch;
     }
 
-
+    /**
+     * get the type of a container with it's ID 
+     *
+     * @param int $id
+     * @return void
+     */
     public function getContaineerNameWithID($id)
     {
         $dbh = $this->connectDatabase();
@@ -73,7 +123,11 @@ where project_container_id = :project_container_id;");
         return $fetch;
     }
 
-
+    /**
+     * get all datas from container_default_value table fron dbh
+     *
+     * @return void
+     */
     public function getContainerData()
     {
         $dbh = $this->connectDatabase();

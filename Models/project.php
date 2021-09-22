@@ -13,7 +13,12 @@ class Project extends User
     private $port_id;
     private $container_df_id;
 
-
+    /**
+     * delete a project from dbh with a project_id data
+     *
+     * @param int $project_id
+     * @return void
+     */
     public function deleteProject($project_id)
     {
         $dbh = $this->connectDatabase();
@@ -25,6 +30,13 @@ class Project extends User
         return $_SESSION['flash']['success'] = 'Project deleted with success.';
     }
 
+    /**
+     * function to get container details with crate details inside a container
+     * with a project_crate_id data
+     *
+     * @param integer $project_id
+     * @return fetch
+     */
     public function containersDetails($project_id)
     {
         $dbh = $this->connectDatabase();
@@ -60,25 +72,12 @@ class Project extends User
 
 
 
-    public function containersInThisProject($project_id)
-    {
-        $dbh = $this->connectDatabase();
-        $req = $dbh->prepare("SELECT 
-    project_ref, 
-    count(container_df_type)
-    FROM
-    project
-    INNER JOIN
-    project_container ON project_container.project_id = project.project_id
-    INNER JOIN
-    container_default_value ON project_container.container_df_id = container_default_value.container_df_id
-    where project.project_id = :project_id;");
-        $req->bindValue(':project_id', $project_id, PDO::PARAM_INT);
-        $req->execute();
-        $fetch = $req->fetchAll(PDO::FETCH_OBJ);
-        return $fetch;
-    }
-
+    /**
+     * function to show a project data with it's ID
+     *
+     * @param int $project_id
+     * @return fetch
+     */
     public function showProjectDataWithID($project_id)
     {
         $dbh = $this->connectDatabase();
@@ -91,7 +90,11 @@ class Project extends User
         return $fetch;
     }
 
-
+    /**
+     * function to get date difference between now and creating date of project 
+     *
+     * @return fetch
+     */
     public function dateDifferenceProjectAndNow()
     {
         $dbh = $this->connectDatabase();
@@ -103,7 +106,13 @@ class Project extends User
         return $fetch;
     }
 
-
+    /**
+     * function to push into IS_STUFF_IN table in dbh
+     *
+     * @param integer $project_container_id
+     * @param integer $project_crate_id
+     * @return void
+     */
     public function isStuffIn($project_container_id, $project_crate_id)
     {
         $dbh = $this->connectDatabase();
@@ -119,7 +128,13 @@ class Project extends User
         $req->execute();
     }
 
-
+    /**
+     * function to push in dbh project_container table
+     *
+     * @param integer $container_df_id
+     * @param integer $project_id
+     * @return lastInsertId()
+     */
     public function pushProject_container($container_df_id, $project_id)
     {
         $dbh = $this->connectDatabase();
@@ -137,7 +152,11 @@ class Project extends User
         return $dbh->lastInsertId();
     }
 
-
+    /**
+     * function to show all data from project table
+     *
+     * @return array
+     */
     public function showProjectData()
     {
         $dbh = $this->connectDatabase();
@@ -148,7 +167,11 @@ class Project extends User
         return $fetch;
     }
 
-
+    /**
+     * function to get the last ID in project table
+     *
+     * @return void
+     */
     public function getLastProjectID()
     {
         $dbh = $this->connectDatabase();
@@ -159,7 +182,20 @@ class Project extends User
         return $fetch;
     }
 
-
+    /**
+     * insert project into dbh project table
+     *
+     * @param string $project_ref
+     * @param string $project_final_customer_name
+     * @param string $project_owner_ref
+     * @param string $project_country_dest
+     * @param string $project_POL
+     * @param string $project_POD
+     * @param string $u_id
+     * @param string $sl_id
+     * @param string $port_id
+     * @return void
+     */
     public function pushProject($project_ref, $project_final_customer_name, $project_owner_ref, $project_country_dest, $project_POL, $project_POD, $u_id, $sl_id, $port_id)
     {
         $dbh = $this->connectDatabase();

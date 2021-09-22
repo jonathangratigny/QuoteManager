@@ -71,6 +71,7 @@ require '../Controllers/header-controller.php';
                             <?php foreach ($getContainerById as $dataContainer) : ?>
                                 <?php $maxWidthContainer = $containerObj->maxWidthContainer($dataContainer['project_container_id']) ?>
                                 <?php $maxHeightContainer = $containerObj->maxHeightContainer($dataContainer['project_container_id']) ?>
+                                <?php $totalGrossWeight = $containerObj->totalGrossWeight($dataContainer['project_container_id']) ?>
                                 <?php $getContainerDimensions = $containerObj->getContainerDimensions($dataContainer['container_df_type']) ?>
                                 <div class="modal-body">
                                     <ul class="list-group ">
@@ -79,7 +80,7 @@ require '../Controllers/header-controller.php';
                                             <div> Widht : <?= $dataContainer['container_df_type'] == '40FR' ? $maxWidthContainer['max_width'] . 'cm => ' . (($maxWidthContainer['max_width'] - $getContainerDimensions['container_df_width']) / 2) . ' Over Width Each Sides.' : ($dataContainer['container_df_type'] == '20FR' ? $maxWidthContainer['max_width'] . 'cm => ' . (($maxWidthContainer['max_width'] - $getContainerDimensions['container_df_width']) / 2) . ' Over Width Each Sides.'  : ($dataContainer['container_df_type'] == '40HC' ? $getContainerDimensions['container_df_width'] . 'cm' : ($dataContainer['container_df_type'] == '20GP' ? $getContainerDimensions['container_df_width'] . 'cm' : 'Error'))) ?> </div>
 
                                             <div> Height : <?= $dataContainer['container_df_type'] == '40FR' ? $maxHeightContainer['max_height'] . 'cm => ' . ($maxHeightContainer['max_height'] - $getContainerDimensions['container_df_height']) . 'cm Over Height.' : ($dataContainer['container_df_type'] == '20FR' ? $maxHeightContainer['max_height'] . 'cm => ' . ($maxHeightContainer['max_height'] - $getContainerDimensions['container_df_height']) . 'cm Over Height.' : ($dataContainer['container_df_type'] == '40HC' ? $getContainerDimensions['container_df_height'] . 'cm' : ($dataContainer['container_df_type'] == '20GP' ? $getContainerDimensions['container_df_height'] . 'cm' : 'Error'))) ?> </div>
-                                            <div> Gross weight : 18000 KG</div>
+                                            <div> Gross weight : <?= $totalGrossWeight['total_gross_weight']?>kg</div>
                                         </li>
                                     </ul>
                                 </div>
