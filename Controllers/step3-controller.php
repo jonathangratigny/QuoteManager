@@ -55,7 +55,7 @@ if (isset($_POST['validate'])) {
                 $containerInQuote[] = 'V' . $value[7][1];
                 $index++;
             }
-            //get container ID of containers in quotation
+            //get container_df_id of containers in quotation
             $containerID[] = $value[5];
         }
 

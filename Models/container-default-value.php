@@ -32,9 +32,10 @@ class ContainerDefault extends Database
     {
 
         $dbh = $this->connectDatabase();
-        $req = $dbh->prepare("SELECT project_container_id, container_df_type FROM project_container 
-        natural join project
-        natural join container_default_value
+        $req = $dbh->prepare("SELECT distinct(project_container_id) AS project_container_id, container_df_type FROM  is_stuff_in 
+        NATURAL JOIN project_container
+        NATURAL JOIN project
+        NATURAL JOIN container_default_value
         where project_ref = :project_ref;");
         $req->bindValue(":project_ref", $project_ref, PDO::PARAM_STR);
         $req->execute();
@@ -52,8 +53,8 @@ class ContainerDefault extends Database
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("SELECT sum(project_crate_gross_weight) as total_gross_weight
-        from project_crate 
-natural join is_stuff_in
+        from is_stuff_in 
+natural join project_crate
 natural join project_container
 where project_container_id = :project_container_id;");
         $req->bindValue(":project_container_id", $project_container_id, PDO::PARAM_STR);
@@ -73,8 +74,8 @@ where project_container_id = :project_container_id;");
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("SELECT
-         max(project_crate_height) as 'max_height' from project_crate 
-natural join is_stuff_in
+         max(project_crate_height) as 'max_height' from is_stuff_in 
+natural join project_crate
 natural join project_container
 where project_container_id = :project_container_id;");
         $req->bindValue(":project_container_id", $project_container_id, PDO::PARAM_STR);
@@ -93,8 +94,8 @@ where project_container_id = :project_container_id;");
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("SELECT
-         max(project_crate_width) as 'max_width' from project_crate 
-natural join is_stuff_in
+         max(project_crate_width) as 'max_width' from is_stuff_in 
+natural join project_crate
 natural join project_container
 where project_container_id = :project_container_id;");
         $req->bindValue(":project_container_id", $project_container_id, PDO::PARAM_STR);

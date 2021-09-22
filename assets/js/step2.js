@@ -119,36 +119,52 @@ addContainerBtn.forEach(button => {
         });
 
         //count for total crates
-        countRef = 0;
-        let totalRef = document.querySelectorAll("[data-ref]");
-        console.log(totalRef);
-        let crates = document.getElementById(`crate_ref_V${index}`);
-        totalRef.forEach(crate_ref => {
-            crate_ref.addEventListener('change', function () {
-                
-                if (this.value != '') {
-                    console.log(this.value);
-                    countRef++;
-                }
+        let myTest = document.querySelectorAll('[data-crate-ref]')
+        myTest.forEach(element => {
+            element.addEventListener('change', function () {
+                let testTotal = 0
+                let target = this.dataset.crateRef
 
-                // if (crate_ref.value != '') {
-                //     countRef++;
-                //     console.log('ok');
-                // }
-
-                if (crate_ref.value == '') {
-                    countRef--;
-                }
-
-                if (countRef > 1) {
-                    crates.value = countRef + " Crates";
-                } else if (countRef == 0) {
-                    crates.value = '';
-                } else {
-                    crates.value = countRef + " Crate";
-                }
+                let testReturn = document.querySelectorAll(`[data-crate-ref="${target}"]`)
+                testReturn.forEach(element => {
+                    element.value.length > 0 ? testTotal++ : ''
+                })
+                let targetTotal = document.querySelector(`[data-crate-total-ref="${target}"]`)
+                targetTotal.value = testTotal > 0 ? testTotal + ' Crate(s)' : ''
             })
         });
+
+        //count for total crates
+        // countRef = 0;
+        // let totalRef = document.querySelectorAll("[data-ref]");
+        // console.log(totalRef);
+        // let crates = document.getElementById(`crate_ref_V${index}`);
+        // totalRef.forEach(crate_ref => {
+        //     crate_ref.addEventListener('change', function () {
+
+        //         if (this.value != '') {
+        //             console.log(this.value);
+        //             countRef++;
+        //         }
+
+        //         // if (crate_ref.value != '') {
+        //         //     countRef++;
+        //         //     console.log('ok');
+        //         // }
+
+        //         if (crate_ref.value == '') {
+        //             countRef--;
+        //         }
+
+        //         if (countRef > 1) {
+        //             crates.value = countRef + " Crates";
+        //         } else if (countRef == 0) {
+        //             crates.value = '';
+        //         } else {
+        //             crates.value = countRef + " Crate";
+        //         }
+        //     })
+        // });
 
 
         //count for total length
