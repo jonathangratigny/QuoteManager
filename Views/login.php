@@ -19,8 +19,6 @@ include '../Controllers/header-controller.php';
                     </div>
                     <div class="col-12 form-floating">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe"> Remember me</label>
                             <a href="forget-password.php">Forgot Password?</a>
                         </div>
                         <div class="col-12">
@@ -38,6 +36,6 @@ include '../Controllers/header-controller.php';
     </div>
     </div>
 
-<?php
-include '../Controllers/footer-controller.php';
-?>
+    <?php
+    include '../Controllers/footer-controller.php';
+    ?>

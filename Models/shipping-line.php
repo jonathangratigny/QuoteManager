@@ -36,9 +36,9 @@ class ShippingLine extends Database
         $req = $dbh->prepare("SELECT sl_id
     FROM shipping_line
     WHERE sl_name = :sl_name;");
-        $req->bindValue(':sl_name', $sl_name, PDO::PARAM_INT);
+        $req->bindValue(':sl_name', $sl_name, PDO::PARAM_STR);
         $req->execute();
-        $fetch = $req->fetch();
+        $fetch = $req->fetch(PDO::FETCH_ASSOC);
         return $fetch;
     }
 

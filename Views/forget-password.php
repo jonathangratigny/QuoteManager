@@ -2,7 +2,6 @@
 
 require '../Controllers/forget-password-controller.php';
 include '../Controllers/header-controller.php';
-var_dump($_SESSION);
 ?>
 <div class="container-fluid w-50 mx-auto">
   <form action="" method="POST">

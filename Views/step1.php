@@ -51,7 +51,7 @@ require '../Controllers/header-controller.php';
         <div class="d-flex mt-1 mb-3">
           <select style="min-width: 327px; text-align: center;" name="project_shipping_line" id="project_shipping_line">
             <option selected><?= $_SESSION['project_shipping_line'] ?? 'Select A Shipping Line' ?></option>
-            <?php foreach ($getShippingLine as $key => $name) : ?>
+            <?php foreach ($getShippingLine as $name) : ?>
               <option><?= $name['sl_name'] ?? 'Select A Shipping Line' ?></option>
             <?php endforeach; ?>
           </select>

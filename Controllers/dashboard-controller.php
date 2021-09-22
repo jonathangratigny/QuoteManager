@@ -1,5 +1,6 @@
 <?php
 
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -10,11 +11,15 @@ require '../Models/user.php';
 require '../Models/shipping-line.php';
 require '../Models/project.php';
 require '../Models/port.php';
-require '../Models/project-container.php';
+require '../Models/container-default-value.php';
 
 resetSession();
 $projectObj = new Project();
 $shippingLineObj = new ShippingLine();
+$containerObj = new ContainerDefault();
+
+$indexModal = 1;
+
 
 $showProjectData = $projectObj->showProjectData();
 
@@ -22,12 +27,11 @@ $getShippingLineWithID = $shippingLineObj->getShippingLineWithID($showProjectDat
 $projectOwnerWithID = $projectObj->projectOwnerWithID($showProjectData['u_id'] ?? null);
 $dateDifferenceProjectAndNow = $projectObj->dateDifferenceProjectAndNow();
 
-
+//for shipping line
 $getShippingLine = $shippingLineObj->getShippingLine() ?? null;
 $getShippingLineOnproject = $shippingLineObj->getShippingLineOnproject() ?? null;
 
 if (isset($_POST['delete_project'])) {
     $deleteProject = $projectObj->deleteProject($_POST['delete_project']);
 }
-$showProjectData = $projectObj->showProjectData();
-var_dump($showProjectData);
+

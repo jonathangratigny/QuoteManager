@@ -144,7 +144,7 @@ class Project extends User
         $req = $dbh->prepare("SELECT * 
         from project");
         $req->execute();
-        $fetch = $req->fetch(PDO::FETCH_ASSOC);
+        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
         return $fetch;
     }
 
