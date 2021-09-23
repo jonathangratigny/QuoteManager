@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <title>Quote Manager</title>
 </head>
-<div class="w-25 mx-auto">
+<div class=" mx-auto">
     <?php if (isset($_SESSION['flash'])) : ?>
         <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
             <div class="alert alert-<?= $type ?> alert-dismissible fade show" role="alert">

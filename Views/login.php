@@ -2,37 +2,37 @@
 include '../Controllers/login-controller.php';
 include '../Controllers/header-controller.php';
 ?>
+<link rel="stylesheet" href="../assets/css/login.css">
 
-<body>
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <div class="login-form bg-light mt-4 p-4">
-                <form action="" method="post" class="row g-3">
-                    <h4 class="text-center">Quote Manager</h4>
-                    <div class="col-12 form-floating">
-                        <input type="text" name="log-username" class="form-control" id="floatingEmail" placeholder="Email or Username">
-                        <label for="floatingEmail">Email or Username</label>
-                    </div>
-                    <div class="col-12 form-floating">
-                        <input type="password" name="log-password" class="form-control" placeholder="Password" id="floatingPassword">
-                        <label for="floatingPassword">Password</label>
-                    </div>
-                    <div class="col-12 form-floating">
-                        <div class="form-check">
-                            <a href="forget-password.php">Forgot Password?</a>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" name="login" class="btn btn-dark float-end">Login</button>
-                        </div>
-                </form>
-                <hr class="mt-4">
-                <div class="col-12">
-                    <p class="text-center mb-0">Need an account?
-                        <a href="signup.php">Sign up now!</a>
-                    </p>
-                </div>
+<body class="text-center flex-column">
+    <main class="form-signin">
+        <form action="" method="post">
+            <h1 class="h2 mb-3 fw-normal">Quote Manager</h1>
+            <h2 class="h4 mb-3 fw-normal">Please sign in</h1>
+            <div class="form-floating">
+                <input type="text" name="log-username" class="form-control" id="floatingInput" placeholder="Email or Username">
+                <label for="floatingInput">Email or Username</label>
             </div>
+            <div class="form-floating">
+                <input type="password" name="log-password" class="form-control" placeholder="Password" id="floatingPassword">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="form-floating">
+                <a href="forget-password.php">Forgot Password?</a>
+            </div>
+            <div class="my-4">
+                <button type="submit" name="login" class="btn btn-warning">Login</button>
+            </div>
+        </form>
+        <hr class="mt-4">
+        <div class="col-12">
+            <p class="text-center mb-0">Need an account?
+                <a href="signup.php">Sign up now!</a>
+            </p>
         </div>
+    </main>
+    </div>
+    </div>
     </div>
     </div>
 

@@ -25,21 +25,14 @@ require '../Controllers/header-controller.php';
             </div>
         </nav>
         <h1 class="display-6">Quotation History</h1>
-
-
         <?php foreach ($showProjectData as $value) : ?>
-
-
             <?php $getShippingLineWithID = $shippingLineObj->getShippingLineWithID($value['sl_id']); ?>
-
-
-
-
             <div class="container my-3">
                 <ol class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto mb-3">
                             <div class="fw-bold">Project Ref : <?= $value['project_ref'] ?? null ?></div>
+                            <span class="badge bg-success rounded-pill d-flex flex-wrap">Created By <?= $projectOwnerWithID['u_username'] ?? null ?> , <?= $dateDifferenceProjectAndNow['creating_interval'] ?? null ?> days ago</span>
                             <div>Port Of Loading : <?= $value['project_POL'] ?? null ?></div>
                             <div>Port Of Discharge : <?= $value['project_POD'] ?? null ?></div>
                             <div>Carrier : <?= $getShippingLineWithID->sl_name ?? null ?></div>
@@ -48,7 +41,6 @@ require '../Controllers/header-controller.php';
                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#quote<?= $indexModal ?>">Delete Project</button>
 
                         </div>
-                        <span class="badge bg-success rounded-pill">Created By <?= $projectOwnerWithID['u_username'] ?? null ?> , <?= $dateDifferenceProjectAndNow['creating_interval'] ?? null ?> days ago</span>
                     </li>
                 </ol>
                 <!-- Modal -->
@@ -60,9 +52,9 @@ require '../Controllers/header-controller.php';
                                     <div class="row">
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                                        <h5 class="modal-title text-center" id="exampleModalLabel"><?= $value['project_ref'] ?? null . ' ' . $value['project_POL'] ?? null . ' - ' . $value['project_POD'] ?? null ?>
+                                        <h5 class="modal-title text-center h2" id="exampleModalLabel">PROJECT <?= $value['project_ref'] ?? null . ' ' . $value['project_POL'] ?? null . ' - ' . $value['project_POD'] ?? null ?>
                                         </h5>
-                                        <span class="modal-body text-center" id="exampleModalLabel">Carrier : <?= $getShippingLineWithID->sl_name ?? null ?> </span>
+                                        <span class="modal-body text-center" id="exampleModalLabel">Carrier : <?= $getShippingLineWithID->sl_name ?? null ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +72,7 @@ require '../Controllers/header-controller.php';
                                             <div> Widht : <?= $dataContainer['container_df_type'] == '40FR' ? $maxWidthContainer['max_width'] . 'cm => ' . (($maxWidthContainer['max_width'] - $getContainerDimensions['container_df_width']) / 2) . ' Over Width Each Sides.' : ($dataContainer['container_df_type'] == '20FR' ? $maxWidthContainer['max_width'] . 'cm => ' . (($maxWidthContainer['max_width'] - $getContainerDimensions['container_df_width']) / 2) . ' Over Width Each Sides.'  : ($dataContainer['container_df_type'] == '40HC' ? $getContainerDimensions['container_df_width'] . 'cm' : ($dataContainer['container_df_type'] == '20GP' ? $getContainerDimensions['container_df_width'] . 'cm' : 'Error'))) ?> </div>
 
                                             <div> Height : <?= $dataContainer['container_df_type'] == '40FR' ? $maxHeightContainer['max_height'] . 'cm => ' . ($maxHeightContainer['max_height'] - $getContainerDimensions['container_df_height']) . 'cm Over Height.' : ($dataContainer['container_df_type'] == '20FR' ? $maxHeightContainer['max_height'] . 'cm => ' . ($maxHeightContainer['max_height'] - $getContainerDimensions['container_df_height']) . 'cm Over Height.' : ($dataContainer['container_df_type'] == '40HC' ? $getContainerDimensions['container_df_height'] . 'cm' : ($dataContainer['container_df_type'] == '20GP' ? $getContainerDimensions['container_df_height'] . 'cm' : 'Error'))) ?> </div>
-                                            <div> Gross weight : <?= $totalGrossWeight['total_gross_weight']?>kg</div>
+                                            <div> Gross weight : <?= $totalGrossWeight['total_gross_weight'] ?>kg</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -104,9 +96,9 @@ require '../Controllers/header-controller.php';
         <?php endforeach; ?>
 
         <h2 class="display-6">Carrier directory</h2>
-        <div class="container">
+        <div class="container-fluid">
             <ul class="list-group"></ul>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 border-top">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 border-top px-2">
                 <?php foreach ($getShippingLine as $value) : ?>
                     <li class="list-group-item border-top-0"><?= $value['sl_name'] ?>
                         <div><?= $value['sl_email'] ?></div>

@@ -9,7 +9,7 @@ $userObj = new User();
 if (isset($_POST['saveNewAccount'])) {
 
     if (empty($_POST['username']) || !preg_match('/^[a-zA-Z]+$/', $_POST['username'])) {
-        $errors['username'] = "The entry is not valid, no digit allowed.";
+        $errors['username'] = "Username entry is not valid, no digit allowed.";
     } else {
         $checkDoubleUsername = $userObj->checkDoubleUsername($_POST['username']);
         
