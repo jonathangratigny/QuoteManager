@@ -11,13 +11,13 @@ addContainerBtn.forEach(button => {
 
         //creating the table
         let newTable = document.createElement("table");
-        newTable.setAttribute("class", "table table-bordered table-sm");
+        newTable.setAttribute("class", "table table-bordered bg-white");
         newTable.setAttribute("id", defaultContainerValue[button.dataset.btn]['container_df_type'] + index);
         tableContainer.append(newTable);
 
         //creating the trash button
         let newButton = document.createElement("button");
-        newButton.setAttribute("class", "btn btn-danger order-1");
+        newButton.setAttribute("class", "btn btn-danger order-1 mb-3 btn-sm");
         newButton.setAttribute("data-trash", defaultContainerValue[button.dataset.btn]['container_df_type'] + index);
         newButton.setAttribute("type", "button");
         newButton.innerText = "Delete Container";
@@ -30,56 +30,56 @@ addContainerBtn.forEach(button => {
 
         <thead>
             <tr>
-                <th scope="col">Crate Ref</th>
-                <th scope="col">Length in cm</th>
-                <th scope="col">Width in cm</th>
-                <th scope="col">Height in cm</th>
-                <th scope="col">Weight in kg</th>
-                <th scope="col">Volume in m3</th>
+                <th>Crate Ref</th>
+                <th>Length in cm</th>
+                <th>Width in cm</th>
+                <th>Height in cm</th>
+                <th>Weight in kg</th>
+                <th>Volume in m3</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R1_V${index}" id="crate_ref_R1_V${index}"  maxlength="10" placeholder="ref..."></td>
+                <td><input data-crate-ref="V${index}" class="border-0 form-control" style="width:100px" type="text" data-ref ="ref" name="crate_ref_R1_V${index}" id="crate_ref_R1_V${index}"  maxlength="10" placeholder="ref..."></td>
                 <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R1_V${index}" id="crate_length_R1_V${index}" onkeypress="if (this.value.length > 3) return false;" ></td>
                 <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R1_V${index}" id="crate_width_R1_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R1_V${index}" id="crate_height_R1_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R1_V${index}" id="crate_gross_weight_R1_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="volume" id="crate_volume_R1_V${index}" readonly></td>
+                <td class="bg-light"><input class="border-0 form-control bg-light" type="number" data-crate="volume" id="crate_volume_R1_V${index}" readonly></td>
             </tr>
             <tr>
-                <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R2_V${index}" id="crate_ref_R2_V${index}" maxlength="10"></td>
+                <td><input data-crate-ref="V${index}" class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R2_V${index}" id="crate_ref_R2_V${index}" maxlength="10"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R2_V${index}" id="crate_length_R2_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R2_V${index}" id="crate_width_R2_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R2_V${index}" id="crate_height_R2_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R2_V${index}" id="crate_gross_weight_R2_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="volume" id="crate_volume_R2_V${index}" readonly></td>
+                <td class="bg-light"><input class="bg-light border-0 form-control" type="number" data-crate="volume" id="crate_volume_R2_V${index}" readonly></td>
             </tr>
             <tr>
-                <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R3_V${index}" id="crate_ref_R3_V${index}" maxlength="10"></td>
+                <td><input data-crate-ref="V${index}" class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R3_V${index}" id="crate_ref_R3_V${index}" maxlength="10"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R3_V${index}" id="crate_length_R3_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R3_V${index}" id="crate_width_R3_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R3_V${index}" id="crate_height_R3_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R3_V${index}" id="crate_gross_weight_R3_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="volume" id="crate_volume_R3_V${index}" readonly></td>
+                <td class="bg-light"><input class="bg-light border-0 form-control" type="number" data-crate="volume" id="crate_volume_R3_V${index}" readonly></td>
             </tr>
             <tr>
-                <td><input class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R4_V${index}" id="crate_ref_R4_V${index}" maxlength="10"></td>
+                <td><input data-crate-ref="V${index}" class="border-0 form-control" type="text" data-ref ="ref" name="crate_ref_R4_V${index}" id="crate_ref_R4_V${index}" maxlength="10"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="length" name="crate_length_R4_V${index}" id="crate_length_R4_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="width" name="crate_width_R4_V${index}" id="crate_width_R4_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="height" name="crate_height_R4_V${index}" id="crate_height_R4_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R4_V${index}" id="crate_gross_weight_R4_V${index}" onkeypress="if (this.value.length > 5) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="volume" 4_V${index}" id="crate_volume_R4_V${index}" readonly></td>
+                <td class="bg-light"><input class="bg-light border-0 form-control" type="number" data-crate="volume" 4_V${index}" id="crate_volume_R4_V${index}" readonly></td>
             </tr>
         </tbody>
         <tfoot class="table-light">
             <tr>
-                <td><input class="border-0 form-control" type="text" id="crate_ref_V${index}"readonly></td>
-                <td><input class="border-0 form-control" type="number"  id="crate_length_V${index}" readonly placeholder="Max Length ${defaultContainerValue[button.dataset.btn]['container_df_length']}cm "></td>
-                <td><input class="border-0 form-control" type="number" id="crate_width_V${index}"readonly placeholder="Max Width ${defaultContainerValue[button.dataset.btn]['container_df_width']}cm "></td>
-                <td><input class="border-0 form-control" type="number"  id="crate_height_V${index}"readonly placeholder="Max Height ${defaultContainerValue[button.dataset.btn]['container_df_height']}cm "></td>
-                <td><input class="border-0 form-control" type="number" name="total_gross_weight_V${index}" id="crate_weight_V${index}"readonly></td>
-                <td><input class="border-0 form-control" type="number" id="crate_volume_V${index}"readonly></td>
+                <td class="bg-light"><input data-crate-total-ref="V${index}" class="bg-light border-0 form-control" type="text" id="crate_ref_V${index}"readonly></td>
+                <td class="bg-light"><input class="bg-light border-0 form-control" type="number"  id="crate_length_V${index}" readonly placeholder="Length ${defaultContainerValue[button.dataset.btn]['container_df_length']}cm "></td>
+                <td class="bg-light"><input class="bg-light border-0 form-control" type="number" id="crate_width_V${index}"readonly placeholder="Width ${defaultContainerValue[button.dataset.btn]['container_df_width']}cm "></td>
+                <td class="bg-light"><input class="bg-light border-0 form-control" type="number"  id="crate_height_V${index}"readonly placeholder="Height ${defaultContainerValue[button.dataset.btn]['container_df_height']}cm "></td>
+                <td class="bg-light"><input class="bg-light border-0 form-control" type="number" name="total_gross_weight_V${index}" id="crate_weight_V${index}"readonly></td>
+                <td class="bg-light"><input class="bg-light border-0 form-control" type="number" id="crate_volume_V${index}"readonly></td>
             </tr>
         </tfoot>`
 
@@ -119,8 +119,8 @@ addContainerBtn.forEach(button => {
         });
 
         //count for total crates
-        let myTest = document.querySelectorAll('[data-crate-ref]')
-        myTest.forEach(element => {
+        let dataCrate = document.querySelectorAll('[data-crate-ref]')
+        dataCrate.forEach(element => {
             element.addEventListener('change', function () {
                 let testTotal = 0
                 let target = this.dataset.crateRef
@@ -351,7 +351,7 @@ buttonsCase.append(backButton);
 
 //creating next button
 let nextButton = document.createElement("button");
-nextButton.setAttribute("class", "btn btn-primary mx-1");
+nextButton.setAttribute("class", "btn btn-warning mx-1");
 nextButton.setAttribute("type", "submit");
 nextButton.innerText = "Next";
 buttonsCase.append(nextButton);

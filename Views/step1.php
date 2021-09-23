@@ -3,7 +3,7 @@ require '../Controllers/step1-controller.php';
 require '../Controllers/header-controller.php';
 ?>
 
-<body>
+<body class="bg-light">
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <span class="navbar-text">
@@ -49,7 +49,7 @@ require '../Controllers/header-controller.php';
 
         <label for="project_shipping_line">Shipping Line :</label>
         <div class="d-flex mt-1 mb-3">
-          <select style="min-width: 327px; text-align: center;" name="project_shipping_line" id="project_shipping_line">
+          <select class="form-select" name="project_shipping_line" id="project_shipping_line">
             <option selected><?= $_SESSION['project_shipping_line'] ?? 'Select A Shipping Line' ?></option>
             <?php foreach ($getShippingLine as $name) : ?>
               <option><?= $name['sl_name'] ?? 'Select A Shipping Line' ?></option>
@@ -59,7 +59,7 @@ require '../Controllers/header-controller.php';
 
         <label for="project_POL">Port Of Loading :</label>
         <div class="d-flex mb-3 mt-1">
-          <select style="min-width: 327px; text-align: center;" name="project_POL" id="project_POL">
+          <select class="form-select"  name="project_POL" id="project_POL">
             <option>LE HAVRE</option>
           </select>
         </div>
@@ -67,7 +67,7 @@ require '../Controllers/header-controller.php';
 
         <label for="project_country_dest">Destination Country :</label>
         <div class="d-flex mt-1 mb-3">
-          <select style="min-width: 327px; text-align: center;" name="project_country_dest" id="project_country_dest">
+          <select class="form-select"  name="project_country_dest" id="project_country_dest">
             <option selected><?= $_SESSION['project_country_dest'] ?? 'Select A Country' ?></option>
             <?php foreach ($showUniqueCountry as $key => $port) : ?>
               <option><?= $port['port_country'] ?? 'Select A Country' ?></option>
@@ -77,12 +77,12 @@ require '../Controllers/header-controller.php';
 
         <label for="project_POD">Port Of Discharge : </label>
         <div class="d-flex mb-3 ">
-          <select name="project_POD" id="project_POD" style="min-width: 327px; text-align: center;">
+          <select name="project_POD" id="project_POD" class="form-select" >
             <option><?= $_SESSION['project_POD'] ?? 'Select A Port' ?></option>
           </select>
         </div>
         <div class="container text-center">
-          <button type="submit" name='step1' class="btn btn-primary">Next</button>
+          <button type="submit" name='step1' class="btn btn-warning">Next</button>
         </div>
       </div>
     </form>

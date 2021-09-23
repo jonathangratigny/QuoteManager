@@ -7,9 +7,8 @@ include '../Controllers/header-controller.php';
 <body class="text-center flex-column">
     <main class="form-signin">
         <form action="" method="post">
-            <h1 class="h2 mb-3 fw-normal">Quote Manager</h1>
-            <h2 class="h4 mb-3 fw-normal">Please sign in</h1>
-            <div class="form-floating">
+            <h1 class="h2 mb-4 fw-normal">Quote Manager</h1>
+            <div class="form-floating ">
                 <input type="text" name="log-username" class="form-control" id="floatingInput" placeholder="Email or Username">
                 <label for="floatingInput">Email or Username</label>
             </div>

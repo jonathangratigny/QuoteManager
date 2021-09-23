@@ -10,48 +10,49 @@ require '../Controllers/header-controller.php';
         <a href="../index.php"><span> <?= $limitedAccess; ?></span></a>
     <?php } else { ?>
         <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid">
-                <span class="navbar-text"> Welcome to Dashboard, <?= $_SESSION['u_username'] ?? null ?></span>
-                <div class="d-flex">
-                    <div class="row">
-                        <div class="col-auto">
-                            <a href="step1.php"><span type="button" class="btn btn-warning text-dark btn-sm">New Quote</span></a>
-                        </div>
-                        <div class="col-auto">
-                            <a href="../Views/disconnect.php"><button type="button" class="btn btn-warning text-dark btn-sm">Disconnect</button></a>
-                        </div>
+            <div class="container-fluid flex-column">
+                <div class="row">
+                    <span class="navbar-text"> Welcome to Dashboard, <?= $_SESSION['u_username'] ?? null ?></span>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <a href="step1.php"><span type="button" class="btn btn-warning text-dark btn-sm">New Quote</span></a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="../Views/disconnect.php"><button type="button" class="btn btn-warning text-dark btn-sm">Disconnect</button></a>
                     </div>
                 </div>
             </div>
         </nav>
-        <h1 class="display-6">Quotation History</h1>
+        <h1 class="display-6 mt-3">Quotation History</h1>
         <?php foreach ($showProjectData as $value) : ?>
             <?php $getShippingLineWithID = $shippingLineObj->getShippingLineWithID($value['sl_id']); ?>
             <div class="container my-3">
-                <ol class="list-group">
+                <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto mb-3">
-                            <div class="fw-bold">Project Ref : <?= $value['project_ref'] ?? null ?></div>
-                            <span class="badge bg-success rounded-pill d-flex flex-wrap">Created By <?= $projectOwnerWithID['u_username'] ?? null ?> , <?= $dateDifferenceProjectAndNow['creating_interval'] ?? null ?> days ago</span>
+                            <div class="fw-bold">Project Ref : <?= $value['project_ref'] ?? null ?>, Created By <?= $projectOwnerWithID['u_username'] ?? null ?> , <?= $dateDifferenceProjectAndNow['creating_interval'] ?? null ?> days ago</div>
+                            <span class="badge bg-warning rounded-pill d-flex flex-wrap mb-4"></span>
+                            <div>Final Customer : <?= $value['project_final_customer_name'] ?? null ?></div>
+                            <div>Carrier : <?= $getShippingLineWithID->sl_name ?? null ?></div>
                             <div>Port Of Loading : <?= $value['project_POL'] ?? null ?></div>
                             <div>Port Of Discharge : <?= $value['project_POD'] ?? null ?></div>
-                            <div>Carrier : <?= $getShippingLineWithID->sl_name ?? null ?></div>
                             <div>Creating Date : <?= $value['project_created_at'] ?? null ?></div>
-                            <button type="button" data-project="<?= $value['project_ref'] ?? null ?>" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#quote<?= $indexModal ?>">View more</button>
-                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#quote<?= $indexModal ?>">Delete Project</button>
-
+                            <div class=" col mx-auto mt-3">
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#quote<?= $indexModal ?>">Delete Project</button>
+                                <button type="button" data-project="<?= $value['project_ref'] ?? null ?>" class="btn btn-secondary btn-sm ms-3" data-bs-toggle="modal" data-bs-target="#quote<?= $indexModal ?>">View more</button>
+                            </div>
                         </div>
                     </li>
-                </ol>
+                </ul>
                 <!-- Modal -->
                 <div class="modal fade" id="quote<?= $indexModal ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header bg-light">
                                 <div class="container">
                                     <div class="row">
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
                                         <h5 class="modal-title text-center h2" id="exampleModalLabel">PROJECT <?= $value['project_ref'] ?? null . ' ' . $value['project_POL'] ?? null . ' - ' . $value['project_POD'] ?? null ?>
                                         </h5>
                                         <span class="modal-body text-center" id="exampleModalLabel">Carrier : <?= $getShippingLineWithID->sl_name ?? null ?></span>
@@ -65,21 +66,21 @@ require '../Controllers/header-controller.php';
                                 <?php $maxHeightContainer = $containerObj->maxHeightContainer($dataContainer['project_container_id']) ?>
                                 <?php $totalGrossWeight = $containerObj->totalGrossWeight($dataContainer['project_container_id']) ?>
                                 <?php $getContainerDimensions = $containerObj->getContainerDimensions($dataContainer['container_df_type']) ?>
-                                <div class="modal-body">
+                                <div class="modal-body bg-light">
                                     <ul class="list-group ">
                                         <li class="list-group-item">
-                                            <p><?= $dataContainer['container_df_type'] ?> - Container #<?= $i ?></p>
-                                            <div> Widht : <?= $dataContainer['container_df_type'] == '40FR' ? $maxWidthContainer['max_width'] . 'cm => ' . (($maxWidthContainer['max_width'] - $getContainerDimensions['container_df_width']) / 2) . ' Over Width Each Sides.' : ($dataContainer['container_df_type'] == '20FR' ? $maxWidthContainer['max_width'] . 'cm => ' . (($maxWidthContainer['max_width'] - $getContainerDimensions['container_df_width']) / 2) . ' Over Width Each Sides.'  : ($dataContainer['container_df_type'] == '40HC' ? $getContainerDimensions['container_df_width'] . 'cm' : ($dataContainer['container_df_type'] == '20GP' ? $getContainerDimensions['container_df_width'] . 'cm' : 'Error'))) ?> </div>
+                                            <p class="text-center fw-bold"><?= $dataContainer['container_df_type'] ?> - Container #<?= $i ?></p>
+                                            <p> Widht : <?= $dataContainer['container_df_type'] == '40FR' ? $maxWidthContainer['max_width'] . 'cm ⇨ ' . (($maxWidthContainer['max_width'] - $getContainerDimensions['container_df_width']) / 2) . 'cm Over Width Each Sides.' : ($dataContainer['container_df_type'] == '20FR' ? $maxWidthContainer['max_width'] . 'cm ⇨ ' . (($maxWidthContainer['max_width'] - $getContainerDimensions['container_df_width']) / 2) . 'cm Over Width Each Sides.'  : ($dataContainer['container_df_type'] == '40HC' ? $getContainerDimensions['container_df_width'] . 'cm' : ($dataContainer['container_df_type'] == '20GP' ? $getContainerDimensions['container_df_width'] . 'cm' : 'Error'))) ?> </p>
 
-                                            <div> Height : <?= $dataContainer['container_df_type'] == '40FR' ? $maxHeightContainer['max_height'] . 'cm => ' . ($maxHeightContainer['max_height'] - $getContainerDimensions['container_df_height']) . 'cm Over Height.' : ($dataContainer['container_df_type'] == '20FR' ? $maxHeightContainer['max_height'] . 'cm => ' . ($maxHeightContainer['max_height'] - $getContainerDimensions['container_df_height']) . 'cm Over Height.' : ($dataContainer['container_df_type'] == '40HC' ? $getContainerDimensions['container_df_height'] . 'cm' : ($dataContainer['container_df_type'] == '20GP' ? $getContainerDimensions['container_df_height'] . 'cm' : 'Error'))) ?> </div>
+                                            <div> Height : <?= $dataContainer['container_df_type'] == '40FR' ? $maxHeightContainer['max_height'] . 'cm ⇨ ' . ($maxHeightContainer['max_height'] - $getContainerDimensions['container_df_height']) . 'cm Over Height.' : ($dataContainer['container_df_type'] == '20FR' ? $maxHeightContainer['max_height'] . 'cm ⇨ ' . ($maxHeightContainer['max_height'] - $getContainerDimensions['container_df_height']) . 'cm Over Height.' : ($dataContainer['container_df_type'] == '40HC' ? $getContainerDimensions['container_df_height'] . 'cm' : ($dataContainer['container_df_type'] == '20GP' ? $getContainerDimensions['container_df_height'] . 'cm' : 'Error'))) ?> </div>
                                             <div> Gross weight : <?= $totalGrossWeight['total_gross_weight'] ?>kg</div>
                                         </li>
                                     </ul>
                                 </div>
                                 <?php $i++; ?>
                             <?php endforeach; ?>
-                            <div class="modal-footer d-flex bd-highlight mb-3">
-                                <form action="" method="post" class="me-auto">
+                            <div class="modal-footer d-flex bd-highlight bg-light">
+                                <form action="" method="post" class="me-auto bg-light">
                                     <button type="submit" name="delete_project" value="<?= $value['project_id'] ?>" class="btn btn-danger p-2 bd-highlight">Delete Project</button>
                                 </form>
                                 <button type="button" class="btn btn-secondary p-2 bd-highlight" data-bs-dismiss="modal">Close</button>
