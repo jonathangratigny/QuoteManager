@@ -9,6 +9,7 @@ require '../Controllers/header-controller.php';
     <body class="bg-light">
         <a href="../index.php"><span> <?= $limitedAccess; ?></span></a>
     <?php } else { ?>
+        <body class="bg-light">
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid flex-column">
                 <div class="row">
@@ -35,8 +36,8 @@ require '../Controllers/header-controller.php';
                             <span class="badge bg-warning rounded-pill d-flex flex-wrap mb-4"></span>
                             <div>Final Customer : <?= $value['project_final_customer_name'] ?? null ?></div>
                             <div>Carrier : <?= $getShippingLineWithID->sl_name ?? null ?></div>
-                            <div>Port Of Loading : <?= $value['project_POL'] ?? null ?></div>
-                            <div>Port Of Discharge : <?= $value['project_POD'] ?? null ?></div>
+                            <div>Port Of Loading : <?= $value['project_POL'] ?? null ?>, France</div>
+                            <div>Port Of Discharge : <?= $value['project_POD'] ?? null ?>, <?= $value['project_country_dest'] ?? null ?></div>
                             <div>Creating Date : <?= $value['project_created_at'] ?? null ?></div>
                             <div class=" col mx-auto mt-3">
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#quote<?= $indexModal ?>">Delete Project</button>

@@ -7,7 +7,7 @@ require '../Controllers/header-controller.php';
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <span class="navbar-text">
-        STEP 1 ON 3
+        STEP 1 ON 3 - Fill Project references, all of them are necessary.
       </span>
       <label for="customRange2" class="form-label">Example range</label>
       <a href="./dashboard.php"><button type="button" class="btn btn-warning text-dark btn-sm">Dashboard</button></a>
@@ -31,7 +31,11 @@ require '../Controllers/header-controller.php';
     <?php endif; ?>
     
     <form action="" method="post">
-      <div class="container-fluid d-flex flex-column col-lg-6 col-sm-12">
+      <div class="container-sm mt-3">
+        <h1>Your project start here.</h1>
+        <p>Project and destination details are required from here.</p>
+      </div>
+      <div class="container-fluid d-flex flex-column col-lg-6 col-sm-12 mt-3">
         <div class="form-floating mb-3 mt-3">
           <input type="text" class="form-control" placeholder="My reference" id="project_owner_ref" name="project_owner_ref" maxlength="15" value="<?= $_SESSION['project_owner_ref'] ?? null ?>">
           <label for="project_owner_ref">My Reference</label>
@@ -60,7 +64,7 @@ require '../Controllers/header-controller.php';
         <label for="project_POL">Port Of Loading :</label>
         <div class="d-flex mb-3 mt-1">
           <select class="form-select"  name="project_POL" id="project_POL">
-            <option>LE HAVRE</option>
+            <option>Le Havre</option>
           </select>
         </div>
 

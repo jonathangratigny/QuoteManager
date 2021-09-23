@@ -1,0 +1,13 @@
+* check if project or ref already exists in step 1.
+
+* take a look on CREATED BY in dashboard, always the same name as EXO
+    ->need to update method
+    //$dateDifferenceProjectAndNow = $projectObj->dateDifferenceProjectAndNow();
+    SELECT 
+        project_ref,
+    DATEDIFF(CURDATE(), project_created_at) AS creating_interval
+    FROM
+        project
+    WHERE
+        project_ref = 'ref2'
+

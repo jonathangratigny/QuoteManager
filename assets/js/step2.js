@@ -2,6 +2,12 @@ const tableContainer = document.getElementById('tableContainer');
 const addContainerBtn = document.querySelectorAll("[data-btn]");
 let index = 0;
 
+//function to get max value of an array
+function max(input) {
+    if (toString.call(input) !== "[object Array]")
+        return false;
+    return Math.max.apply(null, input);
+}
 
 //click on button to print a tab to fill
 //limit is 4 rows per containers
@@ -15,6 +21,11 @@ addContainerBtn.forEach(button => {
         newTable.setAttribute("id", defaultContainerValue[button.dataset.btn]['container_df_type'] + index);
         tableContainer.append(newTable);
 
+        //bring ID of table to target the difference 
+        //between FR and GP/HC container
+        //FR has no width and height limits
+        const checkID = newTable.id;
+
         //creating the trash button
         let newButton = document.createElement("button");
         newButton.setAttribute("class", "btn btn-danger order-1 mb-3 btn-sm");
@@ -26,9 +37,9 @@ addContainerBtn.forEach(button => {
 
         //filling the table
         newTable.innerHTML = `
-        <caption>Container ${defaultContainerValue[button.dataset.btn]['container_df_type']}</caption>
+        <caption class="caption-top">Container ${defaultContainerValue[button.dataset.btn]['container_df_type']}</caption>
 
-        <thead class="text-center">
+        <thead class="text-center align-middle">
             <tr>
                 <th>Crate Ref</th>
                 <th>Length in cm</th>
@@ -44,7 +55,7 @@ addContainerBtn.forEach(button => {
                 <td><input data-crate-length="V${index}" class="border-0 form-control" type="number" data-crate="length" name="crate_length_R1_V${index}" id="crate_length_R1_V${index}" onkeypress="if (this.value.length > 3) return false;" placeholder="1234..." ></td>
                 <td><input data-crate-width="V${index}" class="border-0 form-control" type="number" data-crate="width" name="crate_width_R1_V${index}" id="crate_width_R1_V${index}" onkeypress="if (this.value.length > 2) return false;" placeholder="123..."></td>
                 <td><input data-crate-height="V${index}"class="border-0 form-control" type="number" data-crate="height" name="crate_height_R1_V${index}" id="crate_height_R1_V${index}" onkeypress="if (this.value.length > 2) return false;"placeholder="123..."></td>
-                <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R1_V${index}" id="crate_gross_weight_R1_V${index}" onkeypress="if (this.value.length > 4) return false;"placeholder="12345..."></td>
+                <td><input data-crate-weight="V${index}" class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R1_V${index}" id="crate_gross_weight_R1_V${index}" onkeypress="if (this.value.length > 4) return false;"placeholder="12345..."></td>
                 <td class="bg-light"><input class="border-0 form-control bg-light" type="number" data-crate="volume" id="crate_volume_R1_V${index}" readonly></td>
             </tr>
             <tr>
@@ -52,7 +63,7 @@ addContainerBtn.forEach(button => {
                 <td><input data-crate-length="V${index}" class="border-0 form-control" type="number" data-crate="length" name="crate_length_R2_V${index}" id="crate_length_R2_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
                 <td><input data-crate-width="V${index}" class="border-0 form-control" type="number" data-crate="width" name="crate_width_R2_V${index}" id="crate_width_R2_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input data-crate-height="V${index}" class="border-0 form-control" type="number" data-crate="height" name="crate_height_R2_V${index}" id="crate_height_R2_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R2_V${index}" id="crate_gross_weight_R2_V${index}" onkeypress="if (this.value.length > 4) return false;"></td>
+                <td><input data-crate-weight="V${index}" class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R2_V${index}" id="crate_gross_weight_R2_V${index}" onkeypress="if (this.value.length > 4) return false;"></td>
                 <td class="bg-light"><input class="bg-light border-0 form-control" type="number" data-crate="volume" id="crate_volume_R2_V${index}" readonly></td>
             </tr>
             <tr>
@@ -60,7 +71,7 @@ addContainerBtn.forEach(button => {
                 <td><input data-crate-length="V${index}" class="border-0 form-control" type="number" data-crate="length" name="crate_length_R3_V${index}" id="crate_length_R3_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
                 <td><input data-crate-width="V${index}" class="border-0 form-control" type="number" data-crate="width" name="crate_width_R3_V${index}" id="crate_width_R3_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input data-crate-height="V${index}" class="border-0 form-control" type="number" data-crate="height" name="crate_height_R3_V${index}" id="crate_height_R3_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R3_V${index}" id="crate_gross_weight_R3_V${index}" onkeypress="if (this.value.length > 4) return false;"></td>
+                <td><input data-crate-weight="V${index}" class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R3_V${index}" id="crate_gross_weight_R3_V${index}" onkeypress="if (this.value.length > 4) return false;"></td>
                 <td class="bg-light"><input class="bg-light border-0 form-control" type="number" data-crate="volume" id="crate_volume_R3_V${index}" readonly></td>
             </tr>
             <tr>
@@ -68,7 +79,7 @@ addContainerBtn.forEach(button => {
                 <td><input data-crate-length="V${index}" class="border-0 form-control" type="number" data-crate="length" name="crate_length_R4_V${index}" id="crate_length_R4_V${index}" onkeypress="if (this.value.length > 3) return false;"></td>
                 <td><input data-crate-width="V${index}" class="border-0 form-control" type="number" data-crate="width" name="crate_width_R4_V${index}" id="crate_width_R4_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
                 <td><input data-crate-height="V${index}" class="border-0 form-control" type="number" data-crate="height" name="crate_height_R4_V${index}" id="crate_height_R4_V${index}" onkeypress="if (this.value.length > 2) return false;"></td>
-                <td><input class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R4_V${index}" id="crate_gross_weight_R4_V${index}" onkeypress="if (this.value.length > 4) return false;"></td>
+                <td><input data-crate-weight="V${index}" class="border-0 form-control" type="number" data-crate="weight" name="crate_gross_weight_container_id_${defaultContainerValue[button.dataset.btn]['container_df_id']}_R4_V${index}" id="crate_gross_weight_R4_V${index}" onkeypress="if (this.value.length > 4) return false;"></td>
                 <td class="bg-light"><input class="bg-light border-0 form-control" type="number" data-crate="volume" 4_V${index}" id="crate_volume_R4_V${index}" readonly></td>
             </tr>
         </tbody>
@@ -78,10 +89,11 @@ addContainerBtn.forEach(button => {
                 <td class="bg-light"><input data-crate-total-length="V${index}" class="bg-light border-0 form-control" type="number"  id="crate_length_V${index}" readonly placeholder="Length ${defaultContainerValue[button.dataset.btn]['container_df_length']}cm "></td>
                 <td class="bg-light"><input data-crate-total-width="V${index}" class="bg-light border-0 form-control" type="number" id="crate_width_V${index}"readonly placeholder="Width ${defaultContainerValue[button.dataset.btn]['container_df_width']}cm "></td>
                 <td class="bg-light"><input data-crate-total-height="V${index}" class="bg-light border-0 form-control" type="number"  id="crate_height_V${index}"readonly placeholder="Height ${defaultContainerValue[button.dataset.btn]['container_df_height']}cm "></td>
-                <td class="bg-light"><input class="bg-light border-0 form-control" type="number" name="total_gross_weight_V${index}" id="crate_weight_V${index}"readonly></td>
+                <td class="bg-light"><input data-crate-total-weight="V${index}" class="bg-light border-0 form-control" type="number" name="total_gross_weight_V${index}" id="crate_weight_V${index}"placeholder="Payload ${defaultContainerValue[button.dataset.btn]['container_df_payload']}kg "readonly></td>
                 <td class="bg-light"><input class="bg-light border-0 form-control" type="number" id="crate_volume_V${index}"readonly></td>
             </tr>
         </tfoot>`
+console.log(defaultContainerValue);
 
         //blocking the entry of e + - in input
         let inputBox = document.querySelectorAll("[data-crate]");
@@ -101,9 +113,6 @@ addContainerBtn.forEach(button => {
             });
         });
 
-
-
-
         //delete a container
         let buttontrash = document.querySelectorAll('button[data-trash]')
         buttontrash.forEach(button => {
@@ -119,8 +128,8 @@ addContainerBtn.forEach(button => {
         });
 
         //count for total crates
-        let dataCrate = document.querySelectorAll('[data-crate-ref]')
-        dataCrate.forEach(element => {
+        let dataCrateRef = document.querySelectorAll('[data-crate-ref]')
+        dataCrateRef.forEach(element => {
             element.addEventListener('change', function () {
                 let testTotal = 0
                 let target = this.dataset.crateRef
@@ -134,150 +143,97 @@ addContainerBtn.forEach(button => {
             })
         });
 
-        //count for total crates
-        // countRef = 0;
-        // let totalRef = document.querySelectorAll("[data-ref]");
-        // console.log(totalRef);
-        // let crates = document.getElementById(`crate_ref_V${index}`);
-        // totalRef.forEach(crate_ref => {
-        //     crate_ref.addEventListener('change', function () {
-
-        //         if (this.value != '') {
-        //             console.log(this.value);
-        //             countRef++;
-        //         }
-
-        //         // if (crate_ref.value != '') {
-        //         //     countRef++;
-        //         //     console.log('ok');
-        //         // }
-
-        //         if (crate_ref.value == '') {
-        //             countRef--;
-        //         }
-
-        //         if (countRef > 1) {
-        //             crates.value = countRef + " Crates";
-        //         } else if (countRef == 0) {
-        //             crates.value = '';
-        //         } else {
-        //             crates.value = countRef + " Crate";
-        //         }
-        //     })
-        // });
-
 
         //count for total length
-        countLength = 0;
-        const dataLength = document.querySelectorAll("[data-crate = 'length']");
-        const length = document.getElementById(`crate_length_V${index}`);
-        dataLength.forEach(crate_length => {
-            crate_length.addEventListener('change', function () {
-                first = document.getElementById(`crate_length_R1_V${index}`).value;
-                second = document.getElementById(`crate_length_R2_V${index}`).value;
-                third = document.getElementById(`crate_length_R3_V${index}`).value;
-                fourth = document.getElementById(`crate_length_R4_V${index}`).value;
-                countLength = +first + +second + +third + +fourth;
-                length.value = countLength;
+        const dataCrateLength = document.querySelectorAll('[data-crate-length]')
+        dataCrateLength.forEach(element => {
+            element.addEventListener('change', function () {
+                let testTotal = [];
+                let target = this.dataset.crateLength
+
+                const testReturn = document.querySelectorAll(`[data-crate-length="${target}"]`)
+                testReturn.forEach(element => {
+                    element.value > 0 ? testTotal.push(parseInt(element.value)) : '';
+                })
+                const targetTotal = document.querySelector(`[data-crate-total-length="${target}"]`)
+                targetTotal.value = testTotal.length > 0 ? testTotal.reduce((a, b) => a + b, 0) : '';
 
                 //case if one crate is >max length
-                dataLength.forEach(bigValue => {
-                    if (bigValue.value >= parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])) {
-                        alert(`please update this field, ${bigValue.value}cm is over length for ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
-                        bigValue.focus;
-                        bigValue.setActive;
-                        bigValue.select();
-                        length.value = '';
-                    }
-                })
-
-                if (length.value >= parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])) {
-                    alert(`Overlength in ${defaultContainerValue[button.dataset.btn]['container_df_type']} (${parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])}cm max), please check the lengths.`)
-                    length.value = '';
-                } else if (length.value == 0) {
-                    length.value = '';
+                if (targetTotal.value >= parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])) {
+                    alert(`please update this field, ${targetTotal.value}cm is over length for ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
+                    targetTotal.value = '';
                 }
             })
-        });
-
-        //bring ID of table to target the difference 
-        //between FR and GP/HC container
-        //FR has no width and height limits
-        const checkID = newTable.id;
+        })
 
         //count for max width
-        const dataWidth = document.querySelectorAll("[data-crate = 'width']");
-        const countMaxWidth = document.getElementById(`crate_width_V${index}`);
-        dataWidth.forEach(crate_width => {
-            crate_width.addEventListener('change', function () {
-                first = document.getElementById(`crate_width_R1_V${index}`).value;
-                second = document.getElementById(`crate_width_R2_V${index}`).value;
-                third = document.getElementById(`crate_width_R3_V${index}`).value;
-                fourth = document.getElementById(`crate_width_R4_V${index}`).value;
-                maxWidth = Math.max(first, second, third, fourth);
-                countMaxWidth.value = maxWidth;
+        const dataCrateWidth = document.querySelectorAll('[data-crate-width]')
+        dataCrateWidth.forEach(element => {
+            element.addEventListener('change', function () {
+                let testTotal = [];
+                let target = this.dataset.crateWidth
 
-                //case if one crate is > max width
-                dataWidth.forEach(bigValue => {
-                    if (!checkID.includes('FR')) {
-                        if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_width'])) {
-                            alert(`please update this line, ${bigValue.value}cm is over width in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
-                            bigValue.focus;
-                            bigValue.setActive;
-                            bigValue.select();
-                            countMaxWidth.value = '';
-                        }
-                    }
+                const testReturn = document.querySelectorAll(`[data-crate-width="${target}"]`)
+                testReturn.forEach(element => {
+                    element.value > 0 ? testTotal.push(parseInt(element.value)) : '';
                 })
-            })
+                const targetTotal = document.querySelector(`[data-crate-total-width="${target}"]`)
+                targetTotal.value = max(testTotal) > 0 ? max(testTotal) : '';
+
+                if (!checkID.includes('FR')) {
+                    if (targetTotal.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_width'])) {
+                        alert(`please update this line, ${targetTotal.value}cm is over width in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
+                        targetTotal.value = '';
+                    }
+                }
+            });
         })
-        //count for max height
-        const dataHeight = document.querySelectorAll("[data-crate = 'height']");
-        const countMaxHeight = document.getElementById(`crate_height_V${index}`);
-        dataHeight.forEach(crate_height => {
-            crate_height.addEventListener('change', function () {
-                first = document.getElementById(`crate_height_R1_V${index}`).value;
-                second = document.getElementById(`crate_height_R2_V${index}`).value;
-                third = document.getElementById(`crate_height_R3_V${index}`).value;
-                fourth = document.getElementById(`crate_height_R4_V${index}`).value;
-                maxHeight = Math.max(first, second, third, fourth);
-                countMaxHeight.value = maxHeight;
 
-                //case if one crate is > max height
-                dataHeight.forEach(bigValue => {
-                    if (!checkID.includes('FR')) {
-                        if (bigValue.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_height'])) {
-                            alert(`please update this line, ${bigValue.value}cm over height in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
-                            bigValue.focus;
-                            bigValue.setActive;
-                            bigValue.select();
-                            countMaxHeight.value = '';
-                        }
-                    }
+        //count for max height
+        const dataCrateHeight = document.querySelectorAll('[data-crate-height]')
+        dataCrateHeight.forEach(element => {
+            element.addEventListener('change', function () {
+                let testTotal = [];
+                let target = this.dataset.crateHeight
+
+                const testReturn = document.querySelectorAll(`[data-crate-height="${target}"]`)
+                testReturn.forEach(element => {
+                    element.value > 0 ? testTotal.push(parseInt(element.value)) : '';
                 })
+                const targetTotal = document.querySelector(`[data-crate-total-height="${target}"]`)
+                targetTotal.value = max(testTotal) > 0 ? max(testTotal) : '';
+
+                if (!checkID.includes('FR')) {
+                    if (targetTotal.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_height'])) {
+                        alert(`please update this line, ${targetTotal.value}cm is over height in ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
+                        targetTotal.value = '';
+                    }
+                }
             })
         });
 
         //count for total weight
         countWeight = 0;
-        const dataWeight = document.querySelectorAll("[data-crate = 'weight']");
-        const countdataWeight = document.getElementById(`crate_weight_V${index}`);
-        dataWeight.forEach(crate_weight => {
-            crate_weight.addEventListener('change', function () {
-                first = document.getElementById(`crate_gross_weight_R1_V${index}`).value;
-                second = document.getElementById(`crate_gross_weight_R2_V${index}`).value;
-                third = document.getElementById(`crate_gross_weight_R3_V${index}`).value;
-                fourth = document.getElementById(`crate_gross_weight_R4_V${index}`).value;
+        const dataWeight = document.querySelectorAll("[data-crate-weight]");
+        dataWeight.forEach(element => {
+            element.addEventListener('change', function () {
+                let testTotal = [];
+                let target = this.dataset.crateWeight
 
-                countWeight = +(first) + +(second) + +(third) + +(fourth);
-                countdataWeight.value = countWeight;
-
-                if (countdataWeight.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_payload'])) {
-                    alert(`${countdataWeight.value}kg is over payload in ${defaultContainerValue[button.dataset.btn]['container_df_type']}!`);
-                    countdataWeight.value = '';
+                const testReturn = document.querySelectorAll(`[data-crate-weight="${target}"]`)
+                testReturn.forEach(element => {
+                    element.value > 0 ? testTotal.push(parseInt(element.value)) : '';
+                })
+                const targetTotal = document.querySelector(`[data-crate-total-weight="${target}"]`)
+                targetTotal.value = testTotal.length > 0 ? testTotal.reduce((a, b) => a + b, 0) : '';
+                console.log(targetTotal.value);
+                if (targetTotal.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_payload'])) {
+                    alert(`${targetTotal.value}kg is over payload in ${defaultContainerValue[button.dataset.btn]['container_df_type']}!`);
+                    targetTotal.value = '';
                 }
             })
         })
+
 
         //count for volume
         countVolumeR1 = 0;
@@ -338,8 +294,9 @@ addContainerBtn.forEach(button => {
                 countdataVolume.value = countdataVolume.value / 100;
             })
         })
-    });
+    })
 })
+
 
 //creating back button
 let backButton = document.createElement("button");
