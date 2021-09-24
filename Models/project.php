@@ -27,6 +27,7 @@ class Project extends User
         project_id = :project_id");
         $req->bindValue(':project_id', $project_id, PDO::PARAM_INT);
         $req->execute();
+        header("Refresh:2");
         return $_SESSION['flash']['success'] = 'Project deleted with success.';
     }
 

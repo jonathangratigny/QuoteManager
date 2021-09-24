@@ -30,11 +30,8 @@ include '../Controllers/header-controller.php';
             </p>
         </div>
     </main>
-    </div>
-    </div>
-    </div>
-    </div>
+</body>
 
-    <?php
-    include '../Controllers/footer-controller.php';
-    ?>
+<?php
+include '../Controllers/footer-controller.php';
+?>

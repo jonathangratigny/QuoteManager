@@ -13,7 +13,7 @@ require '../Controllers/header-controller.php';
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid flex-column">
                 <div class="row">
-                    <span class="navbar-text"> Welcome to Dashboard, <?= $_SESSION['u_username'] ?? null ?></span>
+                    <span class="navbar-text h5"> Welcome to Dashboard, <?= $_SESSION['u_username'] ?? null ?></span>
                 </div>
                 <div class="row justify-content-between">
                     <div class="col-auto">

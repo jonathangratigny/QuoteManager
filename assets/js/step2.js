@@ -38,7 +38,6 @@ addContainerBtn.forEach(button => {
         //filling the table
         newTable.innerHTML = `
         <caption class="caption-top">Container ${defaultContainerValue[button.dataset.btn]['container_df_type']}</caption>
-
         <thead class="text-center align-middle">
             <tr>
                 <th>Crate Ref</th>
@@ -143,7 +142,6 @@ console.log(defaultContainerValue);
             })
         });
 
-
         //count for total length
         const dataCrateLength = document.querySelectorAll('[data-crate-length]')
         dataCrateLength.forEach(element => {
@@ -233,7 +231,6 @@ console.log(defaultContainerValue);
                 }
             })
         })
-
 
         //count for volume
         countVolumeR1 = 0;

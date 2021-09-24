@@ -13,11 +13,9 @@ require '../Controllers/header-controller.php';
       <a href="./dashboard.php"><button type="button" class="btn btn-warning text-dark btn-sm">Dashboard</button></a>
     </div>
   </nav>
-
   <div class="progress">
     <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-black" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:33%">33%</div>
   </div>
-
   <div class="container">
     <?php if (!empty($errorS1)) : ?>
       <div class="alert alert-danger">
@@ -29,11 +27,11 @@ require '../Controllers/header-controller.php';
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
-    
+
     <form action="" method="post">
-      <div class="container-sm mt-3">
+      <div class="container-sm mt-3 text-center">
         <h1>Your project start here.</h1>
-        <p>Project and destination details are required from here.</p>
+        <p class="h5">Project and destination details are required from here.</p>
       </div>
       <div class="container-fluid d-flex flex-column col-lg-6 col-sm-12 mt-3">
         <div class="form-floating mb-3 mt-3">
@@ -63,7 +61,7 @@ require '../Controllers/header-controller.php';
 
         <label for="project_POL">Port Of Loading :</label>
         <div class="d-flex mb-3 mt-1">
-          <select class="form-select"  name="project_POL" id="project_POL">
+          <select class="form-select" name="project_POL" id="project_POL">
             <option>Le Havre</option>
           </select>
         </div>
@@ -71,7 +69,7 @@ require '../Controllers/header-controller.php';
 
         <label for="project_country_dest">Destination Country :</label>
         <div class="d-flex mt-1 mb-3">
-          <select class="form-select"  name="project_country_dest" id="project_country_dest">
+          <select class="form-select" name="project_country_dest" id="project_country_dest">
             <option selected><?= $_SESSION['project_country_dest'] ?? 'Select A Country' ?></option>
             <?php foreach ($showUniqueCountry as $key => $port) : ?>
               <option><?= $port['port_country'] ?? 'Select A Country' ?></option>
@@ -81,7 +79,7 @@ require '../Controllers/header-controller.php';
 
         <label for="project_POD">Port Of Discharge : </label>
         <div class="d-flex mb-3 ">
-          <select name="project_POD" id="project_POD" class="form-select" >
+          <select name="project_POD" id="project_POD" class="form-select">
             <option><?= $_SESSION['project_POD'] ?? 'Select A Port' ?></option>
           </select>
         </div>

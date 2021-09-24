@@ -1,8 +1,6 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
-    // $_SESSION= array();
-    // var_dump($_SESSION);
 }
 
 require '../Models/database.php';
@@ -23,21 +21,21 @@ if (isset($_POST['step1'])) {
 
     if (!empty($_POST['project_owner_ref'])) {
         $_SESSION['project_owner_ref'] = '';
-        $_SESSION['project_owner_ref'] = $_POST['project_owner_ref'];
+        $_SESSION['project_owner_ref'] = strtoupper($_POST['project_owner_ref']);
     } else {
         $errorS1['project_owner_ref'] = 'Please Fill Your Local Reference in "My Reference".';
     }
 
     if (!empty($_POST['project_ref'])) {
         $_SESSION['project_ref'] = '';
-        $_SESSION['project_ref'] = $_POST['project_ref'];
+        $_SESSION['project_ref'] = strtoupper($_POST['project_ref']);
     } else {
         $errorS1['project_ref'] = 'Please Fill A Project Reference in "Project Reference".';
     }
 
     if (!empty($_POST['project_final_customer_name'])) {
         $_SESSION['project_final_customer_name'] = '';
-        $_SESSION['project_final_customer_name'] = $_POST['project_final_customer_name'];
+        $_SESSION['project_final_customer_name'] = strtoupper($_POST['project_final_customer_name']);
     } else {
         $errorS1['project_final_customer_name'] = 'Please Fill A Customer Name in "Final Customer Name".';
     }

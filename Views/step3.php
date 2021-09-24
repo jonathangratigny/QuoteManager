@@ -14,11 +14,11 @@ require '../Controllers/step3-controller.php';
         </div>
     </nav>
     <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-black" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:99%">99%</div>
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-black" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:99%">99%</div>
     </div>
-    <div class="container-sm mt-3">
+    <div class="container-sm mt-3 text-center">
         <h1>Here is your recap, good job!</h1>
-        <p>It's time to take 2min and read yourself one last time before to save.</p>
+        <p class="h5">It's time to take 2min and read yourself one last time before to save.</p>
     </div>
 
     <form action="" method="post">
@@ -79,6 +79,7 @@ require '../Controllers/step3-controller.php';
                         <?php }; ?>
                 </table>
                 <div class="container text-center">
+                    <a href="./step2.php" class="btn btn-secondary mt-3">Back</a>
                     <button type="submit" name='validate' class="btn btn-warning mt-3">Finish it!</button>
                 </div>
             </div>
