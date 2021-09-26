@@ -238,22 +238,7 @@ class Project extends User
 
 
 
-    /**
-     * show POD infos
-     *
-     * @return fetch
-     */
-    public function showPOD()
-    {
-        $dbh = $this->connectDatabase();
-        $req = $dbh->prepare("select port_name, port_country
-    from port;");
-        $req->execute();
-        $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
-        return $fetch;
-    }
-
-
+   
     /**
      * Get the value of project_id
      */

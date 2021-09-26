@@ -1,6 +1,6 @@
 <?php
-require '../Controllers/dashboard-controller.php';
-require '../Controllers/header-controller.php';
+require_once '../Controllers/dashboard-controller.php';
+require_once '../Controllers/header-controller.php';
 ?>
 <?php if (empty($_SESSION['u_id'])) {
     $limitedAccess = 'Please log in before accessing this page.';

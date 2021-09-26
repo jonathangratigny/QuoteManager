@@ -11,14 +11,17 @@ require '../Models/project.php';
 require '../Models/port.php';
 require '../Models/project-crate.php';
 
+//to get the id value of the crate
 $crateID = isset($_POST['update_crate']) ? $_POST['update_crate'] : $_POST['save_update'];
 
 $crateObj = new Crate();
 
+//error management array
+$error = array();
+
 //to show data in form
 $readCrate = $crateObj->readCrate($crateID);
 
-$error = array();
 if (isset($_POST['save_update'])) {
     if (empty($_POST['project_crate_ref'])) {
         $error[] = 'ref error';
@@ -40,9 +43,10 @@ if (isset($_POST['save_update'])) {
         $error[] = 'weight error';
         $_SESSION['flash']['danger'] = 'Please indicate the crate weight, it cannot be null.';
     }
+
     if (empty($error)) {
         //to update data in dbh
-        $updateCrate = $crateObj->updateCrate($_POST['project_crate_ref'], $_POST['project_crate_length'], $_POST['project_crate_width'], $_POST['project_crate_height'], $_POST['project_crate_gross_weight'], $readCrate[0]['project_crate_id']);
+        $updateCrate = $crateObj->updateCrate(htmlspecialchars($_POST['project_crate_ref']), htmlspecialchars(intval($_POST['project_crate_length'])), htmlspecialchars(intval($_POST['project_crate_width'])), htmlspecialchars(intval($_POST['project_crate_height'])), htmlspecialchars(intval($_POST['project_crate_gross_weight'])), $readCrate[0]['project_crate_id']);
         header("Refresh:5; url=./dashboard.php");
     }
 }

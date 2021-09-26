@@ -1,6 +1,6 @@
 <?php
-require '../Controllers/step1-controller.php';
-require '../Controllers/header-controller.php';
+require_once '../Controllers/step1-controller.php';
+require_once '../Controllers/header-controller.php';
 ?>
 
 <body class="bg-light">

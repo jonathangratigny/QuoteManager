@@ -16,10 +16,8 @@ $shippingLineObj = new ShippingLine();
 //project data
 $showProjectDataWithID = $projectObj->showProjectDataWithID($_POST['view_project'] ?? null);
 
-
 //containers in this project
 $containersDetails = $projectObj->containersDetails($_POST['view_project'] ?? null);
 
 //variable to separate crates per container in view 
 $cratePerContainer = $containersDetails[0]['CT_id'] ?? null;
-
