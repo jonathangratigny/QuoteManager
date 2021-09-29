@@ -2,8 +2,6 @@
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
-
-    // header('Location: index.php');
 }
 
 require '../Models/database.php';
@@ -24,15 +22,15 @@ $arrayContainerData = json_encode($getContainerData);
 
 
 if (isset($_POST)) {
-    //kick in error array the empty values
     foreach ($_POST as $key => $value) {
+        //kick in error array the empty values
         if (strpos($key, 'total', 0) !== false) {
             continue;
         }
         if (strlen($value) == 0) {
             $errorS2[] = $key;
         }
-        if (strlen($value) > 0) {
+        if (strlen($value) > 0) { // here are data sent by user
             $dataFilled[$key] = $value;
         }
         if (strpos($key, 'crate_ref_R', 0) !== false && strlen($value) != 0) {
@@ -40,19 +38,19 @@ if (isset($_POST)) {
         }
     }
 
-    $dimsArray = []; // Array nous permettant de stacker nos cotes 
-    $start = 1; // va nous permettre de recup les valeurs avec un pas de 5
+    $dimsArray = []; // Array to stack dimensions 
+    $start = 1; // allow to get values each steps of 5 (ref, length, width, height, weight)
     if (!empty($dataFilled)) {
         foreach ($dataFilled as $key => $value) {
-            // nous poussons les valeurs dans un array intermédiaire $row
+            // pushing values in intermediary array -> $row
             $row[] = $value;
-            // nous poussons notre array lors d'un multiple de 5
+            // push in array every steps of 5
             if (($start % 5) == 0) {
-                // on recupère les données R et V dans le dernier passage à l'aide d'un explode de la key
+                // we take back R and V values in last loop by 'exploding' the $key
                 $infos = explode('_', $key);
-                array_push($row, $infos[5], $infos[6], $infos[7]); // on pousse ces valeurs dans notre array intermédiaire
-                $dimsArray[] = $row; // on pousse notre array intermédiaire
-                $row = []; // puis on vide notre array intermédiaire
+                array_push($row, $infos[5], $infos[6], $infos[7]); // pushing these data in intermediary array
+                $dimsArray[] = $row; // fill with the intrmediary array
+                $row = []; // then we clean it for next loop
             }
             $start++;
         }

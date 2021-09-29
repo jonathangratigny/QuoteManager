@@ -3,7 +3,7 @@ require_once '../Controllers/header-controller.php'
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
   <meta charset="UTF-8">

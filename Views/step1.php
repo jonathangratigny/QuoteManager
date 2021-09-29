@@ -2,7 +2,32 @@
 require_once '../Controllers/step1-controller.php';
 require_once '../Controllers/header-controller.php';
 ?>
+<?php if (empty($_SESSION['u_id'])) {
+    $limitedAccess = 'Please log in before accessing this page.';
+?>
 
+    <body class="d-flex h-100 text-center text-white bg-dark">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <header class="mb-auto">
+                <div>
+                    <h3 class="float-md-start mb-5">Quote Manager</h3>
+                </div>
+            </header>
+
+            <main class="px-3 mt-5">
+                <h1>Easy tiger!</h1>
+                <p class="h3 mb-5">You are trying to access in restricted area.</p>
+                <p class="lead"><?= $limitedAccess; ?></p>
+                <p class="lead">
+                    <a href="../index.php" class="btn btn-lg btn-warning fw-bold bg-warning">Log In or create your account</a>
+                </p>
+            </main>
+        </div>
+    </body>
+
+    </html>
+
+<?php } else { ?>
 <body class="bg-light">
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
@@ -91,4 +116,5 @@ require_once '../Controllers/header-controller.php';
   </div>
 
   <script src="../assets/js/script.js"></script>
+  <?php } ?>
   <?php include '../Controllers/footer-controller.php'; ?>

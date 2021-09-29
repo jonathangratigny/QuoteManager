@@ -92,7 +92,6 @@ addContainerBtn.forEach(button => {
                 <td class="bg-light"><input class="bg-light border-0 form-control" type="number" id="crate_volume_V${index}"readonly></td>
             </tr>
         </tfoot>`
-console.log(defaultContainerValue);
 
         //blocking the entry of e + - in input
         let inputBox = document.querySelectorAll("[data-crate]");
@@ -126,9 +125,10 @@ console.log(defaultContainerValue);
             });
         });
 
+  
         //count for total crates
-        let dataCrateRef = document.querySelectorAll('[data-crate-ref]')
-        dataCrateRef.forEach(element => {
+        let dataCrateRefControl = document.querySelectorAll('[data-crate-ref]')
+        dataCrateRefControl.forEach(element => {
             element.addEventListener('change', function () {
                 let testTotal = 0
                 let target = this.dataset.crateRef
@@ -141,6 +141,9 @@ console.log(defaultContainerValue);
                 targetTotal.value = testTotal > 0 ? testTotal + ' Crate(s)' : ''
             })
         });
+
+
+
 
         //count for total length
         const dataCrateLength = document.querySelectorAll('[data-crate-length]')
