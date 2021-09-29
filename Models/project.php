@@ -96,12 +96,14 @@ class Project extends User
      *
      * @return fetch
      */
-    public function dateDifferenceProjectAndNow()
+    public function dateDifferenceProjectAndNow($project_id)
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("SELECT datediff(CURDATE(),project_created_at) 
         AS creating_interval 
-        FROM project;");
+        FROM project
+        WHERE project_id = :project_id;");
+        $req->bindValue(':project_id', $project_id, PDO::PARAM_INT);
         $req->execute();
         $fetch = $req->fetch(PDO::FETCH_ASSOC);
         return $fetch;

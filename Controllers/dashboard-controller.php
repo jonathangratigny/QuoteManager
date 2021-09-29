@@ -30,9 +30,6 @@ $getShippingLineWithID = $shippingLineObj->getShippingLineWithID($showProjectDat
 //get the creating user data of a project
 $projectOwnerWithID = $projectObj->projectOwnerWithID($showProjectData['u_id'] ?? null);
 
-//to calculate the days from creating date of a project
-$dateDifferenceProjectAndNow = $projectObj->dateDifferenceProjectAndNow();
-
 //for shipping line
 //get all shipping line data 
 $getShippingLine = $shippingLineObj->getShippingLine() ?? null;

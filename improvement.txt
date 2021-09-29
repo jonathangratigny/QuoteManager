@@ -1,5 +1,3 @@
-* check if project or ref already exists in step 1.
-
 * take a look on CREATED BY in dashboard, always the same name as EXO
     ->need to update method
     //$dateDifferenceProjectAndNow = $projectObj->dateDifferenceProjectAndNow();
@@ -10,4 +8,10 @@
         project
     WHERE
         project_ref = 'ref2'
+------> done!
 
+* control for step 2
+base on ref 
+if others are not all completed, change class of next to disabled
+
+* as same for update-crate.
