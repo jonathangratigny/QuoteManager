@@ -12,7 +12,7 @@ if (isset($_POST['saveNewAccount'])) {
         $errors['username'] = "Username entry is not valid, no digit allowed.";
     } else {
         $checkDoubleUsername = $userObj->checkDoubleUsername($_POST['username']);
-        
+
         if ($checkDoubleUsername) {
             $errors['username'] = 'Username already exists';
         }
@@ -30,8 +30,17 @@ if (isset($_POST['saveNewAccount'])) {
         }
     }
 
-    if (empty($_POST['password']) || $_POST['password'] != $_POST['confirm_password']) {
-        $errors['password'] = "Password not valid or not matching.";
+    if (!empty($_POST['password']) && $_POST['password'] == $_POST['confirm_password']) {
+        // Validate password strength
+        $password = $_POST['password'];
+        $uppercase = preg_match('@[A-Z]@', $password);
+        $lowercase = preg_match('@[a-z]@', $password);
+        $number    = preg_match('@[0-9]@', $password);
+        $specialChars = preg_match('@[^\w]@', $password);
+
+        if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+            $errors['password'] = 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+        }
     }
 
     if (empty($errors)) {

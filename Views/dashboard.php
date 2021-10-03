@@ -45,7 +45,11 @@ require_once '../Controllers/header-controller.php';
                 </div>
             </div>
         </nav>
-        <h1 class="display-6 mt-3">Quotation History</h1>
+        <div class="container-sm mt-3 text-center">
+            <h1>This is where you can have a quick view of projects.</h1>
+            <p class="h5">In View more, you can see over dimensions of each containers.</p>
+        </div>
+        <h1 class="display-6 mt-5">Quotation History</h1>
         <?php foreach ($showProjectData as $value) : ?>
 
             <?php //to calculate the days from creating date of a project

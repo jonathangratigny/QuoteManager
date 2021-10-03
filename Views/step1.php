@@ -56,7 +56,7 @@ require_once '../Controllers/header-controller.php';
     <form action="" method="post">
       <div class="container-sm mt-3 text-center">
         <h1>Your project start here.</h1>
-        <p class="h5">Project and destination details are required from here.</p>
+        <p class="h5">Project and destination details are required.</p>
       </div>
       <div class="container-fluid d-flex flex-column col-lg-6 col-sm-12 mt-3">
         <div class="form-floating mb-3 mt-3">
