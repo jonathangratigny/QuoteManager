@@ -51,14 +51,13 @@ if (isset($_POST['validate'])) {
         //get the quantity of containers in quotation
         foreach ($_SESSION['crate_data'] as $value) {
 
-            if ($value[7][1] == $index) {
+            
                 $containerInQuote[] = 'V' . $value[7][1];
-                $index++;
-            }
+           
+           
             //get container_df_id of containers in quotation
             $containerID[] = $value[5];
         }
-
         //insert project container : which df container for this request
         $project_container_ID = array();
         $getLastProjectID = $projectObj->getLastProjectID();
