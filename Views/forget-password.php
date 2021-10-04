@@ -14,9 +14,9 @@ include '../Controllers/header-controller.php';
     <form action="" method="POST">
       <div class="container-sm mt-3 text-center">
         <h1>Now you can reset your password</h1>
-        <p class="h5">Please fill your email and follow instructions from this email.</p>
+        <p class="h5">Please fill your email address and follow our instructions.</p>
       </div>
-      <div class="form-group mt-4">
+      <div class="form mt-4">
         <input class="form-control mt-2" type="email" name="reset_email" placeholder="your@email.com" id="email_address">
       </div>
       <button type="submit" name="submit_reset_password" class="btn btn-warning mt-3">Send Password Reset Email</button>
