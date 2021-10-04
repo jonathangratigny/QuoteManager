@@ -3,7 +3,14 @@ require_once '../controllers/signup-controller.php';
 include '../Controllers/header-controller.php';
 ?>
 <link rel="stylesheet" href="../assets/css/login.css">
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6Ld7L6ocAAAAAB-MPmEp57HYI5MGJ4OgSkXEClj8'
+        });
+      };
+    </script>
 <body class="bg-light text-center flex-column">
   <div class="container-sm mt-3 text-center mb-5">
     <h1>Welcome to Quote Manager!</h1>
@@ -38,30 +45,21 @@ include '../Controllers/header-controller.php';
           <div class="form-floating mb-3">
             <input name="confirm_password" type="password" class="form-control " id="floatingPassword2" placeholder="Confirm Password" value="">
             <label for="floatingPassword2">Confirm Password</label>
-            <input type="hidden" id="recaptchaResponse" name="recaptcha-response">
+            <div class="g-recaptcha mt-3 d-flex justify-content-center" data-sitekey="6Ld7L6ocAAAAAB-MPmEp57HYI5MGJ4OgSkXEClj8"></div>
           </div>
           <div class="modal-footer d-flex row justify-content-between">
             <div class="col-auto mx-auto">
               <a href="./login.php" class="btn btn-warning">Log In</a>
             </div>
             <div class="col-auto mx-auto">
-              <button type="submit" name="saveNewAccount" data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit' class="btn btn-warning float-end g-recaptcha">Submit</button>
+              <button type="submit" name="saveNewAccount" class="btn btn-warning float-end">Submit</button>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <script src="https://www.google.com/recaptcha/api.js?render=6Ld7L6ocAAAAAB-MPmEp57HYI5MGJ4OgSkXEClj8"></script>
-  <script>
-    grecaptcha.ready(function() {
-      grecaptcha.execute('6Ld7L6ocAAAAAB-MPmEp57HYI5MGJ4OgSkXEClj8', {
-        action: 'homepage'
-      }).then(function(token) {
-        document.getElementById('recaptchaResponse').value = token
-      });
-    });
-  </script>
+
   <?php
   include '../Controllers/footer-controller.php';
   ?>

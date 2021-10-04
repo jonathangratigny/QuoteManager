@@ -5,8 +5,11 @@ require '../Models/database.php';
 require '../Models/user.php';
 $errors = array();
 $userObj = new User();
-
 if (isset($_POST['saveNewAccount'])) {
+
+    if(isValid($_POST['g-recaptcha-response']) !== true) {
+        $errors['captcha'] = 'Please check the captcha to validate your account.';
+    };
 
     if (empty($_POST['username']) || !preg_match('/^[a-zA-Z]+$/', $_POST['username'])) {
         $errors['username'] = "Username entry is not valid, no digit allowed.";
