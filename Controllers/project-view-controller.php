@@ -13,6 +13,10 @@ require '../Models/port.php';
 $projectObj = new Project();
 $shippingLineObj = new ShippingLine();
 
+if(!isset($_POST['view_project']) || $_POST['view_project'] == '') {
+    header('Location: ./dashboard.php');
+}
+
 //project data
 $showProjectDataWithID = $projectObj->showProjectDataWithID($_POST['view_project'] ?? null);
 

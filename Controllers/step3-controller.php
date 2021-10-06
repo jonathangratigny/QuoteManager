@@ -21,6 +21,27 @@ $containerIndex = 0;
 $crateByContainer = array();
 $index = 1;
 
+if (
+    !isset($_SESSION['project_POD']) ||
+    $_SESSION['project_POD'] == '' ||
+    !isset($_SESSION['project_owner_ref']) ||
+    $_SESSION['project_owner_ref'] == '' ||
+    !isset($_SESSION['project_ref']) ||
+    $_SESSION['project_ref'] == ''||
+    !isset($_SESSION['project_shipping_line']) ||
+    $_SESSION['project_shipping_line'] == '' ||
+    !isset($_SESSION['project_country_dest']) ||
+    $_SESSION['project_country_dest'] == '' ||
+    !isset($_SESSION['POD_ID']) ||
+    $_SESSION['POD_ID'] == '' ||
+    !isset($_SESSION['crate_data']) ||
+    $_SESSION['crate_data'] == ''
+) {
+    header('Location: ./step1.php');
+    $_SESSION['flash']['danger'] = 'Please fill step 1 and step 2 before accessing to step 3.';
+    die();
+}
+
 //get the container default value from dbh
 $getContainerData = $containerObj->getContainerData();
 
