@@ -41,4 +41,3 @@ $getShippingLineOnproject = $shippingLineObj->getShippingLineOnproject() ?? null
 if (isset($_POST['delete_project'])) {
     $deleteProject = $projectObj->deleteProject($_POST['delete_project']);
 }
-

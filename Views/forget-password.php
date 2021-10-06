@@ -13,7 +13,7 @@ include '../Controllers/header-controller.php';
   <div class="container-fluid w-50 mx-auto">
     <form action="" method="POST">
       <div class="container-sm mt-3 text-center">
-        <h1>Now you can reset your password</h1>
+        <h1>Reset your password here.</h1>
         <p class="h5">Please fill your email address and follow our instructions.</p>
       </div>
       <div class="form mt-4">

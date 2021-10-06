@@ -119,7 +119,7 @@ require_once '../Controllers/header-controller.php';
                             <?php endforeach; ?>
                             <div class="modal-footer d-flex bd-highlight bg-light">
                                 <form action="" method="post" class="me-auto bg-light">
-                                    <button type="submit" name="delete_project" value="<?= $value['project_id'] ?>" class="btn btn-danger p-2 bd-highlight">Delete Project</button>
+                                    <button type="submit" name="delete_project" value="<?= $value['project_id'] ?>" class="btn btn-danger p-2 bd-highlight">Delete for good !</button>
                                 </form>
                                 <button type="button" class="btn btn-secondary p-2 bd-highlight" data-bs-dismiss="modal">Close</button>
                                 <form action="./project-view.php" method="post">
@@ -134,14 +134,16 @@ require_once '../Controllers/header-controller.php';
             <?php $indexModal++ ?>
         <?php endforeach; ?>
 
-        <h2 class="display-6">Carrier directory</h2>
-        <div class="container-fluid">
+        <h2 class="display-6 mt-5">Carrier directory</h2>
+        <div class="container-fluid ">
             <ul class="list-group"></ul>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 border-top px-2">
                 <?php foreach ($getShippingLine as $value) : ?>
-                    <li class="list-group-item border-top-0"><?= $value['sl_name'] ?>
-                        <div><?= $value['sl_email'] ?></div>
-                        <div><?= $value['sl_phone'] ?></div>
+                    <li class="list-group-item border-top-0">
+                        <div class="fs-5"><?= $value['sl_name'] ?></div>
+                        <div>Contact : <?= $value['sl_firstname'] . ' ' . $value['sl_lastname'] ?></div>
+                        <a class="stretched-link text-decoration-none text-reset" href="mailto:<?= $value['sl_email'] ?>?subject=New%20Request&body=Hi%20<?= $value['sl_firstname'] ?>,">Email : <?= $value['sl_email'] ?></a>
+                        <div>Phone : <?= $value['sl_phone'] ?></div>
                     </li>
                 <?php endforeach; ?>
             </div>
