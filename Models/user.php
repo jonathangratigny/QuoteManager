@@ -18,11 +18,11 @@ class User extends Database
     {
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("SELECT 
-        u_username, u_email 
-        FROM project
-        inner join user 
-        on project.u_id = user.u_id");
-        $req->bindValue(':u_id', $u_id, PDO::PARAM_INT);
+        u_username
+        FROM user
+        natural join project 
+        where project.u_id = u_id");
+        $req->bindValue(':u_id', $u_id, PDO::PARAM_STR);
         $req->execute();
         $fetch = $req->fetch(PDO::FETCH_ASSOC);
         return $fetch;

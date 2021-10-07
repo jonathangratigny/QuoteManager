@@ -56,6 +56,11 @@ require_once '../Controllers/header-controller.php';
             $dateDifferenceProjectAndNow = $projectObj->dateDifferenceProjectAndNow($value['project_id']); ?>
             <?php // to show shipping line per project
             $getShippingLineWithID = $shippingLineObj->getShippingLineWithID($value['sl_id']); ?>
+            <?php //get the creating user data of a project
+            $projectOwnerWithID = $projectObj->projectOwnerWithID($value['u_id']); ?>
+            <?php var_dump($projectOwnerWithID); ?>
+
+
             <div class="container my-3">
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
