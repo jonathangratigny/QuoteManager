@@ -9,9 +9,9 @@ class User extends Database
     private $reset_token;
 
     /**
-     * return user data with id
+     * return username with id
      *
-     * @param int $u_id
+     * @param str $u_id
      * @return fetch
      */
     public function projectOwnerWithID($u_id)
@@ -19,10 +19,11 @@ class User extends Database
         $dbh = $this->connectDatabase();
         $req = $dbh->prepare("SELECT 
         u_username
-        FROM user
-        natural join project 
-        where project.u_id = u_id");
-        $req->bindValue(':u_id', $u_id, PDO::PARAM_STR);
+    FROM
+        user  
+    WHERE
+        u_id = :u_id");
+        $req->bindValue(':u_id', $u_id, PDO::PARAM_INT);
         $req->execute();
         $fetch = $req->fetch(PDO::FETCH_ASSOC);
         return $fetch;

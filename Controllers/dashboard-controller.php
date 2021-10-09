@@ -23,10 +23,12 @@ $indexModal = 1;
 
 //fetch all project data
 $showProjectData = $projectObj->showProjectData();
-var_dump($showProjectData);
+
 //get the shipping line name with it's UD
 $getShippingLineWithID = $shippingLineObj->getShippingLineWithID($showProjectData['sl_id'] ?? null);
 
+//get the creating user data of a project
+$projectOwnerWithID = $projectObj->projectOwnerWithID($showProjectData['u_id'] ?? null);
 
 //for shipping line
 //get all shipping line data 

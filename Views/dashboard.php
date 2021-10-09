@@ -51,15 +51,14 @@ require_once '../Controllers/header-controller.php';
         </div>
         <h1 class="display-6 mt-5">Quotation History</h1>
         <?php foreach ($showProjectData as $value) : ?>
-
+            
             <?php //to calculate the days from creating date of a project
             $dateDifferenceProjectAndNow = $projectObj->dateDifferenceProjectAndNow($value['project_id']); ?>
             <?php // to show shipping line per project
             $getShippingLineWithID = $shippingLineObj->getShippingLineWithID($value['sl_id']); ?>
-            <?php //get the creating user data of a project
-            $projectOwnerWithID = $projectObj->projectOwnerWithID($value['u_id']); ?>
-            <?php var_dump($projectOwnerWithID); ?>
 
+            <?php
+            $projectOwnerWithID = $projectObj->projectOwnerWithID($value['u_id']);?>
 
             <div class="container my-3">
                 <ul class="list-group">
