@@ -125,7 +125,7 @@ addContainerBtn.forEach(button => {
             });
         });
 
-  
+
         //count for total crates
         let dataCrateRefControl = document.querySelectorAll('[data-crate-ref]')
         dataCrateRefControl.forEach(element => {
@@ -160,7 +160,7 @@ addContainerBtn.forEach(button => {
                 targetTotal.value = testTotal.length > 0 ? testTotal.reduce((a, b) => a + b, 0) : '';
 
                 //case if one crate is >max length
-                if (targetTotal.value >= parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])) {
+                if (targetTotal.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_length'])) {
                     alert(`please update this field, ${targetTotal.value}cm is over length for ${defaultContainerValue[button.dataset.btn]['container_df_type']}.`);
                     targetTotal.value = '';
                 }
@@ -227,7 +227,6 @@ addContainerBtn.forEach(button => {
                 })
                 const targetTotal = document.querySelector(`[data-crate-total-weight="${target}"]`)
                 targetTotal.value = testTotal.length > 0 ? testTotal.reduce((a, b) => a + b, 0) : '';
-                console.log(targetTotal.value);
                 if (targetTotal.value > parseInt(defaultContainerValue[button.dataset.btn]['container_df_payload'])) {
                     alert(`${targetTotal.value}kg is over payload in ${defaultContainerValue[button.dataset.btn]['container_df_type']}!`);
                     targetTotal.value = '';
