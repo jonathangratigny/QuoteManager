@@ -11,17 +11,21 @@ require '../Models/project.php';
 require '../Models/port.php';
 require '../Models/project-crate.php';
 
-
 //to get the id value of the crate
 $crateID = isset($_POST['update_crate']) ? $_POST['update_crate'] : $_POST['save_update'];
 
+if(!$crateID) {
+    header('Location: ./dashboard.php');
+    $_SESSION['flash']['danger'] = "This section is forbidden now.";
+}
+
 $crateObj = new Crate();
+//to show data in form
+$readCrate = $crateObj->readCrate($crateID);
 
 //error management array
 $error = array();
 
-//to show data in form
-$readCrate = $crateObj->readCrate($crateID);
 
 if (isset($_POST['save_update'])) {
     if (empty($_POST['project_crate_ref'])) {

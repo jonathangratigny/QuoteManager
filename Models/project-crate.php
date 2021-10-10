@@ -54,7 +54,7 @@ WHERE
         $req->bindValue(':crate_gross_weight', $crate_gross_weight, PDO::PARAM_INT);
         $req->bindValue(':crate_id', $crate_id, PDO::PARAM_INT);
         $req->execute();
-        return $_SESSION['flash']['success'] = 'crate updated successfully ! 
+        return $_SESSION['flash']['success'] = 'Crate Updated Successfully ! 
         You will now be returned to dashboard in 5 seconds.';
     }
 

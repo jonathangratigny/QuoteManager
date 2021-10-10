@@ -32,7 +32,7 @@ require '../Controllers/header-controller.php';
     <body class="bg-light">
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
-                <span class="navbar-text"> Project number : <?= $containersDetails[0]['project_ref'] ?? null ?></span>
+                <span class="navbar-text"> Project : <?= $containersDetails[0]['project_ref'] ?? null ?></span>
                 <div class="d-flex">
                     <div class="row">
                         <div class="col-auto">
@@ -50,7 +50,7 @@ require '../Controllers/header-controller.php';
         </nav>
         <div class="container-sm mt-3 text-center">
             <h1>Now you can update crates data!</h1>
-            <p class="h5">Click on updates double rows and let it go...</p>
+            <p class="h5">Click on double rows and let's update...</p>
         </div>
         <div class="container-sm mt-5">
             <div class="card mt-3">
